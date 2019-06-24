@@ -11,5 +11,5 @@ func main() {
 	utils.PanicErr(err)
 	defer client.Close()
 
-	client.Call("User.add", nil, nil)
+	client.Call("User.Regist", nil, nil)
 }

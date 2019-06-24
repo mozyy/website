@@ -13,7 +13,7 @@ type User struct {
 	password string
 }
 
-func (user *User) Regist(args *User, reply *message.Message) error {
+func (user *User) Regist(args User, reply *message.Message) error {
 
 	db := datamanage.GetDb()
 
@@ -35,7 +35,7 @@ func (user *User) Regist(args *User, reply *message.Message) error {
 	return nil
 }
 
-func (user *User) Login(args *User, reply *message.Message) error {
+func (user *User) Login(args User, reply *message.Message) error {
 
 	db := datamanage.GetDb()
 
