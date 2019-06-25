@@ -3,64 +3,64 @@ package message
 import "errors"
 
 type Message struct {
-	data    interface{}
-	state   string
-	message string
+	Data    interface{}
+	State   string
+	Message string
 }
 
 func (msg *Message) setData(data interface{}) {
-	msg.data = data
+	msg.Data = data
 }
 
 func (msg *Message) setMessage(message string) {
-	msg.message = message
+	msg.Message = message
 }
 
 func (msg *Message) Success(message string) {
-	msg.state = "success"
-	msg.message = message
+	msg.State = "success"
+	msg.Message = message
 }
 
 func (msg *Message) Info(message string) {
-	msg.state = "info"
-	msg.message = message
+	msg.State = "info"
+	msg.Message = message
 }
 
 func (msg *Message) Warning(message string) {
-	msg.state = "warning"
-	msg.message = message
+	msg.State = "warning"
+	msg.Message = message
 }
 
 func (msg *Message) Error(message string) error {
-	msg.state = "error"
-	msg.message = message
+	msg.State = "error"
+	msg.Message = message
 	return errors.New(message)
 }
 
 func Success(message string) Message {
 	return Message{
-		state:   "success",
-		message: message,
+		State:   "success",
+		Message: message,
 	}
 }
 
 func Info(message string) Message {
 	return Message{
-		state:   "info",
-		message: message,
+		State:   "info",
+		Message: message,
 	}
 }
 
 func Warning(message string) Message {
 	return Message{
-		state:   "warning",
-		message: message,
+		State:   "warning",
+		Message: message,
 	}
 }
 
 func Error(message string) Message {
 	return Message{
-		state:   "error",
-		message: message,
+		State:   "error",
+		Message: message,
 	}
 }

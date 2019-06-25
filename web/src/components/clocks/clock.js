@@ -13,7 +13,6 @@ export class Clock extends HTMLElement {
   connectedCallback() {
     this._valueTotal = str2MillionSeconds(this.getAttribute('value'))
     this._value = this._valueTotal
-    this._valueDom.innerText = formatTimeStr(this._value)
   }
 
   start() {

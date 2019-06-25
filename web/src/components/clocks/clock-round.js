@@ -37,6 +37,8 @@ class ClockRound extends Clock {
 
   connectedCallback() {
     super.connectedCallback()
+    this._valueDom.innerText = formatTimeStr(this._value)
+
   }
 
   fitClock(value, percent) {
