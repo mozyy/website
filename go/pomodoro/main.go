@@ -16,8 +16,9 @@ func main() {
 	defer client.Close()
 
 	message := &message.Message{}
-	user := model.User{10, "rpc client", 18381335182, "123"}
-	err = client.Call("User.Regist", user, message)
+	user := model.User{2, "rpc client", 18381335182, "123"}
+	err = client.Call("User.Login", user, message)
+	fmt.Println(message)
 	utils.PanicErr(err)
 	fmt.Println(message)
 }

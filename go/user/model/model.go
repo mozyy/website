@@ -51,22 +51,21 @@ func (u *User) Regist(user User, reply *message.Message) error {
 
 func (user *User) Login(args User, reply *message.Message) error {
 
+	fmt.Println(args)
+
 	db := datamanage.GetDb()
 
-	rows, err := db.Query("SELECT * FROM userinfo WHERE uid=?", user.UID)
+	rows, err := db.Query("SELECT * FROM userinfo WHERE uid=?", args.UID)
 	utils.PanicErr(err)
 
 	if rows.Next() {
-		return reply.Error("该用户已经注册")
+		u := User{}
+		// rows.Scan(u.UID, u.Name, u.Phone, u.Password)
+		reply.Success("登录成功")
+		reply.Data = u
+		return nil
 	}
 
-	stmt, err := db.Prepare("INSERT userinfo SET name=?,phone=?,password=?")
-	utils.PanicErr(err)
-
-	_, err = stmt.Exec(user.Name, user.Phone, user.Password)
-	utils.PanicErr(err)
-
-	reply.Success("注册成功")
-
+	reply.Error("登录失败")
 	return nil
 }

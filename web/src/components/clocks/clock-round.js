@@ -7,10 +7,10 @@ template.innerHTML = `
 <style>
   div {
     display: flex;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     align-items: center;
-    justify-content: center
+    justify-content: center;
   }
   span {
     position: absolute;
@@ -38,7 +38,6 @@ class ClockRound extends Clock {
   connectedCallback() {
     super.connectedCallback()
     this._valueDom.innerText = formatTimeStr(this._value)
-
   }
 
   fitClock(value, percent) {

@@ -5,13 +5,13 @@ template.innerHTML = `
 <style>
   div {
     min-height: 100vh;
-    background: linear-gradient(to right, rgb(160,26,26), rgb(216,51,37), rgb(160,26,26))
+    background: url(https://cn.bing.com/th?id=OHR.RedAnthiasCoralMayotte_EN-CN7102584078_480x800.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) no-repeat center/cover;
+    // background: linear-gradient(to right, rgb(160,26,26), rgb(216,51,37), rgb(160,26,26))
   }
 
 </style>
 
 <div>
-  <clock-strip value="25:00" class="clock"></clock-strip> 
   <clock-round value="25:00" class="clock"></clock-round> 
   <button id="start">start</button>
   <button id="stop">stop</button>

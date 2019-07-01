@@ -1,4 +1,4 @@
-const width = 440;
+const width = 500;
 const strokeWidth = 10;
 
 
