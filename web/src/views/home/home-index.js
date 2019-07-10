@@ -5,7 +5,7 @@ template.innerHTML = `
 <style>
   div {
     min-height: 100vh;
-    background: url(https://cn.bing.com/th?id=OHR.RedAnthiasCoralMayotte_EN-CN7102584078_480x800.jpg&rf=LaDigue_1920x1080.jpg&pid=hp) no-repeat center/cover;
+    background: url(https://cn.bing.com/ImageResolution.aspx?w=375&h=667&FORM=BEHPTB) no-repeat center/cover;
     // background: linear-gradient(to right, rgb(160,26,26), rgb(216,51,37), rgb(160,26,26))
   }
 

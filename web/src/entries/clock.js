@@ -1,5 +1,5 @@
 // import * as serviceWorker from './serviceWorker';
-import './modules/bootstrap'
+import '../modules/bootstrap'
 
 
 // If you want your app to work offline and load faster, you can change
@@ -19,9 +19,9 @@ import './modules/bootstrap'
    });
  }
 
- window.addEventListener('load', () => {
-   document.querySelector('#app').innerHTML = `
-      <home-index></home-index>
-   `
+window.addEventListener('load', () => {
+  document.querySelector('#app').innerHTML = `
+    <home-index></home-index>
+  `
 
-   });
+});
