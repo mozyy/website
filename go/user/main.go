@@ -13,6 +13,7 @@ func main() {
 
 	user := new(model.User)
 	err := rpc.Register(user)
+
 	utils.PanicErr(err)
 
 	rpc.HandleHTTP()

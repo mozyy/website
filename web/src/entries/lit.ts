@@ -2,13 +2,25 @@ import { LitElement, html, property, customElement } from 'lit-element';
 
 @customElement('simple-greeting')
 export class SimpleGreeting extends LitElement {
-  @property() name = 'World';
+  @property() name = false;
+
+  clickHandler() {
+    console.log(this.name)
+    // this.name = !this.name
+  }
 
   render() {
-    return html`<p>Hello, ${this.name}!</p>`;
+    return html`<p>Hello, ${this.name}!</p><button @click="${this.clickHandler}">+1</button>`;
   }
 }
 
+window.sims= SimpleGreeting 
+
+declare global {
+  interface Window {
+    sims: any
+  }
+}
 
 window.addEventListener('load', () => {
   document.querySelector('#app').innerHTML = `
