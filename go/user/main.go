@@ -5,6 +5,8 @@ import (
 	"net/rpc"
 
 	"user/model"
+
+	"github.com/mozyy/website/go/utils"
 )
 
 func main() {
