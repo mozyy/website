@@ -3,9 +3,9 @@ package model
 import (
 	"fmt"
 
-	"github.com/mozyy/utils"
 	"github.com/mozyy/website/go/datamanage"
 	"github.com/mozyy/website/go/message"
+	"github.com/mozyy/website/go/utils"
 )
 
 // CREATE TABLE `userinfo` (
@@ -25,10 +25,11 @@ type User struct {
 	Password string
 }
 
+var db = datamanage.GetDb("user")
+
 func (u *User) Regist(user User, reply *message.Message) error {
 
 	fmt.Println(user)
-	db := datamanage.GetDb()
 
 	rows, err := db.Query("SELECT * FROM userinfo WHERE uid=?", user.UID)
 	utils.PanicErr(err)
@@ -52,8 +53,6 @@ func (u *User) Regist(user User, reply *message.Message) error {
 func (user *User) Login(args User, reply *message.Message) error {
 
 	fmt.Println(args)
-
-	db := datamanage.GetDb()
 
 	rows, err := db.Query("SELECT * FROM userinfo WHERE uid=?", args.UID)
 	utils.PanicErr(err)

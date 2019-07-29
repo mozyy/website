@@ -6,8 +6,6 @@ import (
 
 	"github.com/mozyy/website/go/message"
 	"github.com/mozyy/website/go/user/model"
-
-	"github.com/mozyy/utils"
 )
 
 func main() {

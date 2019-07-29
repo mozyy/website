@@ -3,7 +3,7 @@ package datamanage
 import (
 	"database/sql"
 
-	"github.com/mozyy/utils"
+	"go/utils"
 
 	// sql driver
 	_ "github.com/go-sql-driver/mysql"
@@ -27,8 +27,8 @@ import (
 // }
 
 // GetDb is get database stmt
-func GetDb() *sql.DB {
-	db, err := sql.Open("mysql", "root:123456@tcp(192.168.99.100:3306)/user?charset=utf8")
+func GetDb(table string) *sql.DB {
+	db, err := sql.Open("mysql", "root:123456@tcp(192.168.99.100:3306)/"+table+"?charset=utf8")
 	utils.PanicErr(err)
 
 	return db
