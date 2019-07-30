@@ -22,4 +22,5 @@ const serviceConfig = {
 serviceWorker.register(serviceConfig);
 navigator.serviceWorker.ready.then(registration=> {
   // registration.addEventListener()
+  console.log(registration)
 })
