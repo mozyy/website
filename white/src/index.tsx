@@ -20,7 +20,7 @@ const serviceConfig = {
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register(serviceConfig);
-navigator.serviceWorker.ready.then(registration=> {
-  // registration.addEventListener()
-  console.log(registration)
-})
+// navigator.serviceWorker.ready.then(registration=> {
+//   // registration.addEventListener()
+//   console.log(registration)
+// })

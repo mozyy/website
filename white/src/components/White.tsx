@@ -1,5 +1,6 @@
 import React, { useRef, useCallback, useState, useEffect, MouseEvent, TouchEvent, Touch } from "react";
 import { makeStyles } from '@material-ui/styles'
+import throttle from 'lodash/throttle'
 
 
 const canvasWidth = 1920 * 3
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100vh',
     display: 'block',
+    touchAction: 'none',
   }
 })
 
@@ -71,6 +73,7 @@ const draw = (startHandler: (p: DrawPoint)=>void, moveHandler:(p: DrawPoint)=>vo
   }
   const move = (event: MouseEvent|TouchEvent) => {
     if (drawing) {
+      event.stopPropagation()
       moveHandler(event2Point(event))
     }
   }
@@ -81,58 +84,74 @@ const draw = (startHandler: (p: DrawPoint)=>void, moveHandler:(p: DrawPoint)=>vo
   return { start, move, stop }
 }
 
+const drawLineHandler = (ctx: CanvasRenderingContext2D, draw:Draw)=> {
+  ctx.strokeStyle = draw.style
+  ctx.lineWidth = 15
+  ctx.beginPath()
+  draw.points.forEach((line,index)=> {
+    if (index === 0 ) {
+      ctx.moveTo(line.x, line.y)
+      ctx.lineTo(line.x, line.y)
+    } else {
+      ctx.lineTo(line.x, line.y)
+    }
+  })
+  ctx.stroke()
+}
 
 const White: React.FC<WhiteProps> = (props)=> {
   const classes = useStyles()
-  const [height,setHeight] = useState(100)
   const [ref, ctxRef, rect] = useCanvasCtx()
-  const [draws, setDraws] = useState<Draws>([])
-  const [currentDraw, setCurrentDraw] = useState<Draw>({style: 'red', points:[]})
+  // const [draws, setDraws] = useState<Draws>([])
+  // const [currentDraw, setCurrentDraw] = useState<Draw>({style: 'red', points:[]})
+  const draws = useRef({draws: [] as Draws, current: {style: 'red', points: []} as Draw})
 
-  useEffect(()=>{
+  // useEffect(()=>{
+  //   const ctx = ctxRef.current as CanvasRenderingContext2D
+  //   ctx.clearRect(0,0, canvasWidth, canvasHeight)
+
+  //   draws.forEach(draw=>drawLineHandler(ctx, draw))
+  //   drawLineHandler(ctx, currentDraw)
+  // },[draws, currentDraw, ctxRef])
+
+  const drawHandler = () => {
     const ctx = ctxRef.current as CanvasRenderingContext2D
-    ctx.clearRect(0,0, canvasWidth, canvasHeight)
-
-    const drawLineHandler = (draw:Draw)=> {
-      ctx.strokeStyle = draw.style
-      ctx.lineWidth = 15
-      ctx.beginPath()
-      draw.points.forEach((line,index)=> {
-        if (index === 0 ) {
-          ctx.moveTo(line.x, line.y)
-          ctx.lineTo(line.x, line.y)
-        } else {
-          ctx.lineTo(line.x, line.y)
-        }
-      })
-      ctx.stroke()
+    draws.current.draws.forEach(draw => drawLineHandler(ctx, draw))
+    drawLineHandler(ctx, draws.current.current)
+  }
+  const setCurrentPoint = (point: DrawPoint) => {
+    const current = draws.current.current
+    draws.current.current = {
+      style: current.style,
+      points: [...current.points, point]
     }
-    draws.forEach(drawLineHandler)
-    drawLineHandler(currentDraw)
-  },[draws, currentDraw])
-
+    drawHandler()
+  }
+  const moveHandlerThrottle = throttle((point)=> setCurrentPoint(point), 16)
+   
   const drawLine = draw((d)=>{
     const point: DrawPoint = {
-      x: d.x * canvasWidth  /rect.width,
-      y: d.y * canvasHeight / rect.height
+      x: Math.round(d.x * canvasWidth  /rect.width),
+      y: Math.round(d.y * canvasHeight / rect.height)
     }
-    setCurrentDraw(d=>({
-      style:d.style,
-      points: [...d.points, point]
-    }))
-    console.log(rect)
+    // setCurrentDraw(d=>({
+    //   style:d.style,
+    //   points: [...d.points, point]
+    // }))
+    setCurrentPoint(point)
   }, (d)=>{
     const point: DrawPoint = {
       x: d.x * canvasWidth  /rect.width,
       y: d.y * canvasHeight / rect.height
     }
-    setCurrentDraw(d=>({
-      style:d.style,
-      points: [...d.points, point]
-    }))
+    // setCurrentDraw(d=>({
+    //   style:d.style,
+    //   points: [...d.points, point]
+    // }))
+    moveHandlerThrottle(point)
   },()=>{
-    setDraws(d=>[...d,currentDraw])
-    setCurrentDraw({style: 'red', points:[]})
+    // setDraws(d=>[...d,currentDraw])
+    // setCurrentDraw({style: 'red', points:[]})
   })
 
 
