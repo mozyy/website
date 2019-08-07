@@ -10,6 +10,6 @@ import (
 func main() {
 	http.HandleFunc("/", websocket.Handler)
 	// err := http.ListenAndServe(":6503", nil)
-	err := http.ListenAndServeTLS(":6503", "./config/gd_bundle-g2-g1.crt", "./config/generated-private-key.txt", nil)
+	err := http.ListenAndServeTLS(":6503", "./config/other/fa19001a2e8fb15a.pem", "./config/other/fa19001a2e8fb15a.pem", nil)
 	utils.PanicErr(err)
 }
