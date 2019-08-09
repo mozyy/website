@@ -9,7 +9,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", websocket.Handler)
-	// err := http.ListenAndServe(":6503", nil)
-	err := http.ListenAndServeTLS(":6503", "./config/other/fa19001a2e8fb15a.pem", "./config/other/fa19001a2e8fb15a.pem", nil)
+	err := http.ListenAndServe(":6503", nil)
+	// err := http.ListenAndServeTLS(":6503", "../docker/nginx/ssl/yyue.dev.crt", "../docker/nginx/ssl/yyue.dev.key", nil)
 	utils.PanicErr(err)
 }

@@ -9,21 +9,12 @@ import React, {
 } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import throttle from "lodash/throttle";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from "@material-ui/core/FormLabel";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Switch from "@material-ui/core/Switch";
-import { capitalize } from "@material-ui/core/utils";
 import SpeedDial from "@material-ui/lab/SpeedDial";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
-import FileCopyIcon from "@material-ui/icons/FileCopyOutlined";
-import SaveIcon from "@material-ui/icons/Save";
-import PrintIcon from "@material-ui/icons/Print";
-import ShareIcon from "@material-ui/icons/Share";
-import DeleteIcon from "@material-ui/icons/Delete";
 import InvertColors from "@material-ui/icons/InvertColors";
+
+import { connect } from '../utils/rtc'
 
 const canvasWidth = 1080 * 3;
 const canvasHeight = 1080 * 3;
@@ -163,6 +154,7 @@ const White: React.FC<WhiteProps> = props => {
     drawHandler(current);
   };
 
+
   const moveHandlerThrottle = throttle(point => setCurrentPoint(point), 16);
 
   const drawLine = draw(
@@ -189,6 +181,11 @@ const White: React.FC<WhiteProps> = props => {
       }
     }
   ];
+
+  // web rtc
+  useEffect(()=>{
+    connect()
+  },[])
 
   return (
     <div>

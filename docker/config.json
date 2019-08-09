@@ -1,0 +1,8 @@
+{
+  "development":{
+    "websocket": "ws://localhost:6503"
+  },
+  "production":{
+    "websocket": "wss://162.219.127.105:6503"
+  }
+}
