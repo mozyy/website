@@ -1,4 +1,4 @@
-import config from '../../docker/config.json'
+import config from 'config/config.json'
 
 declare var process : {
   env :{

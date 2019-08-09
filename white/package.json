@@ -19,7 +19,8 @@
     "react-scripts": "3.0.1",
     "typeface-roboto": "^0.0.75",
     "typescript": "3.4.5",
-    "vconsole": "^3.3.2"
+    "vconsole": "^3.3.2",
+    "config": "../docker/config"
   },
   "scripts": {
     "start": "react-scripts start",

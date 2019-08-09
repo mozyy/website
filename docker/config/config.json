@@ -1,8 +1,11 @@
 {
+  "websocketPort": 6503,
   "development":{
+    "url": "localhost",
     "websocket": "ws://localhost:6503"
   },
   "production":{
+    "url": "www.yyue.dev",
     "websocket": "wss://162.219.127.105:6503"
   }
 }
