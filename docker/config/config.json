@@ -1,5 +1,5 @@
 {
-  "websocketPort": 6503,
+  "websocketPort": "6503",
   "development":{
     "url": "localhost",
     "websocket": "ws://localhost:6503"

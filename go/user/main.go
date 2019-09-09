@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"net/rpc"
 
-	"user/model"
+	"website-go-user/model"
 
-	"github.com/mozyy/website/go/utils"
+	"website-go/utils"
 )
 
 func main() {

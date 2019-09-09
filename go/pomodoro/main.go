@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/rpc"
 
-	"github.com/mozyy/website/go/message"
-	"github.com/mozyy/website/go/user/model"
+	"website-go/message"
+	"website-go-user/model"
 )
 
 func main() {

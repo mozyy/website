@@ -1,0 +1,11 @@
+{
+  "switchHosts.config": {
+    "dev": {
+      "www.yyue.dev": "127.0.0.1"
+    },
+    "prod": {
+      "www.yyue.dev": "162.219.127.105"
+    }
+  },
+  "switchHosts.selected": []
+}
