@@ -13,6 +13,7 @@ import SpeedDial from "@material-ui/lab/SpeedDial";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import InvertColors from "@material-ui/icons/InvertColors";
+import SaveIcon from "@material-ui/icons/Save";
 
 import { connect } from '../utils/rtc'
 
@@ -168,7 +169,7 @@ const White: React.FC<WhiteProps> = props => {
   );
 
   const actions = [
-    // { icon: <SaveIcon />, name: "Save" },
+    { icon: <SaveIcon />, name: "Save" },
     // { icon: <PrintIcon />, name: "Print" },
     // { icon: <ShareIcon />, name: "Share" },
     // { icon: <DeleteIcon />, name: "Delete" },
