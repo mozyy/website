@@ -49,7 +49,7 @@ export const closeVideoCall = (peerConnection: RTCPeerConnection) => {
 
 }
 
-const handleNegotiationNeededEvent = (peerConnection: RTCPeerConnection, conn: WebSocket) => async () => {
+export const handleNegotiationNeededEvent = (peerConnection: RTCPeerConnection, conn: WebSocket, uid: number, target: number) => async () => {
   log("*** Negotiation needed");
 
   try {
@@ -77,6 +77,8 @@ const handleNegotiationNeededEvent = (peerConnection: RTCPeerConnection, conn: W
 
     const msg: Message = {
       kind: 'video-offer',
+      uid,
+      target,
       value: {
         sdp: peerConnection.localDescription
       }
@@ -118,13 +120,15 @@ const handleTrackEvent = (event: RTCTrackEvent) => {
 // ICE candidate (created by our local ICE agent) to the other
 // peer through the signaling server.
 
-const handleICECandidateEvent = (conn: WebSocket) => (event: RTCPeerConnectionIceEvent) => {
+const handleICECandidateEvent = (conn: WebSocket, uid: number, target: number) => (event: RTCPeerConnectionIceEvent) => {
   if (event.candidate) {
     log("*** Outgoing ICE candidate: " + event.candidate.candidate);
 
 
     const msg: Message = {
       kind: 'new-ice-candidate',
+      uid,
+      target,
       value: {
         candidate: event.candidate
       }
@@ -190,7 +194,7 @@ const myHostname = window.location.hostname;
 
 
 
-export const createPeerConnection = async (conn: WebSocket) => {
+export const createPeerConnection = (conn: WebSocket, uid: number, target: number) => {
 
   // Create an RTCPeerConnection which knows to use our chosen
   // STUN server.
@@ -207,12 +211,13 @@ export const createPeerConnection = async (conn: WebSocket) => {
 
   // Set up event handlers for the ICE negotiation process.
 
-  peerConnection.onicecandidate = handleICECandidateEvent(conn);
+  peerConnection.onicecandidate = handleICECandidateEvent(conn, uid, target);
   peerConnection.oniceconnectionstatechange = handleICEConnectionStateChangeEvent(peerConnection);
   peerConnection.onicegatheringstatechange = handleICEGatheringStateChangeEvent(peerConnection);
   peerConnection.onsignalingstatechange = handleSignalingStateChangeEvent(peerConnection);
-  peerConnection.onnegotiationneeded = handleNegotiationNeededEvent(peerConnection, conn);
+  peerConnection.onnegotiationneeded = handleNegotiationNeededEvent(peerConnection, conn, uid, target);
   peerConnection.ontrack = handleTrackEvent;
+  // handleNegotiationNeededEvent(peerConnection, conn, uid, target)()
 
   return peerConnection
 }

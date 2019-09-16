@@ -2,6 +2,7 @@ package websocket
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 	"website-go/utils"
@@ -18,8 +19,10 @@ var upgrader = websocket.Upgrader{
 }
 
 type message struct {
-	Kind  string      `json:"kind"`
-	Value interface{} `json:"value"`
+	UID    uid         `json:"uid"`
+	Target uid         `json:"target"`
+	Kind   string      `json:"kind"`
+	Value  interface{} `json:"value"`
 }
 type userInfoStruct struct {
 	uid     uid
@@ -77,7 +80,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		switch msg.Kind {
 		case "join":
 			if userInfo.uid != 0 {
-				sendMessage(conn, message{Kind: "join-failure", Value: nil})
+				sendMessage(conn, message{Kind: "join-failure", Value: "uid already exists"})
 				return
 			}
 			channel := msg.Value.(map[string]interface{})["channel"].(string)
@@ -90,10 +93,27 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			users = append(users, user{uid: userInfo.uid, conn: conn})
 			channels[channel] = users
 			sendMessage(conn, message{
-				Kind:  "join-success",
-				Value: struct{ uid uid }{userInfo.uid},
+				Kind:   "join-success",
+				Target: userInfo.uid,
 			})
-			sendMessage(conn, message{Kind: "userlist", Value: users})
+			sendMessage(conn, message{
+				Kind:   "userlist",
+				UID:    userInfo.uid,
+				Target: userInfo.uid,
+				Value:  users,
+			})
+			sendMessageOther(channel, userInfo.uid, message{
+				Kind: "user-joined",
+				UID:  userInfo.uid,
+			})
+		case "video-offer":
+			fallthrough
+		case "video-answer":
+			fallthrough
+		case "new-ice-candidate":
+			fallthrough
+		case "hang-up":
+			sendMessageByTarget(userInfo.channel, msg)
 
 		default:
 			if err := conn.WriteMessage(messageType, p); err != nil {
@@ -104,6 +124,15 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func sendMessageByTarget(channel string, msg message) {
+	target := msg.Target
+	if target != 0 {
+		sendMessageByUID(channel, target, msg)
+	} else {
+		sendMessageByChannel(channel, msg)
+	}
+}
+
 func sendMessageByChannel(channel string, msg message) {
 	for _, user := range channels[channel] {
 		sendMessage(user.conn, msg)
@@ -111,21 +140,31 @@ func sendMessageByChannel(channel string, msg message) {
 }
 
 func sendMessageByUID(channel string, uid uid, msg message) {
+	conn := getConnByUID(channel, uid)
+	sendMessage(conn, msg)
+}
+
+func sendMessageOther(channel string, uid uid, msg message) {
 	for _, user := range channels[channel] {
-		if user.uid == uid {
+		if uid != user.uid {
 			sendMessage(user.conn, msg)
-			break
 		}
 	}
 }
 
-func sendMessage(conn *websocket.Conn, msg message) error {
-	reply, err := json.Marshal(msg)
-	if err != nil {
-		utils.LogErr(err)
-		return err
+func getConnByUID(channel string, uid uid) *websocket.Conn {
+	for _, user := range channels[channel] {
+		if user.uid == uid {
+			return user.conn
+		}
 	}
+	utils.PanicErr(errors.New("not found conn"))
+	return nil
+}
+
+func sendMessage(conn *websocket.Conn, msg message) {
+	reply, err := json.Marshal(msg)
+	utils.PanicErr(err)
 	err = conn.WriteMessage(websocket.BinaryMessage, reply)
-	utils.LogErr(err)
-	return err
+	utils.PanicErr(err)
 }

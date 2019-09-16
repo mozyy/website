@@ -1,7 +1,7 @@
 import { URLWs } from '../env'
 import { encode, decode } from './textEncoder'
 import { Message, sendMessage } from './message'
-import { createPeerConnection, closeVideoCall } from './connection'
+import { createPeerConnection, closeVideoCall, handleNegotiationNeededEvent } from './connection'
 
 const log = console.log
 const log_error = console.warn
@@ -25,13 +25,13 @@ interface Options {
   uid?: number
 }
 
-const decodeMessage = (e: MessageEvent): Promise<Message>=> e.data.arrayBuffer().then(decode)
+const decodeMessage = (e: MessageEvent): Promise<Message> => e.data.arrayBuffer().then(decode)
 
 class Connection extends EventTarget {
   options :Options
   conn: undefined | WebSocket
   userlist = []
-  connPeer: undefined | RTCPeerConnection
+  connPeers = new Map<number,RTCPeerConnection>()
   uid = 0
   constructor (options:Options = {channel:'testChannel'}) {
     super();
@@ -41,11 +41,11 @@ class Connection extends EventTarget {
     this.conn = await createSocket()
     this.addListener()
     await this.join()
-    this.connPeer = await this.createPeerConnection()
   }
   join() {
     const joinChannel: Message = {
       kind: 'join',
+      uid: this.uid,
       value: {
         channel: this.options.channel
       }
@@ -73,8 +73,8 @@ class Connection extends EventTarget {
     })
   }
 
-  createPeerConnection() {
-    return createPeerConnection.call(this, this.conn as WebSocket)
+  createPeerConnection(target: number) {
+    return createPeerConnection.call(this, this.conn as WebSocket, this.uid, target)
   }
 
   addListener() {
@@ -87,33 +87,37 @@ class Connection extends EventTarget {
       const msg = await decodeMessage(e)
       console.log('message: ', msg)
       this.dispatchEvent(e)
-      const {kind, value} = msg
+      const {kind, value, uid, target} = msg
       switch (kind) {
         case 'join-success':
-          this.uid = value.uid
+          this.uid = target as number
           break
         case "userlist":      // Received an updated user list
           this.userlist = value
           break;
+        case "user-joined":
+          const peerConn = this.handleUCreatePeerConn(uid)
+          handleNegotiationNeededEvent(peerConn, this.conn as WebSocket, this.uid, uid)()
+          break
   
       // Signaling messages: these messages are used to trade WebRTC
       // signaling information during negotiations leading up to a video
       // call.
   
       case "video-offer":  // Invitation and offer to chat
-        this.handleVideoOfferMsg(value);
+        this.handleVideoOfferMsg(uid, value);
         break;
   
       case "video-answer":  // Callee has answered our offer
-        this.handleVideoAnswerMsg(msg);
+        this.handleVideoAnswerMsg(uid, value);
         break;
   
       case "new-ice-candidate": // A new ICE candidate has been received
-        this.handleNewICECandidateMsg(msg);
+        this.handleNewICECandidateMsg(uid, value);
         break;
   
       case "hang-up": // The other peer has hung up the call
-        this.handleHangUpMsg(msg);
+        this.handleHangUpMsg(uid, value);
         break;
   
       // Unknown message; output to console for debugging.
@@ -125,11 +129,13 @@ class Connection extends EventTarget {
     })
   }
 
-  handleVideoOfferMsg = async (msg: any) => {
-    const target = msg.uid;
-    const connPeer = this.connPeer as RTCPeerConnection
+  handleVideoOfferMsg = async (target: number, msg: any) => {
+    let connPeer = this.connPeers.get(target) as RTCPeerConnection
     // If we're not already connected, create an RTCPeerConnection
     // to be linked to the caller.
+    if (connPeer == null) {
+      connPeer = this.handleUCreatePeerConn(target)
+    }
   
     log("Received video chat offer from " + target);
   
@@ -184,11 +190,13 @@ class Connection extends EventTarget {
     await connPeer.setLocalDescription(await connPeer.createAnswer());
     const response = {
       kind: 'video-answer',
+      uid: this.uid,
+      target,
       value: {
-        uid: this.uid,
+        sdp: connPeer.localDescription
       }
     }
-    sendMessage(this.conn as WebSocket, msg)
+    sendMessage(this.conn as WebSocket, response)
   
     // sendToServer({
     //   name: myUsername,
@@ -197,25 +205,31 @@ class Connection extends EventTarget {
     //   sdp: connPeer.localDescription
     // });
   }
-  async handleVideoAnswerMsg(msg: any) {
+  async handleVideoAnswerMsg(target: number, msg: any) {
     log("*** Call recipient has accepted our call");
   
     // Configure the remote description, which is the SDP payload
     // in our "video-answer" message.
   
     var desc = new RTCSessionDescription(msg.sdp);
-    await (this.connPeer as RTCPeerConnection).setRemoteDescription(desc)
+    await (this.connPeers.get(target) as RTCPeerConnection).setRemoteDescription(desc)
   }
 
-  async handleNewICECandidateMsg(msg: any) {
+  async handleNewICECandidateMsg(target: number, msg: any) {
     var candidate = new RTCIceCandidate(msg.candidate);
   
     log("*** Adding received ICE candidate: " + JSON.stringify(candidate));
-    await (this.connPeer as RTCPeerConnection).addIceCandidate(candidate)
+    await (this.connPeers.get(target) as RTCPeerConnection).addIceCandidate(candidate)
   }
   
-  handleHangUpMsg(msg: any) {
-    closeVideoCall(this.connPeer as RTCPeerConnection)
+  handleHangUpMsg(target: number, msg: any) {
+    closeVideoCall(this.connPeers.get(target) as RTCPeerConnection)
+  }
+
+  handleUCreatePeerConn(target: number) {
+    const connPeer = this.createPeerConnection(target)
+    this.connPeers.set(target,connPeer)
+    return connPeer
   }
 }
 

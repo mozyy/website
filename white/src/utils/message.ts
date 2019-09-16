@@ -6,6 +6,8 @@ type responseKinds = 'join-success'|'join-failure'
 
 export interface Message {
   kind: requestKinds | responseKinds;
+  uid: number,
+  target?: number,
   value: any
 }
 
