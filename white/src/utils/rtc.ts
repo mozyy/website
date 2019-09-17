@@ -27,11 +27,12 @@ interface Options {
 
 const decodeMessage = (e: MessageEvent): Promise<Message> => e.data.arrayBuffer().then(decode)
 
-class Connection extends EventTarget {
+export class Connection extends EventTarget {
   options :Options
   conn: undefined | WebSocket
   userlist = []
   connPeers = new Map<number,RTCPeerConnection>()
+  dataChannels = new Map<number,RTCDataChannel>()
   uid = 0
   constructor (options:Options = {channel:'testChannel'}) {
     super();
@@ -77,6 +78,17 @@ class Connection extends EventTarget {
     return createPeerConnection.call(this, this.conn as WebSocket, this.uid, target)
   }
 
+  dataChannelsSend(msg: Message) {
+    const data = encode(msg)
+    this.dataChannels.forEach( dataChannel => {
+      try{
+        dataChannel.send(data)
+      }catch(err) {
+        console.log('send data channel message failed: ', err)
+      }
+    })
+  }
+
   addListener() {
     const conn = this.conn as WebSocket
     conn.addEventListener('close', (e)=>{
@@ -96,8 +108,9 @@ class Connection extends EventTarget {
           this.userlist = value
           break;
         case "user-joined":
-          const peerConn = this.handleUCreatePeerConn(uid)
+          const peerConn = this.handleCreatePeerConn(uid)
           handleNegotiationNeededEvent(peerConn, this.conn as WebSocket, this.uid, uid)()
+          this.handleCreateDataChannel(uid)
           break
   
       // Signaling messages: these messages are used to trade WebRTC
@@ -134,7 +147,7 @@ class Connection extends EventTarget {
     // If we're not already connected, create an RTCPeerConnection
     // to be linked to the caller.
     if (connPeer == null) {
-      connPeer = this.handleUCreatePeerConn(target)
+      connPeer = this.handleCreatePeerConn(target)
     }
   
     log("Received video chat offer from " + target);
@@ -155,7 +168,7 @@ class Connection extends EventTarget {
       await Promise.all([
         connPeer.setLocalDescription({type: "rollback"}),
         connPeer.setRemoteDescription(desc)
-      ]);
+      ]).catch(error => console.log('setLocalDescription: ', error));
       return;
     } else {
       log ("  - Setting remote description");
@@ -226,15 +239,49 @@ class Connection extends EventTarget {
     closeVideoCall(this.connPeers.get(target) as RTCPeerConnection)
   }
 
-  handleUCreatePeerConn(target: number) {
+  handleCreatePeerConn(target: number) {
     const connPeer = this.createPeerConnection(target)
     this.connPeers.set(target,connPeer)
+    connPeer.addEventListener('datachannel', event => {
+      const dataChannel = event.channel
+     this.handleCreateDataChanneled(Number(dataChannel.label), dataChannel)
+    })
     return connPeer
   }
+
+  handleCreateDataChannel(target: number) {
+    const dataChannel = (this.connPeers.get(target) as RTCPeerConnection).createDataChannel(String(this.uid))
+    this.handleCreateDataChanneled(target, dataChannel)
+    return dataChannel
+  }
+
+  handleCreateDataChanneled(target: number, dataChannel: RTCDataChannel) {
+    const logCurrentState = () => {
+      console.log('current data channel state: ', dataChannel.readyState)
+    }
+    dataChannel.addEventListener('open', logCurrentState)
+    dataChannel.addEventListener('close', logCurrentState)
+    dataChannel.addEventListener('message', eventMessage => {
+      // this.dispatchEvent(eventMessage)
+      this.dispatchEvent(new CustomEvent('datachannelmessage', {detail: eventMessage}))
+    })
+    this.dataChannels.set(target,dataChannel)
+    return dataChannel
+  }
+
+  handleClose() {
+    if (this.conn) {
+      this.conn.close()
+    }
+    this.connPeers.forEach(connPeer => connPeer.close())
+    this.dataChannels.forEach(dataChannel => dataChannel.close())
+  }
+
 }
 
 export const connect = async (options: Options = {channel:'testChannel'}) => {
   const conn = new Connection()
   
   await conn.init()
+  return conn
 }

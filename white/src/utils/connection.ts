@@ -6,7 +6,6 @@ const log = console.log
 const reportError = console.error
 
 export const closeVideoCall = (peerConnection: RTCPeerConnection) => {
-  var localVideo = document.getElementById("local_video") as HTMLVideoElement;
 
   log("Closing the call");
 
@@ -35,12 +34,12 @@ export const closeVideoCall = (peerConnection: RTCPeerConnection) => {
     // element, then stopping each of the getUserMedia() tracks
     // on it.
 
-    if (localVideo.srcObject) {
-      localVideo.pause();
-      (localVideo.srcObject as MediaStream ).getTracks().forEach(track => {
-        track.stop();
-      });
-    }
+    // if (localVideo.srcObject) {
+    //   localVideo.pause();
+    //   (localVideo.srcObject as MediaStream ).getTracks().forEach(track => {
+    //     track.stop();
+    //   });
+    // }
 
     // Close the peer connection
 
@@ -217,7 +216,6 @@ export const createPeerConnection = (conn: WebSocket, uid: number, target: numbe
   peerConnection.onsignalingstatechange = handleSignalingStateChangeEvent(peerConnection);
   peerConnection.onnegotiationneeded = handleNegotiationNeededEvent(peerConnection, conn, uid, target);
   peerConnection.ontrack = handleTrackEvent;
-  // handleNegotiationNeededEvent(peerConnection, conn, uid, target)()
 
   return peerConnection
 }

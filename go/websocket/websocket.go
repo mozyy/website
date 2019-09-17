@@ -164,7 +164,7 @@ func getConnByUID(channel string, uid uid) *websocket.Conn {
 
 func sendMessage(conn *websocket.Conn, msg message) {
 	reply, err := json.Marshal(msg)
-	utils.PanicErr(err)
+	utils.LogErr(err)
 	err = conn.WriteMessage(websocket.BinaryMessage, reply)
-	utils.PanicErr(err)
+	utils.LogErr(err)
 }

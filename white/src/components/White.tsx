@@ -15,26 +15,22 @@ import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import InvertColors from "@material-ui/icons/InvertColors";
 import SaveIcon from "@material-ui/icons/Save";
 
-import { connect } from '../utils/rtc'
+import { connect, Connection } from '../utils/rtc'
+import { Message } from '../utils/message'
+import { decode } from '../utils/textEncoder'
+
+// TODO: remove this
+declare global {
+  interface Window {
+    conn: any
+  }
+}
 
 const canvasWidth = 1080 * 3;
 const canvasHeight = 1080 * 3;
 
 interface WhiteProps {}
 
-const useCanvasCtx = (): [
-  (canvas: HTMLCanvasElement) => void,
-  React.MutableRefObject<CanvasRenderingContext2D | null>,
-  ClientRect
-] => {
-  const [rect, setRect] = useState<ClientRect>();
-  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-  const ref = useCallback((canvas: HTMLCanvasElement) => {
-    setRect(canvas.getBoundingClientRect());
-    ctxRef.current = canvas.getContext("2d");
-  }, []);
-  return [ref, ctxRef, rect as ClientRect];
-};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,7 +53,7 @@ interface DrawPoint {
 
 type CtxStyle = string | CanvasGradient | CanvasPattern;
 interface Draw {
-  style: CtxStyle;
+  color: CtxStyle;
   points: DrawPoint[];
 }
 type Draws = Draw[];
@@ -92,8 +88,10 @@ let drawing = false;
 const draw = (
   startHandler: (p: DrawPoint) => void,
   moveHandler: (p: DrawPoint) => void,
-  stopHandler?: (p: DrawPoint) => void
+  stopHandler: (p: DrawPoint) => void = ()=>{}
 ) => {
+  const moveHandlerThrottle = throttle(moveHandler, 16);
+
   const start = (event: MouseEvent | TouchEvent) => {
     drawing = true;
     startHandler(event2Point(event));
@@ -101,18 +99,18 @@ const draw = (
   const move = (event: MouseEvent | TouchEvent) => {
     if (drawing) {
       event.stopPropagation();
-      moveHandler(event2Point(event));
+      moveHandlerThrottle(event2Point(event));
     }
   };
   const stop = (event: MouseEvent | TouchEvent) => {
     drawing = false;
-    stopHandler && stopHandler(event2Point(event));
+    stopHandler(event2Point(event));
   };
   return { start, move, stop };
 };
 
 const drawLineHandler = (ctx: CanvasRenderingContext2D, draw: Draw) => {
-  ctx.strokeStyle = draw.style;
+  ctx.strokeStyle = draw.color;
   ctx.lineWidth = 15;
   ctx.beginPath();
   ctx.moveTo(draw.points[0].x, draw.points[0].y);
@@ -126,17 +124,13 @@ const White: React.FC<WhiteProps> = props => {
   const classes = useStyles();
   console.log("run function components");
 
-  const [ref, ctxRef, rect] = useCanvasCtx();
-  const [style, setStyle] = useState<CtxStyle>("");
+  const cvsRef = useRef<HTMLCanvasElement >(null)
+  const colorRef = useRef<CtxStyle>("");
   const [dialOpen, setDialOpen] = useState<boolean>(false);
   const drawsRef = useRef<Draws>([]);
-  const colorRef = useRef<HTMLInputElement>(null);
+  const colorInputRef = useRef<HTMLInputElement>(null);
+  const connRef = useRef<Connection>()
 
-
-  const drawHandler = useCallback((line: Draw) => {
-    const ctx = ctxRef.current as CanvasRenderingContext2D;
-    drawLineHandler(ctx, line);
-  }, []);
 
   // useEffect(() => {
   //   console.log('useEffect')
@@ -146,27 +140,45 @@ const White: React.FC<WhiteProps> = props => {
   // });
 
   const setCurrentPoint = (p: DrawPoint) => {
+    const rect = (cvsRef.current as HTMLCanvasElement).getBoundingClientRect()
     const current = drawsRef.current[drawsRef.current.length - 1];
     const point: DrawPoint = {
       x: Math.round(((p.x - rect.left) * canvasWidth) / rect.width),
       y: Math.round(((p.y - rect.top) * canvasHeight) / rect.height)
     };
     current.points.push(point);
-    drawHandler(current);
+    const ctx = (cvsRef.current as HTMLCanvasElement).getContext("2d") as CanvasRenderingContext2D;
+    drawLineHandler(ctx, current);
   };
 
-
-  const moveHandlerThrottle = throttle(point => setCurrentPoint(point), 16);
+  const sendPointMsg = (data: any) => {
+    const conn = connRef.current
+    if(conn) {
+      const msg = {
+        ...data,
+        uid: conn.uid,
+       }
+      conn.dataChannelsSend(msg)
+    }
+  }
 
   const drawLine = draw(
     point => {
-      drawsRef.current.push({ style, points: [] });
-      moveHandlerThrottle(point);
+      drawsRef.current.push({ color: colorRef.current, points: [] });
+      setCurrentPoint(point);
+      sendPointMsg({kind: 'pointStart', value: point})
     },
     point => {
-      moveHandlerThrottle(point);
+      setCurrentPoint(point);
+      sendPointMsg({kind: 'pointMove', value: point})
     }
   );
+
+  const colorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const colorValue = event.target.value
+    colorRef.current = colorValue
+    sendPointMsg({kind: 'colorChange', value: colorValue})
+  }
 
   const actions = [
     { icon: <SaveIcon />, name: "Save" },
@@ -177,7 +189,7 @@ const White: React.FC<WhiteProps> = props => {
       icon: <InvertColors />, 
       name: "color",
       hanler() {
-        (colorRef.current as HTMLInputElement).click()
+        (colorInputRef.current as HTMLInputElement).click()
         setDialOpen(false)
       }
     }
@@ -185,14 +197,43 @@ const White: React.FC<WhiteProps> = props => {
 
   // web rtc
   useEffect(()=>{
-    connect()
+    const datachannelmessage = (event: Event) => {
+      const dataMsg = ((event as CustomEvent).detail as MessageEvent)
+      const decodeMsg = decode(dataMsg.data as Uint8Array)
+      console.log(decodeMsg)
+      switch(decodeMsg.kind) {
+        case 'pointStart':
+          drawsRef.current.push({ color: colorRef.current, points: [] });
+          setCurrentPoint(decodeMsg.value);
+          break;
+        case 'pointMove':
+          setCurrentPoint(decodeMsg.value);
+          break;
+        case 'colorChange':
+          colorRef.current = decodeMsg.value
+          break;
+      }
+    }
+    const init = async () => {
+      const conn = await connect();
+      (window.conn as any) = connRef.current = conn // TODO: remove this
+      conn.addEventListener('datachannelmessage', datachannelmessage)
+    }
+    init()
+    return () => {
+      const conn = connRef.current
+      if (conn) {
+        conn.removeEventListener('datachannelmessage', datachannelmessage)
+        conn.handleClose()
+      }
+    }
   },[])
 
   return (
     <div>
       <canvas
         className={classes.root}
-        ref={ref}
+        ref={cvsRef}
         height={canvasHeight}
         width={canvasWidth}
         onMouseDown={drawLine.start}
@@ -229,10 +270,10 @@ const White: React.FC<WhiteProps> = props => {
         ))}
       </SpeedDial>
       <input
-        ref={colorRef}
+        ref={colorInputRef}
         type="color"
         hidden
-        onChange={e => setStyle(e.target.value)}
+        onChange={colorChange}
       />
     </div>
   );
