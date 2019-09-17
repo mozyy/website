@@ -5,7 +5,7 @@
     "websocket": "ws://localhost:6503"
   },
   "production":{
-    "url": "www.yyue.dev",
-    "websocket": "wss://162.219.127.105:6503"
+    "url": "yyue.dev",
+    "websocket": "wss://yyue.dev:6503"
   }
 }
