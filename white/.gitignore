@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# production
-/build
+# production not ignore for docker build
+# /build
 
 # misc
 .DS_Store

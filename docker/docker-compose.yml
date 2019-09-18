@@ -1,17 +1,17 @@
-version: "1.1.0"
+version: "3.6"
 services:
+
   nginx:
     build:
       context: ../
       dockerfile: nginx.Dockerfile
-      target: 1.1.0
     ports:
       - "80:80"
       - "443:443"
+      
   go:
     build:
-      context: ..
+      context: ../
       dockerfile: go.Dockerfile
-      target: 1.1.0
     ports:
-      - "6503:5403"
+      - "6503:6503"
