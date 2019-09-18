@@ -214,7 +214,7 @@ export const createPeerConnection = (conn: WebSocket, uid: number, target: numbe
   peerConnection.oniceconnectionstatechange = handleICEConnectionStateChangeEvent(peerConnection);
   peerConnection.onicegatheringstatechange = handleICEGatheringStateChangeEvent(peerConnection);
   peerConnection.onsignalingstatechange = handleSignalingStateChangeEvent(peerConnection);
-  peerConnection.onnegotiationneeded = handleNegotiationNeededEvent(peerConnection, conn, uid, target);
+  // peerConnection.onnegotiationneeded = handleNegotiationNeededEvent(peerConnection, conn, uid, target);
   peerConnection.ontrack = handleTrackEvent;
 
   return peerConnection
