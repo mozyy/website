@@ -3,13 +3,15 @@ services:
 
   nginx:
     build:
+      context: .
       dockerfile: nginx.Dockerfile
     ports:
       - "80:80"
       - "443:443"
-      
+
   go:
     build:
+      context: .
       dockerfile: go.Dockerfile
     ports:
       - "6503:6503"
