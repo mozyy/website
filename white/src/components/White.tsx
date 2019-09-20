@@ -18,6 +18,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import { connect, Connection } from '../utils/rtc'
 import { Message } from '../utils/message'
 import { decode } from '../utils/textEncoder'
+import { RTC } from '../utils/webrtc'
 
 // TODO: remove this
 declare global {
@@ -129,7 +130,7 @@ const White: React.FC<WhiteProps> = props => {
   const [dialOpen, setDialOpen] = useState<boolean>(false);
   const drawsRef = useRef<Draws>([]);
   const colorInputRef = useRef<HTMLInputElement>(null);
-  const connRef = useRef<Connection>()
+  const connRef = useRef<RTC>()
 
 
   // useEffect(() => {
@@ -215,7 +216,8 @@ const White: React.FC<WhiteProps> = props => {
       }
     }
     const init = async () => {
-      const conn = await connect();
+      const conn = new RTC();
+      await conn.init();
       (window.conn as any) = connRef.current = conn // TODO: remove this
       conn.addEventListener('datachannelmessage', datachannelmessage)
     }

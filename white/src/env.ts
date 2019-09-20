@@ -12,5 +12,6 @@ interface ConfigEnv {
 
 export const configEnv: ConfigEnv = config[process.env.NODE_ENV]
 
+export const isDev = process.env.NODE_ENV === 'development'
 
 export const URLWs = configEnv.websocket

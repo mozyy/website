@@ -106,9 +106,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				Kind: "user-joined",
 				UID:  userInfo.uid,
 			})
-		case "video-offer":
+		case "create-offer":
 			fallthrough
-		case "video-answer":
+		case "create-answer":
 			fallthrough
 		case "new-ice-candidate":
 			fallthrough
@@ -116,10 +116,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			sendMessageByTarget(userInfo.channel, msg)
 
 		default:
-			if err := conn.WriteMessage(messageType, p); err != nil {
-				log.Println(err)
-				return
-			}
+			log.Println("received unknown message: ", msg.Kind)
+			sendMessageByTarget(userInfo.channel, msg)
+
+			// if err := conn.WriteMessage(messageType, p); err != nil {
+			// 	log.Println(err)
+			// 	return
+			// }
 		}
 	}
 }

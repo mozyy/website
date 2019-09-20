@@ -143,10 +143,10 @@ export class Connection extends EventTarget {
   }
 
   handleVideoOfferMsg = async (target: number, msg: any) => {
-    let connPeer = this.connPeers.get(target) as RTCPeerConnection
+    let connPeer = this.connPeers.get(target)
     // If we're not already connected, create an RTCPeerConnection
     // to be linked to the caller.
-    if (connPeer == null) {
+    if (!connPeer) {
       connPeer = this.handleCreatePeerConn(target)
     }
   
@@ -211,12 +211,6 @@ export class Connection extends EventTarget {
     }
     sendMessage(this.conn as WebSocket, response)
   
-    // sendToServer({
-    //   name: myUsername,
-    //   target: targetUsername,
-    //   type: "video-answer",
-    //   sdp: connPeer.localDescription
-    // });
   }
   async handleVideoAnswerMsg(target: number, msg: any) {
     log("*** Call recipient has accepted our call");

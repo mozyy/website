@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceRoot}/index.go",
+      "program": "${workspaceRoot}/app.go",
       "env": {},
       "args": []
     }

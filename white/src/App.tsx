@@ -1,6 +1,7 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // import 'normalize.css';
+import 'webrtc-adapter';
 import './App.css';
 import White from './components/White';
 
