@@ -99,13 +99,30 @@ export class RTC extends EventTarget {
     const conn = new RTCPeerConnection({
       // Information about ICE servers - Use your own!
       iceServers: [{
-          urls: "turn:" + window.location.hostname,  // A TURN server
-          username: "webrtc",
-          credential: "turnserver"
+          urls: [
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            'stun:stun3.l.google.com:19302',
+            'stun:stun4.l.google.com:19302',
+            'stun:23.21.150.121',
+            'stun:stun01.sipphone.com',
+            'stun:stun.ekiga.net',
+            'stun:stun.fwdnet.net',
+            'stun:stun.ideasip.com',
+            'stun:stun.iptel.org',
+            'stun:stun.rixtelecom.se',
+            'stun:stun.schlund.de',
+            'stun:stunserver.org',
+            'stun:stun.softjoys.com',
+            'stun:stun.voiparound.com',
+            'stun:stun.voipbuster.com',
+            'stun:stun.voipstunt.com',
+            'stun:stun.voxgratia.org',
+            'stun:stun.xten.com',
+          ]
         }]
     });
     conn.addEventListener('icecandidate', e => {
-      log(111111, e)
       if (e.candidate) {
         log("*** Outgoing ICE candidate: " + e.candidate.candidate);
         const msg: Message = {

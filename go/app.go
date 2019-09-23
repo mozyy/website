@@ -13,8 +13,8 @@ func main() {
 	http.HandleFunc("/", websocket.Handler)
 	// err := http.ListenAndServe(":6503", nil)
 	config := getConfig()
-	// err := http.ListenAndServe(":"+config["websocketPort"].(string), nil)
-	err := http.ListenAndServeTLS(":"+config["websocketPort"].(string), "../docker/nginx/ssl/yyue.dev.crt", "../docker/nginx/ssl/yyue.dev.key", nil)
+	err := http.ListenAndServe(":"+config["websocketPort"].(string), nil)
+	// err := http.ListenAndServeTLS(":"+config["websocketPort"].(string), "../docker/nginx/ssl/yyue.dev.crt", "../docker/nginx/ssl/yyue.dev.key", nil)
 	utils.PanicErr(err)
 }
 
