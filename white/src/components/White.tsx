@@ -17,7 +17,7 @@ import SaveIcon from "@material-ui/icons/Save";
 
 import { connect, Connection } from '../utils/rtc'
 import { Message } from '../utils/message'
-import { decode } from '../utils/textEncoder'
+import { decode, decodeMessage } from '../utils/textEncoder'
 import { RTC } from '../utils/webrtc'
 
 // TODO: remove this
@@ -159,7 +159,7 @@ const White: React.FC<WhiteProps> = props => {
         ...data,
         uid: conn.uid,
        }
-      conn.dataChannelsSend(msg)
+      conn.sendMessage(msg)
     }
   }
 
@@ -199,33 +199,39 @@ const White: React.FC<WhiteProps> = props => {
   // web rtc
   useEffect(()=>{
     const datachannelmessage = (event: Event) => {
-      const dataMsg = ((event as CustomEvent).detail as MessageEvent)
-      const decodeMsg = decode(dataMsg.data as Uint8Array)
-      console.log(decodeMsg)
-      switch(decodeMsg.kind) {
-        case 'pointStart':
-          drawsRef.current.push({ color: colorRef.current, points: [] });
-          setCurrentPoint(decodeMsg.value);
-          break;
-        case 'pointMove':
-          setCurrentPoint(decodeMsg.value);
-          break;
-        case 'colorChange':
-          colorRef.current = decodeMsg.value
-          break;
+      const handler = async () => {
+        const decodeMsg = await decodeMessage(event as MessageEvent)
+
+        // const dataMsg = ((event as CustomEvent).detail as MessageEvent)
+        // const decodeMsg = decode(dataMsg.data as Uint8Array)
+        console.log(decodeMsg)
+        switch(decodeMsg.kind) {
+          case 'pointStart':
+            drawsRef.current.push({ color: colorRef.current, points: [] });
+            setCurrentPoint(decodeMsg.value);
+            break;
+          case 'pointMove':
+            setCurrentPoint(decodeMsg.value);
+            break;
+          case 'colorChange':
+            colorRef.current = decodeMsg.value
+            break;
+        }
       }
+      handler()
+      
     }
     const init = async () => {
       const conn = new RTC();
       await conn.init();
       (window.conn as any) = connRef.current = conn // TODO: remove this
-      conn.addEventListener('datachannelmessage', datachannelmessage)
+      conn.addEventListener('message', datachannelmessage)
     }
     init()
     return () => {
       const conn = connRef.current
       if (conn) {
-        conn.removeEventListener('datachannelmessage', datachannelmessage)
+        conn.removeEventListener('message', datachannelmessage)
         conn.handleClose()
       }
     }

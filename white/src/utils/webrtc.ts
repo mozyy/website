@@ -1,8 +1,6 @@
 import { URLWs } from '../env'
 import { Message, sendMessage } from './message'
-import { encode, decode } from './textEncoder'
-
-const decodeMessage = (e: MessageEvent): Promise<Message> => e.data.arrayBuffer().then(decode)
+import { encode, decode, decodeMessage } from './textEncoder'
 
 const log = console.log.bind(console, '%c[[WebRTC]]: ', 'color: red')
 
@@ -210,7 +208,7 @@ export class RTC extends EventTarget {
     this.sendMessage(msg)
   }
 
-  private sendMessage(msg: Message) {
+  sendMessage(msg: Message) {
     if (this.webSocket) {
       this.webSocket.send(encode(msg))
     }

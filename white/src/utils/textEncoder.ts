@@ -12,3 +12,5 @@ export const decode = (arr: Uint8Array): Message => {
   const dataStr = new TextDecoder().decode(arr)
   return JSON.parse(dataStr)
 }
+
+export const decodeMessage = (e: MessageEvent): Promise<Message> => e.data.arrayBuffer().then(decode)
