@@ -5,8 +5,8 @@ COPY ./go ./build
 RUN cd ./build && \
     CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /app ./app.go
 
-FROM alpine:latest  
-RUN apk --no-cache add ca-certificates
+FROM alpine:latest
+ENV GO_RUN_ENV production
 WORKDIR /
 COPY ./docker ./docker
 COPY --from=builder app .
