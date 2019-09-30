@@ -7,7 +7,7 @@
 FROM nginx:1.16.0
 COPY ./docker/nginx/conf.d /etc/nginx/conf.d
 COPY ./docker/nginx/ssl /etc/nginx/ssl
-COPY ./white/build /usr/share/nginx/www/white
+COPY ./www/white/build /usr/share/nginx/www/white
 # COPY --from=repo /git /usr/share/nginx/www
 VOLUME /var/log/nginx
 EXPOSE 443

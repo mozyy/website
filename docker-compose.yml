@@ -13,5 +13,23 @@ services:
     build:
       context: .
       dockerfile: go.Dockerfile
+    environment:
+      GO_RUN_ENV: production
     ports:
       - "6503:6503"
+    networks:
+      - back
+
+  mysql:
+    build:
+      context: .
+      dockerfile: mysql.Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    networks:
+      - back
+
+networks:
+  back:
+    # Use a custom driver which takes special options
+    driver: custom-driver-1

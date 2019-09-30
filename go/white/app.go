@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"website-go/utils"
-	"website-go/websocket"
+	"yyue.dev/common/utils"
+	"white/websocket"
 )
 
 func main() {

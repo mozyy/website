@@ -5,7 +5,7 @@ import (
 	"errors"
 	"log"
 	"net/http"
-	"website-go/utils"
+	"yyue.dev/common/utils"
 
 	"github.com/gorilla/websocket"
 )
