@@ -11,6 +11,8 @@ import (
 	"white/websocket"
 )
 
+const configPath = "../../docker"
+
 func main() {
 	http.HandleFunc("/", websocket.Handler)
 	// err := http.ListenAndServe(":6503", nil)
@@ -26,7 +28,7 @@ func main() {
 	case "development":
 		err = http.ListenAndServe(":"+config["websocketPort"].(string), nil)
 	case "production":
-		err = http.ListenAndServeTLS(":"+config["websocketPort"].(string), "../docker/nginx/ssl/yyue.dev.crt", "../docker/nginx/ssl/yyue.dev.key", nil)
+		err = http.ListenAndServeTLS(":"+config["websocketPort"].(string), configPath + "/nginx/ssl/yyue.dev.crt", configPath + "/nginx/ssl/yyue.dev.key", nil)
 	default:
 		log.Println("unknow GO_RUN_ENV")
 	}
@@ -34,7 +36,7 @@ func main() {
 }
 
 func getConfig() map[string]interface{} {
-	configByte, err := ioutil.ReadFile("../docker/config/config.json")
+	configByte, err := ioutil.ReadFile(configPath + "/config/config.json")
 	utils.PanicErr(err)
 	var config map[string]interface{}
 	json.Unmarshal(configByte, &config)
