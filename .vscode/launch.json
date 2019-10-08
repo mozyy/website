@@ -9,7 +9,7 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceRoot}/go/app.go",
+      "program": "${workspaceRoot}/go/white/app.go",
       "env": {
         "GO_RUN_ENV": "development"
       },

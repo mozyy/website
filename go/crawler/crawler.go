@@ -1,11 +1,17 @@
 package main
 
-import "crawler/engin"
+import (
+	"yyue.dev/crawler/engine"
+	"yyue.dev/crawler/scheduler"
+)
 
 func main() {
-	entry := engin.Request{
-		URL:    "https://cd.lianjia.com/ershoufang/",
-		Parser: engin.NilParser,
+	entry := engine.Engine{
+		Scheduler: scheduler.New(),
 	}
+	// entry := engine.Engine{
+	// 	URL:    "https://cd.lianjia.com/ershoufang/",
+	// 	Parser: engine.NilParser,
+	// }
 	entry.Run()
 }

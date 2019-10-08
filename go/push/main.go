@@ -3,9 +3,10 @@ package push
 import (
 	"encoding/json"
 	"fmt"
-	"website-go/utils"
+	"log"
 
 	webpush "github.com/SherClockHolmes/webpush-go"
+	"yyue.dev/datamanage"
 )
 
 const (
@@ -15,7 +16,11 @@ const (
 
 func getKey() {
 	privateKey, publicKey, err := webpush.GenerateVAPIDKeys()
-	utils.PanicErr(err)
+	if err != nil {
+		log.Fatal(err)
+	}
+	datamanage.GetDb("table")
+	// utils.PanicErr(err)
 	fmt.Printf("privateKey:\n%s\npublicKey\n%s\n", privateKey, publicKey)
 }
 
