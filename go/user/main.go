@@ -4,9 +4,8 @@ import (
 	"net/http"
 	"net/rpc"
 
-	"website-go-user/model"
-
-	"website-go/utils"
+	"yyue.dev/common/utils"
+	"yyue.dev/user/model"
 )
 
 func main() {

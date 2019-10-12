@@ -9,12 +9,34 @@
       "type": "go",
       "request": "launch",
       "mode": "auto",
-      "program": "${workspaceRoot}/white/app.go",
+      "program": "${workspaceRoot}/white/main.go",
       "env": {
         "GO_RUN_ENV": "development"
       },
       "args": [],
-      "cwd": "${workspaceRoot}"
+      "cwd": "${workspaceRoot}/white"
+    },{
+      "name": "crawler",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceRoot}/crawler/main.go",
+      "env": {
+        "GO_RUN_ENV": "development"
+      },
+      "args": [],
+      "cwd": "${workspaceRoot}/crawler"
+    },{
+      "name": "datamanage",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceRoot}/datamanage/main.go",
+      "env": {
+        "GO_RUN_ENV": "development"
+      },
+      "args": [],
+      "cwd": "${workspaceRoot}/datamanage"
     }
   ]
 }

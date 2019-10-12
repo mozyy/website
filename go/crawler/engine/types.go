@@ -1,14 +1,17 @@
 package engine
 
+import "github.com/PuerkitoBio/goquery"
+
 type Engine struct {
-	Scheduler Scheduler
-	ItemSaver chan Item
+	Scheduler   Scheduler
+	ItemSaver   chan Item
+	WorkerCount int
 }
 
 // Request is engin request
 type Request struct {
 	URL    string
-	Parser func([]byte) Result
+	Parser func(*goquery.Document) Result
 }
 
 // Result is engin result
@@ -19,9 +22,9 @@ type Result struct {
 
 // Items is engin result
 type Item struct {
-	URL string
-
-	Perloads interface{}
+	URL     string
+	ID      string
+	Payload interface{}
 }
 
 // ParserResult is engin result
@@ -31,6 +34,6 @@ type Item struct {
 // }
 
 // NilParser is engin nil Parser, for not complete Parser
-func NilParser(b []byte) Result {
+func NilParser(q *goquery.Document) Result {
 	return Result{}
 }

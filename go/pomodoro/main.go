@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"net/rpc"
 
-	"website-go/message"
-	"website-go-user/model"
+	"yyue.dev/common/message"
+	"yyue.dev/common/utils"
+	"yyue.dev/user/model"
 )
 
 func main() {

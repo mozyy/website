@@ -3,10 +3,9 @@ package datamanage
 import (
 	"database/sql"
 
-	"go/utils"
-
 	// sql driver
 	_ "github.com/go-sql-driver/mysql"
+	"yyue.dev/common/utils"
 )
 
 // private String dataKey; // 服务名称

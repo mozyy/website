@@ -4,16 +4,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"net/http/httputil"
 	"time"
 
+	"github.com/PuerkitoBio/goquery"
 	"yyue.dev/common/utils"
 )
 
 var ticker = time.NewTicker(10 * time.Millisecond)
 
 // Fetch url
-func Fetch(url string) []byte {
+func Fetch(url string) *goquery.Document {
 	// 每次请求间隔一段时间
 	<-ticker.C
 	log.Printf("Fetcher: fetching url: %s", url)
@@ -29,9 +29,21 @@ func Fetch(url string) []byte {
 	if resp.StatusCode != http.StatusOK {
 		utils.PanicErr(fmt.Errorf("Resp status fail, code is : %d", resp.StatusCode))
 	}
-	response, err := httputil.DumpResponse(resp, true)
-	if err != nil {
-		utils.PanicErr(err)
-	}
-	return response
+	// response, err := httputil.DumpResponse(resp, true)
+	// fileName := "index.html"
+	// _, err = os.Stat(fileName)
+	// var f *os.File
+	// if os.IsNotExist(err) {
+	// 	f, err = os.Create(fileName)
+	// } else {
+	// 	f, err = os.OpenFile(fileName, os.O_APPEND, 0666)
+	// }
+	// utils.PanicErr(err)
+	// defer f.Close()
+	// _, err = f.Write(response)
+	// utils.PanicErr(err)
+	// Load the HTML document
+	doc, err := goquery.NewDocumentFromReader(resp.Body)
+	utils.PanicErr(err)
+	return doc
 }

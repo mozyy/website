@@ -43,6 +43,10 @@ func (s *Scheduler) Submit(request engine.Request) {
 	s.requestChan <- request
 }
 
-func (s *Scheduler) WorkerReady() {
+func (s *Scheduler) GetWorkerChan() chan engine.Request {
+	return make(chan engine.Request)
+}
 
+func (s *Scheduler) WorkerReady(worker chan engine.Request) {
+	s.workerChan <- worker
 }

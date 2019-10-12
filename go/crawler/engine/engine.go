@@ -1,13 +1,19 @@
 package engine
 
+import "yyue.dev/crawler/fetcher"
+
 type Scheduler interface {
 	Submit(Request)
-	WorkerReady()
+	GetWorkerChan() chan Request
+	WorkerReady(chan Request)
 }
 
 // Run is the entry point for engin
 func (engine *Engine) Run(seed ...Request) {
 	out := make(chan Result)
+	for i := 0; i < engine.WorkerCount; i++ {
+		createWorker(engine.Scheduler.GetWorkerChan(), out, engine.Scheduler)
+	}
 	for _, request := range seed {
 		engine.Scheduler.Submit(request)
 	}
@@ -25,10 +31,20 @@ func (engine *Engine) Run(seed ...Request) {
 		}
 	}
 }
-
-func worker() {
-	// b := fetcher.Fetch(request.URL)
-
+func createWorker(in chan Request, out chan Result, scheduler Scheduler) {
+	go func() {
+		for {
+			scheduler.WorkerReady(in)
+			request := <-in
+			result := worker(request)
+			out <- result
+		}
+	}()
+}
+func worker(request Request) Result {
+	b := fetcher.Fetch(request.URL)
+	result := request.Parser(b)
+	return result
 }
 
 var visitsMaps = make(map[string]bool)
