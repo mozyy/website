@@ -3,6 +3,7 @@ package parser
 import (
 	"encoding/json"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -76,7 +77,7 @@ func City(q *goquery.Document) engine.Result {
 		default:
 			// TODO: 如果还有多余数据, 再细化搜索条件
 			log.Println("total: ", total, selectedLen, q.Find("div[data-role=ershoufang] .selected").Text())
-			result.Items = append(result.Items, engine.Item{Payload: total})
+			// result.Items = append(result.Items, engine.Item{Payload: total})
 		}
 		return result
 	}
@@ -128,9 +129,11 @@ func morePage(q *goquery.Document) []engine.Request {
 }
 
 type HouseInfo struct {
-	Title    string // 标题
-	SubTitle string // 副标题
-	Region   string // 小区
+	ID       string `db:"id"` // id
+	URL      string `db:"url"`
+	Title    string `db:"title"`     // 标题
+	SubTitle string `db:"sub_title"` // 副标题
+	Region   string `db:"region"`    // 小区
 	BaseInfo
 	TransactionInfo
 }
@@ -159,6 +162,8 @@ type TransactionInfo struct {
 	MortgageInfo     string // 抵押信息
 	DocumentPhoto    string // 房本备件
 }
+
+var IDRegexp = regexp.MustCompile(`https://cd.lianjia.com/ershoufang/(\d+).html`)
 
 func House(q *goquery.Document, URL string) engine.Result {
 
@@ -223,16 +228,15 @@ func House(q *goquery.Document, URL string) engine.Result {
 		}
 	})
 	houseInfo := HouseInfo{
+		URL:             URL,
 		Title:           title,
 		SubTitle:        subTitle,
 		BaseInfo:        baseInfo,
 		TransactionInfo: transactionInfo,
 	}
 	return engine.Result{
-		Items: []engine.Item{{
-			URL:     URL,
-			Payload: houseInfo,
-		},
+		Items: []engine.Item{
+			houseInfo,
 		},
 	}
 }

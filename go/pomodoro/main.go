@@ -6,18 +6,24 @@ import (
 
 	"yyue.dev/common/message"
 	"yyue.dev/common/utils"
-	"yyue.dev/user/model"
 )
 
+type User struct {
+	Name string `db:"name"`
+}
+
 func main() {
-	client, err := rpc.DialHTTP("tcp", "localhost:5000")
+	datamanageURL := utils.GetConfig().DatamanageURL
+	client, err := rpc.DialHTTP("tcp", datamanageURL)
 	utils.PanicErr(err)
 	defer client.Close()
 
 	message := &message.Message{}
-	user := model.User{2, "rpc client", 18381335182, "123"}
-	err = client.Call("User.Login", user, message)
-	fmt.Println(message)
+	// user := &[]User{
+	// 	{"name"},
+	// }
+	user := "test"
+	err = client.Call("Query.Show", &user, message)
 	utils.PanicErr(err)
 	fmt.Println(message)
 }

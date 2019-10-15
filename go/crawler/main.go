@@ -9,11 +9,6 @@ import (
 )
 
 func main() {
-	defer func() {
-		if r := recover(); r != nil {
-			fmt.Println("Recovered in main", r)
-		}
-	}()
 	item := make(chan engine.Item)
 	entry := engine.Engine{
 		Scheduler:   scheduler.New(),

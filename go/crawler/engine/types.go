@@ -21,11 +21,7 @@ type Result struct {
 }
 
 // Items is engin result
-type Item struct {
-	URL     string
-	ID      string
-	Payload interface{}
-}
+type Item interface{}
 
 // ParserResult is engin result
 // type ParserResult struct {
