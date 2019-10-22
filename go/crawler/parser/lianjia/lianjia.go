@@ -134,106 +134,99 @@ type HouseInfo struct {
 	Title    string `db:"title"`     // 标题
 	SubTitle string `db:"sub_title"` // 副标题
 	Region   string `db:"region"`    // 小区
-	BaseInfo
-	TransactionInfo
-}
-type BaseInfo struct {
-	Layout        string // 房屋户型
-	Floor         string // 所在楼层
-	AreaBuild     string // 建筑面积
-	StructHouse   string // 户型结构
-	AreaInner     string // 套内面积
-	BuildType     string // 建筑类型
-	Face          string // 房屋朝向
-	StructBuild   string // 建筑结构
-	Decoration    string // 装修情况
-	ElevatorRatio string // 梯户比例
-	Elevator      string // 配备电梯
-	Property      string // 产权年限
+
+	Layout        string `db:"layout"` // 房屋户型
+	Floor         string `db:"floor"` // 所在楼层
+	AreaBuild     string `db:"area_build"` // 建筑面积
+	StructHouse   string `db:"struct_house"` // 户型结构
+	AreaInner     string `db:"area_inner"` // 套内面积
+	BuildType     string `db:"build_type"` // 建筑类型
+	Face          string `db:"face"` // 房屋朝向
+	StructBuild   string `db:"struct_build"` // 建筑结构
+	Decoration    string `db:"decoration"` // 装修情况
+	ElevatorRatio string `db:"elevator_ratio"` // 梯户比例
+	Elevator      string `db:"elevator"` // 配备电梯
+	Property      string `db:"property"` // 产权年限
+
+	ListingTime      string `db:"listing_time"` // 挂牌时间
+	TradingAuthority string `db:"trading_authority"` // 交易权属
+	LastTransaction  string `db:"last_transaction"` // 上次交易
+	HousingPurposes  string `db:"housing_purposes"` // 房屋用途
+	HouseYear        string `db:"house_year"` // 房屋年限
+	PropertyRights   string `db:"property_rights"` // 产权所属
+	MortgageInfo     string `db:"mortgage_info"` // 抵押信息
+	DocumentPhoto    string `db:"document_photo"` // 房本备件
 }
 
-type TransactionInfo struct {
-	ListingTime      string // 挂牌时间
-	TradingAuthority string // 交易权属
-	LastTransaction  string // 上次交易
-	HousingPurposes  string // 房屋用途
-	HouseYear        string // 房屋年限
-	PropertyRights   string // 产权所属
-	MortgageInfo     string // 抵押信息
-	DocumentPhoto    string // 房本备件
-}
-
-var IDRegexp = regexp.MustCompile(`https://cd.lianjia.com/ershoufang/(\d+).html`)
+var IDRegexp = regexp.MustCompile(`^https://cd.lianjia.com/ershoufang/(\d+).html`)
 
 func House(q *goquery.Document, URL string) engine.Result {
 
+	id := IDRegexp.FindStringSubmatch(URL)[1]
+
 	title := q.Find(".title-wrapper .title .main").Text()
 	subTitle := q.Find(".title-wrapper .title .sub").Text()
-
+	houseInfo := HouseInfo{
+		ID:              string(id),
+		URL:             URL,
+		Title:           title,
+		SubTitle:        subTitle,
+	}
 	introduction := q.Find("#introduction")
-	baseInfo := BaseInfo{}
 	introduction.Find(".base .content ul li").Each(func(i int, s *goquery.Selection) {
 		s.Contents().Each(func(_ int, s *goquery.Selection) {
 			if goquery.NodeName(s) == "#text" {
 				value := strings.TrimSpace(s.Text())
 				switch i {
 				case 0:
-					baseInfo.Layout = value // 房屋户型
+					houseInfo.Layout = value // 房屋户型
 				case 1:
-					baseInfo.Floor = value // 所在楼层
+					houseInfo.Floor = value // 所在楼层
 				case 2:
-					baseInfo.AreaBuild = value // 建筑面积
+					houseInfo.AreaBuild = value // 建筑面积
 				case 3:
-					baseInfo.StructHouse = value // 户型结构
+					houseInfo.StructHouse = value // 户型结构
 				case 4:
-					baseInfo.AreaInner = value // 套内面积
+					houseInfo.AreaInner = value // 套内面积
 				case 5:
-					baseInfo.BuildType = value // 建筑类型
+					houseInfo.BuildType = value // 建筑类型
 				case 6:
-					baseInfo.Face = value // 房屋朝向
+					houseInfo.Face = value // 房屋朝向
 				case 7:
-					baseInfo.StructBuild = value // 建筑结构
+					houseInfo.StructBuild = value // 建筑结构
 				case 8:
-					baseInfo.Decoration = value // 装修情况
+					houseInfo.Decoration = value // 装修情况
 				case 9:
-					baseInfo.ElevatorRatio = value // 梯户比例
+					houseInfo.ElevatorRatio = value // 梯户比例
 				case 10:
-					baseInfo.Elevator = value // 配备电梯
+					houseInfo.Elevator = value // 配备电梯
 				case 11:
-					baseInfo.Property = value // 产权年限
+					houseInfo.Property = value // 产权年限
 				}
 			}
 		})
 	})
-	transactionInfo := TransactionInfo{}
 	introduction.Find(".transaction .content ul li span:nth-child(2)").Each(func(i int, s *goquery.Selection) {
 		value := strings.TrimSpace(s.Text())
 		switch i {
 		case 0:
-			transactionInfo.ListingTime = value // 挂牌时间
+			houseInfo.ListingTime = value // 挂牌时间
 		case 1:
-			transactionInfo.TradingAuthority = value // 交易权属
+			houseInfo.TradingAuthority = value // 交易权属
 		case 2:
-			transactionInfo.LastTransaction = value // 上次交易
+			houseInfo.LastTransaction = value // 上次交易
 		case 3:
-			transactionInfo.HousingPurposes = value // 房屋用途
+			houseInfo.HousingPurposes = value // 房屋用途
 		case 4:
-			transactionInfo.HouseYear = value // 房屋年限
+			houseInfo.HouseYear = value // 房屋年限
 		case 5:
-			transactionInfo.PropertyRights = value // 产权所属
+			houseInfo.PropertyRights = value // 产权所属
 		case 6:
-			transactionInfo.MortgageInfo = value // 抵押信息
+			houseInfo.MortgageInfo = value // 抵押信息
 		case 7:
-			transactionInfo.DocumentPhoto = value // 房本备件
+			houseInfo.DocumentPhoto = value // 房本备件
 		}
 	})
-	houseInfo := HouseInfo{
-		URL:             URL,
-		Title:           title,
-		SubTitle:        subTitle,
-		BaseInfo:        baseInfo,
-		TransactionInfo: transactionInfo,
-	}
 	return engine.Result{
 		Items: []engine.Item{
 			houseInfo,

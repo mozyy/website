@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"log"
 	"net"
 	"net/http"
@@ -8,10 +9,14 @@ import (
 
 	"yyue.dev/common/message"
 	"yyue.dev/common/utils"
+	parser "yyue.dev/crawler/parser/lianjia"
 	"yyue.dev/datamanage/database"
 )
 
 func main() {
+	// register possible struct types for gob
+	gob.Register(parser.HouseInfo{})
+
 	datamanageURL := utils.GetConfig().DatamanageURL
 	q, err := database.New()
 	utils.PanicErr(err)

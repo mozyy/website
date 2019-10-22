@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"reflect"
 	"strings"
 	"time"
@@ -75,6 +76,7 @@ func (q *Query) ConnectDatabase(database *string, reply *message.Message) error 
 	}
 	q.Database = *database
 	reply.Success(fmt.Sprintf("连接数据库[%s]成功", *database))
+	log.Println(fmt.Sprintf("USE %s", *database))
 	return nil
 }
 
@@ -84,64 +86,28 @@ func (q *Query) ConnectTable(table *string, reply *message.Message) error {
 	return nil
 }
 
-func (q *Query) InsertStruct(stru interface{}, reply *message.Message) error {
-
-	return nil
-}
-func getStructKV(stru interface{}) ([]string, []interface{}) {
-	keys, values := []string{}, []interface{}{}
-	v := reflect.ValueOf(stru)
-	//剥离指针
-	for v.Kind() == reflect.Ptr {
-		v = v.Elem()
-	}
-	if v.Kind() == reflect.Struct {
-		t := v.Type()
-		for i := 0; i < t.NumField(); i++ {
-			tf := t.Field(i)
-			vf := v.Field(i)
-			//忽略非导出字段
-			if tf.Anonymous || !vf.CanInterface() {
-				continue
-			}
-			//忽略无效
-			if !vf.IsValid() {
-				continue
-			}
-			// 忽略零值字段
-			// if reflect.DeepEqual(vf.Interface(), reflect.Zero(vf.Type()).Interface()) {
-			// 	continue
-			// }
-			key := tf.Tag.Get("db")
-			if key == "" {
-				continue
-			}
-			vi := vf.Interface()
-			values = append(values, vi)
-			keys = append(keys, key)
-		}
-	}
-	return keys, values
-}
-
-func (q *Query) Insert(ins *interface{}, reply *message.Message) error {
-
+func (q *Query) Insert(ins interface{}, reply *message.Message) error {
+	log.Println("received ins")
 	v := reflect.ValueOf(ins)
 	// 剥离指针
 	for v.Kind() == reflect.Ptr {
 		v = v.Elem()
 	}
+	if v.Kind() == reflect.Struct {
+		v = reflect.ValueOf([]interface{}{v.Interface()})
+	}
 	// 输入只有一个元素, 且为slice, 当成多个输入
-	if v.Len() == 1 && v.Index(0).Kind() == reflect.Slice {
-		v = v.Index(0)
+	if v.Kind() != reflect.Slice {
+		return reply.Error("Insert error: first argument must be a slice or struct")
 	}
 	// 先用第一个无素生成keys
 	var (
-		keys   []string
-		values [][]string
-		value  []string
-		stmt   *sql.Stmt
-		err    error
+		keys []string
+		// values [][]string
+		value []string
+		stmt  *sql.Stmt
+		err   error
+		errs  []string
 	)
 
 	for i := 0; i < v.Len(); i++ {
@@ -154,26 +120,31 @@ func (q *Query) Insert(ins *interface{}, reply *message.Message) error {
 			switch item.Kind() {
 			case reflect.Struct:
 				keys, value = struct2KV(item)
-				values = append(values, value)
 			}
-			stmt, err = q.DB.Prepare(fmt.Sprintf(`INSERT %s SET %s=?`, q.Table, strings.Join(keys, "=?,")))
+			sql := fmt.Sprintf(`INSERT %s SET %s=?`, q.Table, strings.Join(keys, "=?,"))
+			log.Println("sql: ", sql)
+			stmt, err = q.DB.Prepare(sql)
 			if err != nil {
 				return err
 			}
 			defer stmt.Close()
 		} else {
 			_, value = struct2KV(item)
-			values = append(values, value)
 		}
-
+		values := make([]interface{}, len(value))
+		for i, v := range value {
+			values[i] = v
+		}
+		log.Println("insert data: ", values)
+		_, err = stmt.Exec(values...)
+		if err != nil {
+			errs = append(errs, err.Error())
+		}
 	}
-	res, err := stmt.Exec(values)
-	if err != nil {
-		return err
+	if len(errs) > 0 {
+		return reply.Error(strings.Join(errs, "\n"))
 	}
-	affect, err := res.RowsAffected()
-	reply.Success("Insert success")
-	reply.SetData(affect)
+	reply.Success(fmt.Sprintf("Insert %d data success", v.Len()))
 	return nil
 }
 
@@ -240,4 +211,44 @@ func format(v reflect.Value) string {
 		return format(v.Elem())
 	}
 	return ""
+}
+
+func (q *Query) InsertStruct(stru interface{}, reply *message.Message) error {
+
+	return nil
+}
+func getStructKV(stru interface{}) ([]string, []interface{}) {
+	keys, values := []string{}, []interface{}{}
+	v := reflect.ValueOf(stru)
+	//剥离指针
+	for v.Kind() == reflect.Ptr {
+		v = v.Elem()
+	}
+	if v.Kind() == reflect.Struct {
+		t := v.Type()
+		for i := 0; i < t.NumField(); i++ {
+			tf := t.Field(i)
+			vf := v.Field(i)
+			//忽略非导出字段
+			if tf.Anonymous || !vf.CanInterface() {
+				continue
+			}
+			//忽略无效
+			if !vf.IsValid() {
+				continue
+			}
+			// 忽略零值字段
+			// if reflect.DeepEqual(vf.Interface(), reflect.Zero(vf.Type()).Interface()) {
+			// 	continue
+			// }
+			key := tf.Tag.Get("db")
+			if key == "" {
+				continue
+			}
+			vi := vf.Interface()
+			values = append(values, vi)
+			keys = append(keys, key)
+		}
+	}
+	return keys, values
 }

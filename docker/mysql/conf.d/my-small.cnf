@@ -3,6 +3,7 @@
 #password	= your_password
 port		= 3306			#客户端链接端口
 socket		= /tmp/mysql.sock	#socket文件路径
+default-character-set=utf8
 
 # MySQL服务器配置
 [mysqld]
@@ -17,6 +18,9 @@ read_buffer_size = 256K			#读查询操作使用的缓冲区大小
 read_rnd_buffer_size = 256K		#随机读缓冲区大小
 net_buffer_length = 2K			#通信时缓存数据的大小
 thread_stack = 128K			#线程使用的堆大小
+
+character-set-server=utf8
+collation-server=utf8_general_ci
 
 #skip-networking			#关闭通过TCP/IP连接MySQL
 server-id = 1				#表示本机序号为1,也就master的意思

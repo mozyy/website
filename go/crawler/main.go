@@ -1,33 +1,26 @@
 package main
 
 import (
-	"fmt"
-
+	"github.com/PuerkitoBio/goquery"
 	"yyue.dev/crawler/engine"
+	"yyue.dev/crawler/itemsaver"
 	parser "yyue.dev/crawler/parser/lianjia"
 	"yyue.dev/crawler/scheduler"
 )
 
 func main() {
-	item := make(chan engine.Item)
 	entry := engine.Engine{
 		Scheduler:   scheduler.New(),
 		WorkerCount: 15,
-		ItemSaver:   item,
+		ItemSaver:   itemsaver.New(),
 	}
-	go func() {
-		count := 0
-
-		for {
-			result := <-item
-			count++
-			fmt.Printf("got result: %s, count: %d\n", result, count)
-		}
-	}()
 	request := engine.Request{
-		URL: "https://cd.lianjia.com/ershoufang/",
-		// URL: "https://cd.lianjia.com/ershoufang/106103087618.html",
-		Parser: parser.City,
+		// URL: "https://cd.lianjia.com/ershoufang/",
+		// Parser: parser.City,
+		URL: "https://cd.lianjia.com/ershoufang/106103087618.html",
+		Parser: func(q *goquery.Document) engine.Result {
+			return parser.House(q, "https://cd.lianjia.com/ershoufang/106103087618.html")
+		},
 	}
 	entry.Run(request)
 }
