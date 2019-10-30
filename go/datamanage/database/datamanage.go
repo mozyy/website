@@ -11,6 +11,7 @@ import (
 	// sql driver
 	_ "github.com/go-sql-driver/mysql"
 	"yyue.dev/common/message"
+	"yyue.dev/common/types"
 	"yyue.dev/common/utils"
 )
 
@@ -39,10 +40,10 @@ func GetDb(table string) *sql.DB {
 	return db
 }
 
-func Connect() (*sql.DB, error) {
+func Connect(database string) (*sql.DB, error) {
 	dbc := utils.GetConfig().Database
-	dsn := fmt.Sprintf(`%s:%s@tcp(%s:%s)/?%s`, dbc.User, dbc.Password,
-		dbc.Domain, dbc.Port, "charset=utf8&parseTime=true")
+	dsn := fmt.Sprintf(`%s:%s@tcp(%s:%s)/%s?%s`, dbc.User, dbc.Password,
+		dbc.Domain, dbc.Port, database, "charset=utf8&parseTime=true")
 	conn, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, err
@@ -55,40 +56,43 @@ func Connect() (*sql.DB, error) {
 }
 
 type Query struct {
-	DB       *sql.DB
-	Table    string
-	Database string
+	DBMap map[string]*sql.DB
 }
 
 func New() (*Query, error) {
-	db, err := Connect()
-	if err != nil {
-		return nil, err
-	}
-	return &Query{DB: db}, nil
+
+	return &Query{}, nil
 }
 
-func (q *Query) ConnectDatabase(database *string, reply *message.Message) error {
-
-	_, err := q.DB.Exec(fmt.Sprintf("USE %s", *database))
-	if err != nil {
-		return reply.Error(fmt.Sprintf("连接数据库[%s]失败: %s", *database, err.Error()))
+func (q *Query) ConnectDatabase(database string, reply *message.Message) error {
+	if DB, ok := q.DBMap[database]; ok && DB.Ping() == nil {
+		reply.Success(fmt.Sprintf("存在已连接的数据库[%s]", database))
+		return nil
 	}
-	q.Database = *database
-	reply.Success(fmt.Sprintf("连接数据库[%s]成功", *database))
-	log.Println(fmt.Sprintf("USE %s", *database))
+
+	DB, err := Connect(database)
+
+	if err != nil {
+		return reply.Error(fmt.Sprintf("连接数据库[%s]失败: %s", database, err.Error()))
+	}
+	q.DBMap[database] = DB
+	reply.Success(fmt.Sprintf("连接数据库[%s]成功", database))
 	return nil
 }
 
-func (q *Query) ConnectTable(table *string, reply *message.Message) error {
-	q.Table = *table
-	reply.Success(fmt.Sprintf("连接数据表[%s]成功", *table))
-	return nil
-}
+func (q *Query) Insert(dbo types.DBOperater, reply *message.Message) error {
+	fmt.Println("receive insert: ", dbo)
+	DB, ok := q.DBMap[dbo.Database]
+	if !ok {
+		return reply.Error(fmt.Sprintf("未连接数据库[%s]", dbo.Database))
+	}
+	fmt.Println("exists database: ", dbo.Database)
+	if DB.Ping() != nil {
+		return reply.Error(fmt.Sprintf("数据库[%s]已断开", dbo.Database))
+	}
+	fmt.Println("DB alive: ", DB)
 
-func (q *Query) Insert(ins interface{}, reply *message.Message) error {
-	log.Println("received ins")
-	v := reflect.ValueOf(ins)
+	v := reflect.ValueOf(dbo.Ins)
 	// 剥离指针
 	for v.Kind() == reflect.Ptr {
 		v = v.Elem()
@@ -121,9 +125,9 @@ func (q *Query) Insert(ins interface{}, reply *message.Message) error {
 			case reflect.Struct:
 				keys, value = struct2KV(item)
 			}
-			sql := fmt.Sprintf(`INSERT %s SET %s=?`, q.Table, strings.Join(keys, "=?,"))
+			sql := fmt.Sprintf(`INSERT %s SET %s=?`, dbo.Table, strings.Join(keys, "=?,"))
 			log.Println("sql: ", sql)
-			stmt, err = q.DB.Prepare(sql)
+			stmt, err = DB.Prepare(sql)
 			if err != nil {
 				return err
 			}
@@ -211,44 +215,4 @@ func format(v reflect.Value) string {
 		return format(v.Elem())
 	}
 	return ""
-}
-
-func (q *Query) InsertStruct(stru interface{}, reply *message.Message) error {
-
-	return nil
-}
-func getStructKV(stru interface{}) ([]string, []interface{}) {
-	keys, values := []string{}, []interface{}{}
-	v := reflect.ValueOf(stru)
-	//剥离指针
-	for v.Kind() == reflect.Ptr {
-		v = v.Elem()
-	}
-	if v.Kind() == reflect.Struct {
-		t := v.Type()
-		for i := 0; i < t.NumField(); i++ {
-			tf := t.Field(i)
-			vf := v.Field(i)
-			//忽略非导出字段
-			if tf.Anonymous || !vf.CanInterface() {
-				continue
-			}
-			//忽略无效
-			if !vf.IsValid() {
-				continue
-			}
-			// 忽略零值字段
-			// if reflect.DeepEqual(vf.Interface(), reflect.Zero(vf.Type()).Interface()) {
-			// 	continue
-			// }
-			key := tf.Tag.Get("db")
-			if key == "" {
-				continue
-			}
-			vi := vf.Interface()
-			values = append(values, vi)
-			keys = append(keys, key)
-		}
-	}
-	return keys, values
 }
