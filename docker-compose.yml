@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: mysql.Dockerfile
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     networks:
       - back
 
