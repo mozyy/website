@@ -19,7 +19,7 @@
     "database": {
       "user": "root",
       "password": "",
-      "domain": "datamanage",
+      "domain": "mysql",
       "port":"3306",
       "charset": "utf8"
     },
