@@ -1,8 +1,8 @@
 {
   "development":{
-    "websocketPort": "6503",
+    "websocketPort": "30000",
     "url": "localhost",
-    "websocket": "ws://localhost:6503",
+    "websocket": "ws://localhost:30000",
     "database": {
       "user": "root",
       "password": "",
@@ -10,19 +10,19 @@
       "port":"3306",
       "charset": "utf8"
     },
-    "DatamanageURL":":30000"
+    "DatamanageURL":":30001"
   },
   "production":{
-    "websocketPort": "6503",
+    "websocketPort": "30000",
     "url": "yyue.dev",
-    "websocket": "wss://yyue.dev:6503",
+    "websocket": "wss://yyue.dev:30000",
     "database": {
       "user": "root",
-      "password": "123456",
-      "domain": "192.168.99.100",
+      "password": "",
+      "domain": "datamanage",
       "port":"3306",
       "charset": "utf8"
     },
-    "DatamanageURL":":30000"
+    "DatamanageURL":"datamanage:30001"
   }
 }

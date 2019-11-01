@@ -2,13 +2,13 @@
 [client]
 #password	= your_password
 port		= 3306			#客户端链接端口
-socket		= /tmp/mysql.sock	#socket文件路径
+#socket		= /tmp/mysql.sock	#socket文件路径
 default-character-set=utf8
 
 # MySQL服务器配置
 [mysqld]
 port		= 3306			#客户端链接端口
-socket		= /tmp/mysql.sock	#socket文件路径
+#socket		= /tmp/mysql.sock	#socket文件路径
 skip-external-locking			#避免外部锁定
 key_buffer_size = 16K			#执行索引的缓冲区大小
 max_allowed_packet = 1M			#服务器发送和接受的最大包长度

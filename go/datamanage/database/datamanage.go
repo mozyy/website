@@ -44,6 +44,7 @@ func Connect(database string) (*sql.DB, error) {
 	dbc := utils.GetConfig().Database
 	dsn := fmt.Sprintf(`%s:%s@tcp(%s:%s)/%s?%s`, dbc.User, dbc.Password,
 		dbc.Domain, dbc.Port, database, "charset=utf8&parseTime=true")
+	fmt.Println(dsn)
 	conn, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, err
@@ -61,7 +62,7 @@ type Query struct {
 
 func New() (*Query, error) {
 
-	return &Query{}, nil
+	return &Query{make(map[string]*sql.DB)}, nil
 }
 
 func (q *Query) ConnectDatabase(database string, reply *message.Message) error {

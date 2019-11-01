@@ -1,0 +1,56 @@
+version: "3.6"
+services:
+
+  mysql:
+    build:
+      context: ../../
+      dockerfile: ./docker/docker/mysql.Dockerfile
+    volumes:
+       - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    networks:
+      - back
+
+  # nginx:
+  #   build:
+  #     context: ../../
+  #     dockerfile: ./docker/docker/nginx.Dockerfile
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+
+  datamanage:
+    build:
+      context: ../../
+      dockerfile: ./docker/docker/go/datamanage.Dockerfile
+    environment:
+      GO_RUN_ENV: production
+      GOPROXY: https://goproxy.cn
+    # ports:
+    #   - "30001:30001"
+    networks:
+      - back
+    depends_on:
+      - mysql
+
+  crawler:
+    build:
+      context: ../../
+      dockerfile: ./docker/docker/go/crawler.Dockerfile
+    environment:
+      GO_RUN_ENV: production
+      GOPROXY: https://goproxy.cn
+    networks:
+      - back
+    depends_on:
+      - datamanage
+
+
+networks:
+  back:
+    # Use a custom driver which takes special options
+    # driver: custom-driver-1
+
+volumes:
+  db-data:

@@ -33,7 +33,7 @@ func New() chan engine.Item {
 			go func() {
 				message := &message.Message{}
 				fmt.Println("start: ", message)
-				dbo := types.DBOperater{"development", "houseInfo", result}
+				dbo := types.DBOperater{"development", "house_info", result}
 				err := client.Call("Query.Insert", dbo, message)
 				if err != nil {
 					fmt.Println("error:", err, message)

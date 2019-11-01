@@ -6,7 +6,6 @@ import (
 	"log"
 
 	webpush "github.com/SherClockHolmes/webpush-go"
-	"yyue.dev/datamanage"
 )
 
 const (
@@ -19,7 +18,7 @@ func getKey() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	datamanage.GetDb("table")
+	// datamanage.GetDb("table")
 	// utils.PanicErr(err)
 	fmt.Printf("privateKey:\n%s\npublicKey\n%s\n", privateKey, publicKey)
 }
