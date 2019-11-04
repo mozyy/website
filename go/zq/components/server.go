@@ -1,4 +1,4 @@
-package compoments
+package components
 
 import (
 	"bufio"

@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/tealeg/xlsx"
 	"yyue.dev/common/utils"
-	"yyue.dev/zq/compoments"
+	"yyue.dev/zq/components"
 )
 
 type Server struct {
@@ -22,9 +22,9 @@ type Result struct {
 }
 
 func main() {
-	ips := compoments.GetIps()
-	groups := compoments.GetGroups()
-	servers := compoments.GetServers()
+	ips := components.GetIps()
+	groups := components.GetGroups()
+	servers := components.GetServers()
 
 	result := []Result{}
 	for _, ip := range ips {
