@@ -1,0 +1,40 @@
+syntax="proto3";
+
+package lianjia;
+
+
+option go_package = "go.yyue.dev/crawler/parser/lianjia";
+
+message HouseInfo {
+	string ID = 1;               // id
+	string URL = 2;             // url
+	string Title = 3;         // 标题
+	string SubTitle = 4;  // 副标题
+  string Region = 5;       // 小区
+}
+
+message BaseInfo {
+	string Layout = 1;                 // 房屋户型
+	string Floor = 2;                   // 所在楼层
+	string AreaBuild = 3;          // 建筑面积
+	string StructHouse = 4;      // 户型结构
+	string AreaInner = 5;          // 套内面积
+	string BuildType = 6;          // 建筑类型
+	string Face = 7;                     // 房屋朝向
+	string StructBuild = 8;      // 建筑结构
+	string Decoration = 9;         // 装修情况
+	string ElevatorRatio = 10;  // 梯户比例
+	string Elevator = 11;             // 配备电梯
+  string Property = 12;             // 产权年限
+}
+
+message TransactionInfo {
+	string ListingTime = 1;            // 挂牌时间
+	string TradingAuthority = 2;  // 交易权属
+	string LastTransaction = 3;    // 上次交易
+	string HousingPurposes = 4;    // 房屋用途
+	string HouseYear = 5;                // 房屋年限
+	string PropertyRights = 6;      // 产权所属
+	string MortgageInfo = 7;          // 抵押信息
+	string DocumentPhoto = 8;        // 房本备件
+}

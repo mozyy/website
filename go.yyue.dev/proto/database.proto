@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package database;
+
+import "message.proto";
+
+option go_package="go.yyue.dev/datamanage/database";
+
+service DatabaseService {
+  rpc Connect(ConnectRequest) returns (message.Message) {};
+  rpc Insert(ConnectRequest) returns (message.Message) {};
+}
+
+message ConnectRequest {
+  string database = 1;
+}
+

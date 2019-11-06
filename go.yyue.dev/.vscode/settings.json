@@ -1,0 +1,9 @@
+{
+  "protoc": {
+    "path": "protoc",
+    "options": [
+        "--proto_path=${workspaceRoot}/proto",
+        "--go_out=plugins=grpc:."
+    ]
+  }
+}
