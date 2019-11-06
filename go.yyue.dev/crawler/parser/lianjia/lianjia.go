@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"go.yyue.dev/common/types"
 	"go.yyue.dev/common/utils"
 	"go.yyue.dev/crawler/engine"
 )
@@ -138,66 +137,70 @@ func House(q *goquery.Document, URL string) engine.Result {
 	title := q.Find(".title-wrapper .title .main").Text()
 	subTitle := q.Find(".title-wrapper .title .sub").Text()
 	region := q.Find(".communityName .info").Text()
-	houseInfo := types.HouseInfo{
-		ID:       string(id),
-		URL:      URL,
-		Title:    title,
-		SubTitle: subTitle,
-		Region:   region,
+	houseInfo := HouseInfo{
+		Id:              string(id),
+		Url:             URL,
+		Title:           title,
+		SubTitle:        subTitle,
+		Region:          region,
+		BaseInfo:        &BaseInfo{},
+		TransactionInfo: &TransactionInfo{},
 	}
 	introduction := q.Find("#introduction")
 	introduction.Find(".base .content ul li").Each(func(i int, s *goquery.Selection) {
 		s.Contents().Each(func(_ int, s *goquery.Selection) {
 			if goquery.NodeName(s) == "#text" {
 				value := strings.TrimSpace(s.Text())
+				baseInfo := houseInfo.BaseInfo
 				switch i {
 				case 0:
-					houseInfo.Layout = value // 房屋户型
+					baseInfo.Layout = value // 房屋户型
 				case 1:
-					houseInfo.Floor = value // 所在楼层
+					baseInfo.Floor = value // 所在楼层
 				case 2:
-					houseInfo.AreaBuild = value // 建筑面积
+					baseInfo.AreaBuild = value // 建筑面积
 				case 3:
-					houseInfo.StructHouse = value // 户型结构
+					baseInfo.StructHouse = value // 户型结构
 				case 4:
-					houseInfo.AreaInner = value // 套内面积
+					baseInfo.AreaInner = value // 套内面积
 				case 5:
-					houseInfo.BuildType = value // 建筑类型
+					baseInfo.BuildType = value // 建筑类型
 				case 6:
-					houseInfo.Face = value // 房屋朝向
+					baseInfo.Face = value // 房屋朝向
 				case 7:
-					houseInfo.StructBuild = value // 建筑结构
+					baseInfo.StructBuild = value // 建筑结构
 				case 8:
-					houseInfo.Decoration = value // 装修情况
+					baseInfo.Decoration = value // 装修情况
 				case 9:
-					houseInfo.ElevatorRatio = value // 梯户比例
+					baseInfo.ElevatorRatio = value // 梯户比例
 				case 10:
-					houseInfo.Elevator = value // 配备电梯
+					baseInfo.Elevator = value // 配备电梯
 				case 11:
-					houseInfo.Property = value // 产权年限
+					baseInfo.Property = value // 产权年限
 				}
 			}
 		})
 	})
 	introduction.Find(".transaction .content ul li span:nth-child(2)").Each(func(i int, s *goquery.Selection) {
 		value := strings.TrimSpace(s.Text())
+		transactionInfo := houseInfo.TransactionInfo
 		switch i {
 		case 0:
-			houseInfo.ListingTime = value // 挂牌时间
+			transactionInfo.ListingTime = value // 挂牌时间
 		case 1:
-			houseInfo.TradingAuthority = value // 交易权属
+			transactionInfo.TradingAuthority = value // 交易权属
 		case 2:
-			houseInfo.LastTransaction = value // 上次交易
+			transactionInfo.LastTransaction = value // 上次交易
 		case 3:
-			houseInfo.HousingPurposes = value // 房屋用途
+			transactionInfo.HousingPurposes = value // 房屋用途
 		case 4:
-			houseInfo.HouseYear = value // 房屋年限
+			transactionInfo.HouseYear = value // 房屋年限
 		case 5:
-			houseInfo.PropertyRights = value // 产权所属
+			transactionInfo.PropertyRights = value // 产权所属
 		case 6:
-			houseInfo.MortgageInfo = value // 抵押信息
+			transactionInfo.MortgageInfo = value // 抵押信息
 		case 7:
-			houseInfo.DocumentPhoto = value // 房本备件
+			transactionInfo.DocumentPhoto = value // 房本备件
 		}
 	})
 	return engine.Result{

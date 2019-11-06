@@ -2,16 +2,20 @@ syntax = "proto3";
 
 package database;
 
-import "message.proto";
+import "common/message.proto";
+import "crawler/lianjia.proto";
 
 option go_package="go.yyue.dev/datamanage/database";
 
 service DatabaseService {
   rpc Connect(ConnectRequest) returns (message.Message) {};
-  rpc Insert(ConnectRequest) returns (message.Message) {};
+  rpc Insert(InsertRequest) returns (message.Message) {};
 }
 
 message ConnectRequest {
   string database = 1;
 }
 
+message InsertRequest {
+  lianjia.HouseInfo house_info = 1;
+}

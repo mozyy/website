@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/PuerkitoBio/goquery"
 	"go.yyue.dev/crawler/engine"
 	"go.yyue.dev/crawler/itemsaver"
 	"go.yyue.dev/crawler/parser/lianjia"
@@ -14,12 +15,12 @@ func main() {
 		ItemSaver:   itemsaver.New(),
 	}
 	request := engine.Request{
-		URL:    "https://cd.lianjia.com/ershoufang/",
-		Parser: lianjia.City,
-		// URL: "https://cd.lianjia.com/ershoufang/106103655131.html",
-		// Parser: func(q *goquery.Document) engine.Result {
-		// 	return parser.House(q, "https://cd.lianjia.com/ershoufang/106103655131.html")
-		// },
+		// URL:    "https://cd.lianjia.com/ershoufang/",
+		// Parser: lianjia.City,
+		URL: "https://cd.lianjia.com/ershoufang/106103655131.html",
+		Parser: func(q *goquery.Document) engine.Result {
+			return lianjia.House(q, "https://cd.lianjia.com/ershoufang/106103655131.html")
+		},
 	}
 	entry.Run(request)
 }
