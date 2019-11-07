@@ -10,6 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"go.yyue.dev/common/utils"
 	"go.yyue.dev/crawler/engine"
+	"go.yyue.dev/crawler/proto"
 )
 
 //<ul class="sellListContent" log-mod="list">
@@ -137,14 +138,14 @@ func House(q *goquery.Document, URL string) engine.Result {
 	title := q.Find(".title-wrapper .title .main").Text()
 	subTitle := q.Find(".title-wrapper .title .sub").Text()
 	region := q.Find(".communityName .info").Text()
-	houseInfo := HouseInfo{
+	houseInfo := proto.HouseInfo{
 		Id:              string(id),
 		Url:             URL,
 		Title:           title,
 		SubTitle:        subTitle,
 		Region:          region,
-		BaseInfo:        &BaseInfo{},
-		TransactionInfo: &TransactionInfo{},
+		BaseInfo:        &proto.BaseInfo{},
+		TransactionInfo: &proto.TransactionInfo{},
 	}
 	introduction := q.Find("#introduction")
 	introduction.Find(".base .content ul li").Each(func(i int, s *goquery.Selection) {

@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
@@ -11,8 +12,8 @@ import (
 	// sql driver
 	_ "github.com/go-sql-driver/mysql"
 	"go.yyue.dev/common/message"
-	"go.yyue.dev/common/types"
 	"go.yyue.dev/common/utils"
+	"go.yyue.dev/datamanage/proto"
 )
 
 // private String dataKey; // 服务名称
@@ -60,12 +61,13 @@ type Query struct {
 	DBMap map[string]*sql.DB
 }
 
-func New() (*Query, error) {
+func New() *Query {
 
-	return &Query{make(map[string]*sql.DB)}, nil
+	return &Query{make(map[string]*sql.DB)}
 }
 
-func (q *Query) ConnectDatabase(database string, reply *message.Message) error {
+func (q *Query) Connect(ctx context.Context, req *proto.ConnectRequest, reply *message.Message) error {
+	database := req.Database
 	if DB, ok := q.DBMap[database]; ok && DB.Ping() == nil {
 		reply.Success(fmt.Sprintf("存在已连接的数据库[%s]", database))
 		return nil
@@ -80,20 +82,35 @@ func (q *Query) ConnectDatabase(database string, reply *message.Message) error {
 	reply.Success(fmt.Sprintf("连接数据库[%s]成功", database))
 	return nil
 }
+func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, reply *message.Message) error {
+	fmt.Println("receive insert: ")
+	DB, ok := q.DBMap[req.Database]
 
-func (q *Query) Insert(dbo types.DBOperater, reply *message.Message) error {
-	fmt.Println("receive insert: ", dbo)
-	DB, ok := q.DBMap[dbo.Database]
 	if !ok {
-		return reply.Error(fmt.Sprintf("未连接数据库[%s]", dbo.Database))
+		return reply.Error(fmt.Sprintf("未连接数据库[%s]", req.Database))
 	}
-	fmt.Println("exists database: ", dbo.Database)
+	fmt.Println("exists database: ", req.Database)
 	if DB.Ping() != nil {
-		return reply.Error(fmt.Sprintf("数据库[%s]已断开", dbo.Database))
+		return reply.Error(fmt.Sprintf("数据库[%s]已断开", req.Database))
 	}
 	fmt.Println("DB alive: ", DB)
+	sql := fmt.Sprintf(`INSERT INTO %s (
+		id, url, title, sub_title, region, layout, floor, area_build, struct_house, area_inner, build_type, face, struct_build, decoration, elevator_ratio,
+		elevator, property, listing_time, trading_authority, last_transaction, housing_purposes, house_year, property_rights, mortgage_info, document_photo
+	) `, req.Table)
+	stmt, err := DB.Prepare(sql)
+	if err != nil {
+		return err
+	}
+	house := req.HouseInfo
+	stmt.Exec(
+		house.
+	)
+}
 
-	v := reflect.ValueOf(dbo.Ins)
+func execSliceInsert(DB *sql.DB, table string, ins interface{}) (message.Message, error) {
+	reply := message.Message{}
+	v := reflect.ValueOf(ins)
 	// 剥离指针
 	for v.Kind() == reflect.Ptr {
 		v = v.Elem()
@@ -103,7 +120,7 @@ func (q *Query) Insert(dbo types.DBOperater, reply *message.Message) error {
 	}
 	// 输入只有一个元素, 且为slice, 当成多个输入
 	if v.Kind() != reflect.Slice {
-		return reply.Error("Insert error: first argument must be a slice or struct")
+		return reply, reply.Error("Insert error: first argument must be a slice or struct")
 	}
 	// 先用第一个无素生成keys
 	var (
@@ -126,11 +143,12 @@ func (q *Query) Insert(dbo types.DBOperater, reply *message.Message) error {
 			case reflect.Struct:
 				keys, value = struct2KV(item)
 			}
-			sql := fmt.Sprintf(`INSERT %s SET %s=?`, dbo.Table, strings.Join(keys, "=?,"))
+			sql := fmt.Sprintf(`INSERT %s SET %s=?`, table, strings.Join(keys, "=?,"))
 			log.Println("sql: ", sql)
 			stmt, err = DB.Prepare(sql)
 			if err != nil {
-				return err
+				reply.Error(err.Error())
+				return reply, err
 			}
 			defer stmt.Close()
 		} else {
@@ -147,10 +165,10 @@ func (q *Query) Insert(dbo types.DBOperater, reply *message.Message) error {
 		}
 	}
 	if len(errs) > 0 {
-		return reply.Error(strings.Join(errs, "\n"))
+		return reply, reply.Error(strings.Join(errs, "\n"))
 	}
 	reply.Success(fmt.Sprintf("Insert %d data success", v.Len()))
-	return nil
+	return reply, nil
 }
 
 func struct2KV(s reflect.Value) ([]string, []string) {

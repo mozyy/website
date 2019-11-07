@@ -3,43 +3,72 @@ syntax="proto3";
 package lianjia;
 
 
-option go_package = "go.yyue.dev/crawler/parser/lianjia";
+option go_package = "go.yyue.dev/crawler/proto";
+
+message House {
+	string id = 1;          //
+	string house_no = 2;
+	string house_info_id = 3;
+	string house_base_info_id = 4;
+	string house_transaction_info_id = 5;
+	string house_pic_id = 6;
+}
 
 // 房子信息
 message HouseInfo {
 	string id = 1;               // id
-	string url = 2;             // url
-	string title = 3;         // 标题
-	string sub_title = 4;  // 副标题
-	string region = 5;       // 小区
-	BaseInfo base_info = 6;   // 基本信息
-	TransactionInfo transaction_info = 7; // 交易信息
+	string house_no = 2; 				// house number
+	string url = 3;             // url
+	string title = 4;         // 标题
+	string sub_title = 5;  // 副标题
+	string region = 6;       // 小区
+	string total_price = 7; // 总价
+	string unit_price = 8;
+	string room_info = 9;
+	string room_sub = 10;          //
+	string type_info = 11;          
+	string type_sub = 12;
+	string area_info = 13;
+	string area_sub = 14;
+
 }
 
 // 基本信息
-message BaseInfo {
-	string layout = 1;                 // 房屋户型
-	string floor = 2;                   // 所在楼层
-	string area_build = 3;          // 建筑面积
-	string struct_house = 4;      // 户型结构
-	string area_inner = 5;          // 套内面积
-	string build_type = 6;          // 建筑类型
-	string face = 7;                     // 房屋朝向
-	string struct_build = 8;      // 建筑结构
-	string decoration = 9;         // 装修情况
-	string elevator_ratio = 10;  // 梯户比例
-	string elevator = 11;             // 配备电梯
-  string property = 12;             // 产权年限
+message HouseBaseInfo {
+	string id = 1;               // id
+	string house_no = 2; 				// house number
+	string layout = 3;                 // 房屋户型
+	string floor = 4;                   // 所在楼层
+	string area_build = 5;          // 建筑面积
+	string struct_house = 6;      // 户型结构
+	string area_inner = 7;          // 套内面积
+	string build_type = 8;          // 建筑类型
+	string face = 9;                     // 房屋朝向
+	string struct_build = 10;      // 建筑结构
+	string decoration = 11;         // 装修情况
+	string elevator_ratio = 12;  // 梯户比例
+	string elevator = 13;             // 配备电梯
+  string property = 14;             // 产权年限
 }
 
 // 交易信息
-message TransactionInfo {
-	string listing_time = 1;            // 挂牌时间
-	string trading_authority = 2;  // 交易权属
-	string last_transaction = 3;    // 上次交易
-	string housing_purposes = 4;    // 房屋用途
-	string house_year = 5;                // 房屋年限
-	string property_rights = 6;      // 产权所属
-	string mortgage_info = 7;          // 抵押信息
-	string document_photo = 8;        // 房本备件
+message HouseTransactionInfo {
+	string id = 1;               // id
+	string house_no = 2; 				// house number
+	string listing_time = 3;            // 挂牌时间
+	string trading_authority = 4;  // 交易权属
+	string last_transaction = 5;    // 上次交易
+	string housing_purposes = 6;    // 房屋用途
+	string house_year = 7;                // 房屋年限
+	string property_rights = 8;      // 产权所属
+	string mortgage_info = 9;          // 抵押信息
+	string document_photo = 10;        // 房本备件
+}
+
+// 照片
+message HousePic {
+	string id = 1;
+	string house_no = 2;
+	string description = 3;
+	string pic_url = 4;
 }

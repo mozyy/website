@@ -1,35 +1,13 @@
 package main
 
 import (
-	"log"
-	"net"
-	"net/http"
-	"net/rpc"
-
-	"go.yyue.dev/common/types"
-	"go.yyue.dev/common/utils"
+	"github.com/micro/go-micro"
 	"go.yyue.dev/datamanage/database"
+	"go.yyue.dev/datamanage/proto"
 )
 
 func main() {
-
-	// register possible struct types for gob
-	database.Register(types.HouseInfo{})
-
-	datamanageURL := utils.GetConfig().DatamanageURL
-	q, err := database.New()
-	utils.PanicErr(err)
-
-	err = rpc.Register(q)
-
-	utils.PanicErr(err)
-
-	rpc.HandleHTTP()
-
-	listen, err := net.Listen("tcp", datamanageURL)
-
-	utils.PanicErr(err)
-	log.Println("datamanage server started")
-	err = http.Serve(listen, nil)
-	utils.PanicErr(err)
+	srv := micro.NewService()
+	srv.Init()
+	proto.RegisterDatabaseServiceHandler(srv.Server(), database.New())
 }

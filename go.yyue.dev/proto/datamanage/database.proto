@@ -5,17 +5,19 @@ package database;
 import "common/message.proto";
 import "crawler/lianjia.proto";
 
-option go_package="go.yyue.dev/datamanage/database";
+option go_package="go.yyue.dev/datamanage/proto";
 
 service DatabaseService {
   rpc Connect(ConnectRequest) returns (message.Message) {};
-  rpc Insert(InsertRequest) returns (message.Message) {};
+  rpc InsertHouse(InsertHouseRequest) returns (message.Message) {};
 }
 
 message ConnectRequest {
   string database = 1;
 }
 
-message InsertRequest {
-  lianjia.HouseInfo house_info = 1;
+message InsertHouseRequest {
+  string database =1;
+	string table= 2;
+  lianjia.HouseInfo house_info = 3;
 }

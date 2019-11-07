@@ -1,0 +1,705 @@
+[
+  {
+    "ip": "192.168.26.10",
+    "service-groups": [
+      {
+        "port": "80",
+        "service-group": "UDB_renzheng_pool"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.15.9",
+    "service-groups": [
+      {
+        "port": "8080",
+        "service-group": "WAAA-WLANPROTAL-8080"
+      },
+      {
+        "port": "7777",
+        "service-group": "WAAA-WLANPROTAL-7777"
+      },
+      {
+        "port": "28888",
+        "service-group": "WAAA-WLANPROTAL-28888"
+      },
+      {
+        "port": "18888",
+        "service-group": "WAAA-WLANPROTAL-18888"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.25.9",
+    "service-groups": [
+      {
+        "port": "8296",
+        "service-group": "iptvams-epg8296-pool"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.25.8",
+    "service-groups": [
+      {
+        "port": "8292",
+        "service-group": "iptvams-int8292-pool"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.25.7",
+    "service-groups": [
+      {
+        "port": "8292",
+        "service-group": "iptvams-vip-int8292"
+      }
+    ]
+  },
+  {
+    "ip": "0.0.0.0",
+    "service-groups": [
+      {
+        "port": "0",
+        "service-group": "gateway_tcp"
+      },
+      {
+        "port": "0",
+        "service-group": "gateway_udp"
+      },
+      {
+        "port": "0",
+        "service-group": "gateway_tcp"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.33.9",
+    "service-groups": [
+      {
+        "port": "80",
+        "service-group": "ismpb-ability-80"
+      },
+      {
+        "port": "8080",
+        "service-group": "ismpb-ability-8080"
+      },
+      {
+        "port": "9091",
+        "service-group": "ismpb-ability-9091"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.33.8",
+    "service-groups": [
+      {
+        "port": "80",
+        "service-group": "ismpb-group-interface-80"
+      },
+      {
+        "port": "8080",
+        "service-group": "ismpb-group-interface-8080"
+      },
+      {
+        "port": "9091",
+        "service-group": "ismpb-group-interface-9091"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.15.8",
+    "service-groups": [
+      {
+        "port": "1812",
+        "service-group": "waaa-prenode-1812"
+      },
+      {
+        "port": "1813",
+        "service-group": "waaa-prenode-1813"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.28.7",
+    "service-groups": [
+      {
+        "port": "80",
+        "service-group": "SCSJB-WEBservice"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.35.9",
+    "service-groups": [
+      {
+        "port": "5080",
+        "service-group": "isag-12500-12509"
+      },
+      {
+        "port": "5181",
+        "service-group": "isag-12500-12509"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.36.9",
+    "service-groups": [
+      {
+        "port": "80",
+        "service-group": "GaoXiao_80"
+      },
+      {
+        "port": "443",
+        "service-group": "GaoXiao_443"
+      },
+      {
+        "port": "48080",
+        "service-group": "GaoXiao_48080"
+      },
+      {
+        "port": "18888",
+        "service-group": "GaoXiao_18888"
+      },
+      {
+        "port": "18889",
+        "service-group": "GaoXiao_18889"
+      },
+      {
+        "port": "28888",
+        "service-group": "GaoXiao_28888"
+      },
+      {
+        "port": "28889",
+        "service-group": "GaoXiao_28889"
+      },
+      {
+        "port": "8050",
+        "service-group": "GaoXiao_8050_TCP"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.49.45",
+    "service-groups": [
+      {
+        "port": "80",
+        "service-group": "iWIFI-80"
+      },
+      {
+        "port": "443",
+        "service-group": "iWIFI-443"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.49.46",
+    "service-groups": [
+      {
+        "port": "1812",
+        "service-group": "iWIFI-1812-UDP"
+      },
+      {
+        "port": "1813",
+        "service-group": "iWIFI-1813-UDP"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.49.47",
+    "service-groups": [
+      {
+        "port": "17006",
+        "service-group": "iWIFI-17006"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.54.9",
+    "service-groups": [
+      {
+        "port": "8021",
+        "service-group": "dandianwg-gate-8021"
+      },
+      {
+        "port": "8023",
+        "service-group": "dandianwg-gate-8023"
+      },
+      {
+        "port": "1049",
+        "service-group": "dandianwg-gate-1049"
+      },
+      {
+        "port": "8033",
+        "service-group": "dandianwg-gate-8033"
+      },
+      {
+        "port": "8035",
+        "service-group": "dandianwg-gate-8035"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.203",
+    "service-groups": [
+      {
+        "port": "6037",
+        "service-group": "TMgmt-6037"
+      },
+      {
+        "port": "6033",
+        "service-group": "TMgmt-6033"
+      },
+      {
+        "port": "6039",
+        "service-group": "TMgmt-6039"
+      },
+      {
+        "port": "6031",
+        "service-group": "TMgmt-6031"
+      },
+      {
+        "port": "6032",
+        "service-group": "TMgmt-6032"
+      },
+      {
+        "port": "6050",
+        "service-group": "TMgmt-6050"
+      },
+      {
+        "port": "6027",
+        "service-group": "TMgmt-6027-http"
+      },
+      {
+        "port": "6034",
+        "service-group": "TMgmt-6034"
+      },
+      {
+        "port": "6021",
+        "service-group": "TMgmt-73-6021"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.204",
+    "service-groups": [
+      {
+        "port": "6038",
+        "service-group": "TMgmt-6038"
+      },
+      {
+        "port": "6027",
+        "service-group": "TMgmt-6027"
+      },
+      {
+        "port": "6025",
+        "service-group": "TMgmt-6025"
+      },
+      {
+        "port": "6030",
+        "service-group": "TMgmt-6030"
+      },
+      {
+        "port": "6035",
+        "service-group": "TMgmt-6035-73"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.200",
+    "service-groups": [
+      {
+        "port": "3305",
+        "service-group": "TMgmt-3305"
+      },
+      {
+        "port": "6308",
+        "service-group": "TMgmt-6308"
+      },
+      {
+        "port": "6319",
+        "service-group": "TMgmt-6319"
+      },
+      {
+        "port": "6025",
+        "service-group": "TMgmt-users-6025"
+      },
+      {
+        "port": "6320",
+        "service-group": "TMgmt-6320"
+      },
+      {
+        "port": "6102",
+        "service-group": "TMgmt-6102"
+      },
+      {
+        "port": "6103",
+        "service-group": "TMgmt-6103"
+      },
+      {
+        "port": "6309",
+        "service-group": "TMgmt-6309"
+      },
+      {
+        "port": "6136",
+        "service-group": "TMgmt-6136"
+      },
+      {
+        "port": "6317",
+        "service-group": "fTMgmt-6317"
+      },
+      {
+        "port": "6139",
+        "service-group": "TMgmt-6139"
+      },
+      {
+        "port": "6350",
+        "service-group": "TMgmt-6350"
+      },
+      {
+        "port": "6351",
+        "service-group": "TMgmt-6351"
+      },
+      {
+        "port": "6352",
+        "service-group": "TMgmt-6352"
+      },
+      {
+        "port": "6035",
+        "service-group": "TMgmt-6035-73"
+      },
+      {
+        "port": "6201",
+        "service-group": "mofang-NLP-6309"
+      },
+      {
+        "port": "6202",
+        "service-group": "mofang-NLP-6038"
+      },
+      {
+        "port": "6203",
+        "service-group": "mofang-NLP-6019"
+      },
+      {
+        "port": "6204",
+        "service-group": "mofang-NLP-6139"
+      },
+      {
+        "port": "6205",
+        "service-group": "mofang-NLP-6307"
+      },
+      {
+        "port": "6353",
+        "service-group": "TMgmt-bigdata-6307"
+      },
+      {
+        "port": "6354",
+        "service-group": "http-TMgmt-6354"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.201",
+    "service-groups": [
+      {
+        "port": "6027",
+        "service-group": "TMgmt-6027"
+      },
+      {
+        "port": "6023",
+        "service-group": "TMgmt-6023"
+      },
+      {
+        "port": "6024",
+        "service-group": "TMgmt-6024"
+      },
+      {
+        "port": "6022",
+        "service-group": "TMgmt-6022"
+      },
+      {
+        "port": "6031",
+        "service-group": "TMgmt-app-6031"
+      },
+      {
+        "port": "6035",
+        "service-group": "TMgmt-6035"
+      },
+      {
+        "port": "6036",
+        "service-group": "TMgmt-6036"
+      },
+      {
+        "port": "6037",
+        "service-group": "TMgmt-6037-02"
+      },
+      {
+        "port": "6038",
+        "service-group": "TMgmt-6038-02"
+      },
+      {
+        "port": "6039",
+        "service-group": "TMgmt-6039-02"
+      },
+      {
+        "port": "6021",
+        "service-group": "TMgmt-6021"
+      },
+      {
+        "port": "6025",
+        "service-group": "TMgmt-app-6025"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.82.201",
+    "service-groups": [
+      {
+        "port": "8890",
+        "service-group": "SC-YWWG_8890"
+      },
+      {
+        "port": "8900",
+        "service-group": "SC-YWWG_8900"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.202",
+    "service-groups": [
+      {
+        "port": "6027",
+        "service-group": "TMgmt-6027-http"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.178",
+    "service-groups": [
+      {
+        "port": "6021",
+        "service-group": "TMgmt-6021(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.179",
+    "service-groups": [
+      {
+        "port": "6022",
+        "service-group": "TMgmt-6022(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.180",
+    "service-groups": [
+      {
+        "port": "6023",
+        "service-group": "TMgmt-6023(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.181",
+    "service-groups": [
+      {
+        "port": "6024",
+        "service-group": "TMgmt-6024(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.182",
+    "service-groups": [
+      {
+        "port": "6025",
+        "service-group": "TMgmt-6025(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.183",
+    "service-groups": [
+      {
+        "port": "6026",
+        "service-group": "TMgmt-6026(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.184",
+    "service-groups": [
+      {
+        "port": "6027",
+        "service-group": "TMgmt-6027(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.185",
+    "service-groups": [
+      {
+        "port": "6028",
+        "service-group": "TMgmt-6028(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.186",
+    "service-groups": [
+      {
+        "port": "6029",
+        "service-group": "TMgmt-6029(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.187",
+    "service-groups": [
+      {
+        "port": "6030",
+        "service-group": "TMgmt-6030(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.188",
+    "service-groups": [
+      {
+        "port": "6031",
+        "service-group": "TMgmt-6031(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.189",
+    "service-groups": [
+      {
+        "port": "6032",
+        "service-group": "TMgmt-6032(120-125)"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.73.206",
+    "service-groups": [
+      {
+        "port": "9999",
+        "service-group": "\u6984\u65c0\u67df\u9a9e\u51b2\u5f740921\u7ed4\ue21a\u5f5b9999"
+      },
+      {
+        "port": "9998",
+        "service-group": "\u6984\u65c0\u67df\u9a9e\u51b2\u5f740921\u7ed4\ue21a\u5f5b9998"
+      },
+      {
+        "port": "37402",
+        "service-group": "\u6984\u65c0\u67df\u9a9e\u51b2\u5f740921\u7ed4\ue21a\u5f5b37402"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.94.200",
+    "service-groups": [
+      {
+        "port": "6037",
+        "service-group": "TMgmt-6037-94"
+      },
+      {
+        "port": "6021",
+        "service-group": "TMgmt-6021-94"
+      },
+      {
+        "port": "6319",
+        "service-group": "TMgmt-6319-94"
+      },
+      {
+        "port": "6308",
+        "service-group": "TMgmt-6308-94"
+      },
+      {
+        "port": "6307",
+        "service-group": "TMgmt-6307-94"
+      },
+      {
+        "port": "6139",
+        "service-group": "TMgmt-6139-94"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.96.200",
+    "service-groups": [
+      {
+        "port": "6017",
+        "service-group": "TMgmt-6017-96"
+      },
+      {
+        "port": "8201",
+        "service-group": "TMgmt-8201-96"
+      },
+      {
+        "port": "7101",
+        "service-group": "TMgmt-7101-96"
+      },
+      {
+        "port": "8019",
+        "service-group": "TMgmt-8019-96"
+      },
+      {
+        "port": "5672",
+        "service-group": "TMgmt-5672-96"
+      },
+      {
+        "port": "8501",
+        "service-group": "TMgmt-8501-96"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.96.202",
+    "service-groups": [
+      {
+        "port": "8019",
+        "service-group": "TMgmt-8019-96"
+      },
+      {
+        "port": "7101",
+        "service-group": "TMgmt-7101-96"
+      },
+      {
+        "port": "7201",
+        "service-group": "TMgmt-7201-96"
+      },
+      {
+        "port": "7301",
+        "service-group": "TMgmt-7301-96"
+      },
+      {
+        "port": "7401",
+        "service-group": "TMgmt-7401-96"
+      },
+      {
+        "port": "7501",
+        "service-group": "TMgmt-7501-96"
+      }
+    ]
+  },
+  {
+    "ip": "192.168.99.10",
+    "service-groups": [
+      {
+        "port": "80",
+        "service-group": "ZXYG-YSdirector-80"
+      },
+      {
+        "port": "443",
+        "service-group": "ZXYG-YSdirector-443"
+      },
+      {
+        "port": "446",
+        "service-group": "ZXYG-YSdirector-446"
+      }
+    ]
+  }
+]

@@ -27,6 +27,7 @@ CREATE TABLE `house_info` (
   `title` varchar(100) DEFAULT NULL COMMENT '标题',
   `sub_title` varchar(255) DEFAULT NULL COMMENT '副标题',
   `region` varchar(50) DEFAULT NULL COMMENT '小区',
+
   `layout` varchar(50) DEFAULT NULL COMMENT '房屋户型',
   `floor` varchar(50) DEFAULT NULL COMMENT '所在楼层',
   `area_build` varchar(50) DEFAULT NULL COMMENT '建筑面积',
@@ -39,6 +40,7 @@ CREATE TABLE `house_info` (
   `elevator_ratio` varchar(50) DEFAULT NULL COMMENT '梯户比例',
   `elevator` varchar(50) DEFAULT NULL COMMENT '配备电梯',
   `property` varchar(50) DEFAULT NULL COMMENT '产权年限',
+  
   `listing_time` varchar(50) DEFAULT NULL COMMENT '挂牌时间',
   `trading_authority` varchar(50) DEFAULT NULL COMMENT '交易权属',
   `last_transaction` varchar(50) DEFAULT NULL COMMENT '上次交易',
