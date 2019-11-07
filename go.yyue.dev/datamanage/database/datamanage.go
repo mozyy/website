@@ -99,7 +99,7 @@ func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, 
 	houseInfo := req.House.GetHouseInfo()
 	sql := fmt.Sprintf(`INSERT INTO %s (
 		house_no, url, title, sub_title, region, total_price, unit_price, room_info, room_sub, type_info, type_sub, area_info, area_sub
-	) VALUES (%s, "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");`,
+	) VALUES (%s, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q);`,
 		"house_info",
 		houseInfo.GetHouseNo(),
 		houseInfo.GetUrl(),
@@ -125,7 +125,7 @@ func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, 
 		fmt.Sprintf(`INSERT INTO %s (
 			house_no, layout, floor, area_build, struct_house, area_inner, build_type, face, struct_build, decoration, elevator_ratio,
 			elevator, property
-		) VALUES (%s, "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");`,
+		) VALUES (%s, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q);`,
 			"house_base_info",
 			houseBaseInfo.GetHouseNo(),
 			houseBaseInfo.GetLayout(),
@@ -148,7 +148,7 @@ func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, 
 	_, err = tx.Exec(
 		fmt.Sprintf(`INSERT INTO %s (
 			house_no, listing_time, trading_authority, last_transaction, housing_purposes, house_year, property_rights, mortgage_info, document_photo
-		) VALUES (%s, "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");`,
+		) VALUES (%s, %q, %q, %q, %q, %q, %q, %q, %q);`,
 			"house_transaction_info",
 			houseTransactionInfo.GetHouseNo(),
 			houseTransactionInfo.GetListingTime(),
@@ -168,7 +168,7 @@ func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, 
 		_, err = tx.Exec(
 			fmt.Sprintf(`INSERT INTO %s (
 				house_no, description, pic_small_url, pic_normal_url, pic_large_url
-			) VALUES (%s, "%s", "%s", "%s", "%s");`,
+			) VALUES (%s, %q, %q, %q, %q);`,
 				"house_pic",
 				housePic.GetHouseNo(),
 				housePic.GetDescription(),
