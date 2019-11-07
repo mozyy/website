@@ -94,18 +94,98 @@ func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, 
 		return reply.Error(fmt.Sprintf("数据库[%s]已断开", req.Database))
 	}
 	fmt.Println("DB alive: ", DB)
+	tx, err := DB.Begin()
+	defer tx.Rollback()
+	houseInfo := req.House.GetHouseInfo()
 	sql := fmt.Sprintf(`INSERT INTO %s (
-		id, url, title, sub_title, region, layout, floor, area_build, struct_house, area_inner, build_type, face, struct_build, decoration, elevator_ratio,
-		elevator, property, listing_time, trading_authority, last_transaction, housing_purposes, house_year, property_rights, mortgage_info, document_photo
-	) `, req.Table)
-	stmt, err := DB.Prepare(sql)
+		house_no, url, title, sub_title, region, total_price, unit_price, room_info, room_sub, type_info, type_sub, area_info, area_sub
+	) VALUES (%s, "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");`,
+		"house_info",
+		houseInfo.GetHouseNo(),
+		houseInfo.GetUrl(),
+		houseInfo.GetTitle(),
+		houseInfo.GetSubTitle(),
+		houseInfo.GetRegion(),
+		houseInfo.GetTotalPrice(),
+		houseInfo.GetUnitPrice(),
+		houseInfo.GetRoomInfo(),
+		houseInfo.GetRoomSub(),
+		houseInfo.GetTypeInfo(),
+		houseInfo.GetTypeSub(),
+		houseInfo.GetAreaInfo(),
+		houseInfo.GetAreaSub(),
+	)
+	fmt.Println("sql: ", sql)
+	_, err = tx.Exec(sql)
 	if err != nil {
 		return err
 	}
-	house := req.HouseInfo
-	stmt.Exec(
-		house.
-	)
+	houseBaseInfo := req.House.GetHouseBaseInfo()
+	_, err = tx.Exec(
+		fmt.Sprintf(`INSERT INTO %s (
+			house_no, layout, floor, area_build, struct_house, area_inner, build_type, face, struct_build, decoration, elevator_ratio,
+			elevator, property
+		) VALUES (%s, "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");`,
+			"house_base_info",
+			houseBaseInfo.GetHouseNo(),
+			houseBaseInfo.GetLayout(),
+			houseBaseInfo.GetFloor(),
+			houseBaseInfo.GetAreaBuild(),
+			houseBaseInfo.GetStructHouse(),
+			houseBaseInfo.GetAreaInner(),
+			houseBaseInfo.GetBuildType(),
+			houseBaseInfo.GetFace(),
+			houseBaseInfo.GetStructBuild(),
+			houseBaseInfo.GetDecoration(),
+			houseBaseInfo.GetElevatorRatio(),
+			houseBaseInfo.GetElevator(),
+			houseBaseInfo.GetProperty(),
+		))
+	if err != nil {
+		return err
+	}
+	houseTransactionInfo := req.House.GetHouseTransactionInfo()
+	_, err = tx.Exec(
+		fmt.Sprintf(`INSERT INTO %s (
+			house_no, listing_time, trading_authority, last_transaction, housing_purposes, house_year, property_rights, mortgage_info, document_photo
+		) VALUES (%s, "%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s");`,
+			"house_transaction_info",
+			houseTransactionInfo.GetHouseNo(),
+			houseTransactionInfo.GetListingTime(),
+			houseTransactionInfo.GetTradingAuthority(),
+			houseTransactionInfo.GetLastTransaction(),
+			houseTransactionInfo.GetHousingPurposes(),
+			houseTransactionInfo.GetHouseYear(),
+			houseTransactionInfo.GetPropertyRights(),
+			houseTransactionInfo.GetMortgageInfo(),
+			houseTransactionInfo.GetDocumentPhoto(),
+		))
+	if err != nil {
+		return err
+	}
+	housePics := req.House.GetHousePics()
+	for _, housePic := range housePics {
+		_, err = tx.Exec(
+			fmt.Sprintf(`INSERT INTO %s (
+				house_no, description, pic_small_url, pic_normal_url, pic_large_url
+			) VALUES (%s, "%s", "%s", "%s", "%s");`,
+				"house_pic",
+				housePic.GetHouseNo(),
+				housePic.GetDescription(),
+				housePic.GetPicSmallUrl(),
+				housePic.GetPicNormalUrl(),
+				housePic.GetPicLargeUrl(),
+			))
+		if err != nil {
+			return err
+		}
+	}
+	err = tx.Commit()
+	if err != nil {
+		return err
+	}
+	reply.Success("insert success")
+	return nil
 }
 
 func execSliceInsert(DB *sql.DB, table string, ins interface{}) (message.Message, error) {

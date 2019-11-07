@@ -17,9 +17,9 @@ func main() {
 	request := engine.Request{
 		// URL:    "https://cd.lianjia.com/ershoufang/",
 		// Parser: lianjia.City,
-		URL: "https://cd.lianjia.com/ershoufang/106103655131.html",
+		URL: "https://cd.lianjia.com/ershoufang/106102678685.html",
 		Parser: func(q *goquery.Document) engine.Result {
-			return lianjia.House(q, "https://cd.lianjia.com/ershoufang/106103655131.html")
+			return lianjia.House(q, "https://cd.lianjia.com/ershoufang/106102678685.html")
 		},
 	}
 	entry.Run(request)

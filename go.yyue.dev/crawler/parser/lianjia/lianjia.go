@@ -132,27 +132,30 @@ func morePage(q *goquery.Document) []engine.Request {
 var idRegexp = regexp.MustCompile(`^https://cd.lianjia.com/ershoufang/(\d+).html`)
 
 func House(q *goquery.Document, URL string) engine.Result {
+	HouseNo := idRegexp.FindStringSubmatch(URL)[1]
 
-	id := idRegexp.FindStringSubmatch(URL)[1]
-
-	title := q.Find(".title-wrapper .title .main").Text()
-	subTitle := q.Find(".title-wrapper .title .sub").Text()
-	region := q.Find(".communityName .info").Text()
 	houseInfo := proto.HouseInfo{
-		Id:              string(id),
-		Url:             URL,
-		Title:           title,
-		SubTitle:        subTitle,
-		Region:          region,
-		BaseInfo:        &proto.BaseInfo{},
-		TransactionInfo: &proto.TransactionInfo{},
+		HouseNo:    HouseNo,
+		Url:        URL,
+		Title:      q.Find(".title-wrapper .title .main").Text(),
+		SubTitle:   q.Find(".title-wrapper .title .sub").Text(),
+		Region:     q.Find(".communityName .info").Text(),
+		TotalPrice: q.Find(".price .total").Text(),
+		UnitPrice:  strings.Replace(q.Find(".unitPriceValue").Text(), "元/平米", "", 1),
+		RoomInfo:   q.Find(".room .mainInfo").Text(),
+		RoomSub:    q.Find(".room .subInfo").Text(),
+		TypeInfo:   q.Find(".type .mainInfo").Text(),
+		TypeSub:    q.Find(".type .subInfo").Text(),
+		AreaInfo:   q.Find(".area .mainInfo").Text(),
+		AreaSub:    q.Find(".area .subInfo").Text(),
 	}
+
 	introduction := q.Find("#introduction")
+	baseInfo := proto.HouseBaseInfo{HouseNo: HouseNo}
 	introduction.Find(".base .content ul li").Each(func(i int, s *goquery.Selection) {
 		s.Contents().Each(func(_ int, s *goquery.Selection) {
 			if goquery.NodeName(s) == "#text" {
 				value := strings.TrimSpace(s.Text())
-				baseInfo := houseInfo.BaseInfo
 				switch i {
 				case 0:
 					baseInfo.Layout = value // 房屋户型
@@ -182,9 +185,9 @@ func House(q *goquery.Document, URL string) engine.Result {
 			}
 		})
 	})
+	transactionInfo := proto.HouseTransactionInfo{HouseNo: HouseNo}
 	introduction.Find(".transaction .content ul li span:nth-child(2)").Each(func(i int, s *goquery.Selection) {
 		value := strings.TrimSpace(s.Text())
-		transactionInfo := houseInfo.TransactionInfo
 		switch i {
 		case 0:
 			transactionInfo.ListingTime = value // 挂牌时间
@@ -204,9 +207,35 @@ func House(q *goquery.Document, URL string) engine.Result {
 			transactionInfo.DocumentPhoto = value // 房本备件
 		}
 	})
+	housePics := []*proto.HousePic{}
+	q.Find(".smallpic li").Each(func(i int, s *goquery.Selection) {
+		housePic := proto.HousePic{HouseNo: HouseNo}
+		if desc, ok := s.Attr("data-desc"); ok {
+			housePic.Description = desc
+		} else {
+			housePic.Description = "vr"
+		}
+		if picSmallUrl, ok := s.Find("img").Attr("src"); ok {
+			housePic.PicSmallUrl = picSmallUrl
+		}
+		if picNormalUrl, ok := s.Attr("data-src"); ok {
+			housePic.PicNormalUrl = picNormalUrl
+		}
+		if picLargeUrl, ok := s.Attr("data-pic"); ok {
+			housePic.PicLargeUrl = picLargeUrl
+		}
+		housePics = append(housePics, &housePic)
+	})
+	house := proto.House{
+		HouseNo:              HouseNo,
+		HouseInfo:            &houseInfo,
+		HouseBaseInfo:        &baseInfo,
+		HouseTransactionInfo: &transactionInfo,
+		HousePics:            housePics,
+	}
 	return engine.Result{
 		Items: []engine.Item{
-			houseInfo,
+			house,
 		},
 	}
 }

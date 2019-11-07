@@ -34,7 +34,7 @@ func GetConfig() Config {
 func GetEnv() string {
 	env := os.Getenv("GO_RUN_ENV")
 	if env == "" {
-		env = "production"
+		env = "development"
 	}
 	return env
 }

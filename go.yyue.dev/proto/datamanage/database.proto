@@ -17,7 +17,7 @@ message ConnectRequest {
 }
 
 message InsertHouseRequest {
-  string database =1;
+  string database = 1;
 	string table= 2;
-  lianjia.HouseInfo house_info = 3;
+  lianjia.House house = 3;
 }
