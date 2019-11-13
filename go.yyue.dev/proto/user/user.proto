@@ -1,0 +1,31 @@
+syntax="proto3";
+
+package user;
+
+import "common/message.proto";
+
+option go_package="go.yyue.dev/user/proto";
+
+service SMSService {
+  rpc Send(SendRequest) returns (message.Message) {};
+  rpc Validate(ValidateRequest) returns (message.Message) {}
+}
+
+message SendRequest {
+  string mobile = 1;
+}
+
+message ValidateRequest {
+  string mobile = 1;
+  string verification_code = 2;
+}
+
+
+service UserService {
+  rpc Register(RegisterRequest) returns (message.Message) {}
+}
+
+message RegisterRequest {
+  string mobile = 1;
+  string password = 2;
+}
