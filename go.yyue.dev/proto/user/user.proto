@@ -17,15 +17,27 @@ message SendRequest {
 
 message ValidateRequest {
   string mobile = 1;
-  string verification_code = 2;
+  string code = 2;
 }
 
 
 service UserService {
   rpc Register(RegisterRequest) returns (message.Message) {}
+  rpc Login(LoginRequest) returns (UserInfo) {}
+  rpc GetInfo(GetInfoRequest) returns (UserInfo) {}
 }
 
 message RegisterRequest {
   string mobile = 1;
   string password = 2;
+}
+
+message LoginRequest {
+  string mobile = 1;
+  string password = 3;
+}
+
+message UserInfo {
+  message.Message message = 1;
+  string token = 2;
 }
