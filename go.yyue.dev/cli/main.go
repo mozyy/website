@@ -12,6 +12,7 @@ import (
 
 	"github.com/c-bata/go-prompt"
 	"github.com/urfave/cli/v2"
+	util "go.yyue.dev/cli/utils"
 	"go.yyue.dev/common/utils"
 )
 
@@ -84,7 +85,7 @@ var objects = []ObjectConfig{
 	},
 }
 
-func main() {
+func main2() {
 
 	var object, env string
 	commands := []*cli.Command{
@@ -138,6 +139,13 @@ func main() {
 	err = app.Run(os.Args)
 	utils.PanicErr(err)
 
+}
+
+func main() {
+	err := util.UploadDeploy("d:/work/evidence-security/dist/evidence-security-one/evidence-security-one.zip", "http://192.168.88.122:9990/upfile.php?pk_id=202")
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 // Deploy is deploy struct
