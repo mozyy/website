@@ -12,8 +12,11 @@ import * as grpcWeb from 'grpc-web';
 import * as common_message_pb from '../common/message_pb';
 
 import {
+  GetInfoRequest,
+  LoginRequest,
   RegisterRequest,
   SendRequest,
+  UserInfo,
   ValidateRequest} from './user_pb';
 
 export class SMSServiceClient {
@@ -119,6 +122,50 @@ export class UserServiceClient {
       request,
       metadata || {},
       this.methodInfoRegister,
+      callback);
+  }
+
+  methodInfoLogin = new grpcWeb.AbstractClientBase.MethodInfo(
+    UserInfo,
+    (request: LoginRequest) => {
+      return request.serializeBinary();
+    },
+    UserInfo.deserializeBinary
+  );
+
+  login(
+    request: LoginRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: UserInfo) => void) {
+    return this.client_.rpcCall(
+      this.hostname_ +
+        '/user.UserService/Login',
+      request,
+      metadata || {},
+      this.methodInfoLogin,
+      callback);
+  }
+
+  methodInfoGetInfo = new grpcWeb.AbstractClientBase.MethodInfo(
+    UserInfo,
+    (request: GetInfoRequest) => {
+      return request.serializeBinary();
+    },
+    UserInfo.deserializeBinary
+  );
+
+  getInfo(
+    request: GetInfoRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: UserInfo) => void) {
+    return this.client_.rpcCall(
+      this.hostname_ +
+        '/user.UserService/GetInfo',
+      request,
+      metadata || {},
+      this.methodInfoGetInfo,
       callback);
   }
 

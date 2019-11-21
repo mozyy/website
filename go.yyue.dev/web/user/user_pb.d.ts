@@ -24,8 +24,8 @@ export class ValidateRequest extends jspb.Message {
   getMobile(): string;
   setMobile(value: string): void;
 
-  getVerificationCode(): string;
-  setVerificationCode(value: string): void;
+  getCode(): string;
+  setCode(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ValidateRequest.AsObject;
@@ -38,7 +38,7 @@ export class ValidateRequest extends jspb.Message {
 export namespace ValidateRequest {
   export type AsObject = {
     mobile: string,
-    verificationCode: string,
+    code: string,
   }
 }
 
@@ -61,6 +61,64 @@ export namespace RegisterRequest {
   export type AsObject = {
     mobile: string,
     password: string,
+  }
+}
+
+export class LoginRequest extends jspb.Message {
+  getMobile(): string;
+  setMobile(value: string): void;
+
+  getPassword(): string;
+  setPassword(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): LoginRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: LoginRequest): LoginRequest.AsObject;
+  static serializeBinaryToWriter(message: LoginRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): LoginRequest;
+  static deserializeBinaryFromReader(message: LoginRequest, reader: jspb.BinaryReader): LoginRequest;
+}
+
+export namespace LoginRequest {
+  export type AsObject = {
+    mobile: string,
+    password: string,
+  }
+}
+
+export class UserInfo extends jspb.Message {
+  getToken(): string;
+  setToken(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): UserInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: UserInfo): UserInfo.AsObject;
+  static serializeBinaryToWriter(message: UserInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UserInfo;
+  static deserializeBinaryFromReader(message: UserInfo, reader: jspb.BinaryReader): UserInfo;
+}
+
+export namespace UserInfo {
+  export type AsObject = {
+    token: string,
+  }
+}
+
+export class GetInfoRequest extends jspb.Message {
+  getMobile(): string;
+  setMobile(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetInfoRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetInfoRequest): GetInfoRequest.AsObject;
+  static serializeBinaryToWriter(message: GetInfoRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetInfoRequest;
+  static deserializeBinaryFromReader(message: GetInfoRequest, reader: jspb.BinaryReader): GetInfoRequest;
+}
+
+export namespace GetInfoRequest {
+  export type AsObject = {
+    mobile: string,
   }
 }
 

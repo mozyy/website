@@ -37,7 +37,7 @@ func main() {
 			if err != nil {
 				fmt.Printf("protoc error: %s, out: %s\n", err, out)
 			} else {
-				fmt.Printf("protoc success: %s", file)
+				fmt.Printf("protoc success: %s\n", file)
 			}
 		}
 	}

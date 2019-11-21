@@ -38,6 +38,9 @@ message LoginRequest {
 }
 
 message UserInfo {
-  message.Message message = 1;
   string token = 2;
+}
+
+message GetInfoRequest {
+  string mobile = 1;
 }
