@@ -25,9 +25,8 @@ func New() chan engine.Item {
 		srv.Init()
 
 		database := databaseproto.NewDatabaseServiceClient("database", srv.Client())
-		rep, err := database.Connect(context.TODO(), &databaseproto.ConnectRequest{Database: "development"})
+		_, err := database.Connect(context.TODO(), &databaseproto.ConnectRequest{Database: "development"})
 		utils.PanicErr(err)
-		fmt.Println(rep)
 
 		for {
 			result := <-item
@@ -37,9 +36,7 @@ func New() chan engine.Item {
 				message, err := database.InsertHouse(context.TODO(), &databaseproto.InsertHouseRequest{Database: "development", House: &house})
 
 				if err != nil {
-					fmt.Println("error:", err, message)
-				} else {
-					fmt.Println("finally: ", message)
+					fmt.Printf("error: %s, message: %s\n", err, message)
 				}
 			}()
 		}

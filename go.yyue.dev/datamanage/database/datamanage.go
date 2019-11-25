@@ -83,18 +83,18 @@ func (q *Query) Connect(ctx context.Context, req *proto.ConnectRequest, reply *m
 	return nil
 }
 func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, reply *message.Message) error {
-	fmt.Println("receive insert: ")
 	DB, ok := q.DBMap[req.Database]
 
 	if !ok {
 		return reply.Error(fmt.Sprintf("未连接数据库[%s]", req.Database))
 	}
-	fmt.Println("exists database: ", req.Database)
 	if DB.Ping() != nil {
 		return reply.Error(fmt.Sprintf("数据库[%s]已断开", req.Database))
 	}
-	fmt.Println("DB alive: ", DB)
 	tx, err := DB.Begin()
+	if err != nil {
+		return err
+	}
 	defer tx.Rollback()
 	houseInfo := req.House.GetHouseInfo()
 	sql := fmt.Sprintf(`INSERT INTO %s (
@@ -115,7 +115,6 @@ func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, 
 		houseInfo.GetAreaInfo(),
 		houseInfo.GetAreaSub(),
 	)
-	fmt.Println("sql: ", sql)
 	_, err = tx.Exec(sql)
 	if err != nil {
 		return err

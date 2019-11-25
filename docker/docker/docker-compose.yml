@@ -39,6 +39,7 @@ services:
       - back
     depends_on:
       - mysql
+    # command: ["./docker/docker/wait-for-it.sh", "mysql:3306", "--", "./app"]
 
   crawler:
     build:
@@ -50,7 +51,7 @@ services:
       - back
     depends_on:
       - datamanage
-    # command: ["./wait-for-it.sh", "mysql:3306", "--", "./app"]
+    command: ["./app", "mysql:3306"]
 
 
 networks:
@@ -59,5 +60,5 @@ networks:
     # driver: custom-driver-1
 
 volumes:
-  db-data:
-  go-apps:
+  db-data: 
+    driver: /demo/volumes/mysql

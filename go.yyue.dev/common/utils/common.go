@@ -2,8 +2,11 @@ package utils
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"net"
 	"os"
+	"time"
 )
 
 const configPath = "../../docker"
@@ -37,4 +40,20 @@ func GetEnv() string {
 		env = "development"
 	}
 	return env
+}
+
+// WaitForIt is dependes for some tcp
+func WaitForIt(tcp string) {
+	if tcp == "" {
+		return
+	}
+	ticker := time.NewTicker(500 * time.Millisecond)
+	for {
+		_, err := net.Dial("tcp", tcp)
+		fmt.Println("err: ", err)
+		if err == nil {
+			return
+		}
+		<-ticker.C
+	}
 }

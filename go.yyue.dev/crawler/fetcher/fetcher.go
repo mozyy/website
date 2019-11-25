@@ -2,7 +2,6 @@ package fetcher
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -16,7 +15,7 @@ var ticker = time.NewTicker(10 * time.Millisecond)
 func Fetch(url string) *goquery.Document {
 	// 每次请求间隔一段时间
 	<-ticker.C
-	log.Printf("Fetcher: fetching url: %s", url)
+	// log.Printf("Fetcher: fetching url: %s", url)
 	request, err := http.NewRequest(http.MethodGet, url, nil)
 	utils.PanicErr(err)
 	// 添加浏览器 User Agent 模拟电脑chrome
