@@ -11,7 +11,10 @@ func TestFetch(t *testing.T) {
 	for i := 0; i < 5; i++ {
 		wg.Add(1)
 		go func() {
-			b := Fetch("https://www.baidu.com/")
+			b, err := Fetch("https://www.baidu.com/")
+			if err != nil {
+				t.Errorf("fetch error: %s", err)
+			}
 			if b.Find("title").Text() != title {
 				t.Errorf("first 15 strings want:\n%s, got:\n%s", title, b.Find("title").Text())
 			}

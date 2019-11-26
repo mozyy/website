@@ -3,7 +3,7 @@ package itemsaver
 import (
 	"context"
 	"encoding/gob"
-	"fmt"
+	"log"
 
 	"github.com/micro/go-micro"
 	"go.yyue.dev/common/types"
@@ -23,7 +23,7 @@ func New() chan engine.Item {
 			micro.Name("database.client"),
 		)
 		srv.Init()
-
+		// all := map[string]string{}
 		database := databaseproto.NewDatabaseServiceClient("database", srv.Client())
 		_, err := database.Connect(context.TODO(), &databaseproto.ConnectRequest{Database: "development"})
 		utils.PanicErr(err)
@@ -33,10 +33,20 @@ func New() chan engine.Item {
 			count++
 			go func() {
 				house := result.(proto.House)
+				// info := house.GetHouseInfo()
+				// url := info.GetUrl()
+				// no := info.GetHouseNo()
+				// title := info.GetTitle()
+				// log.Printf("count: %d, url: %s, house: %s\n", count, url, title)
+				// if _, ok := all[no]; ok {
+				// 	log.Printf("mutile no: %s", no)
+				// } else {
+				// 	all[no] = title
+				// }
 				message, err := database.InsertHouse(context.TODO(), &databaseproto.InsertHouseRequest{Database: "development", House: &house})
 
 				if err != nil {
-					fmt.Printf("error: %s, message: %s\n", err, message)
+					log.Printf("error: %s, message: %s, url: %s\n", err, message, house.GetHouseInfo().GetUrl())
 				}
 			}()
 		}

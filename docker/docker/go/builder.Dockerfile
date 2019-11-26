@@ -3,6 +3,12 @@ FROM golang:1.13.0
 ENV GOPROXY https://goproxy.cn
 
 WORKDIR /
+
+COPY ./docker/docker/go/go.mod ./go.yyue.dev/go.mod
+
+RUN cd ./go.yyue.dev && \
+    go mod download
+
 COPY ./go.yyue.dev ./go.yyue.dev
 # 打包应用
 RUN mkdir /go-apps && \

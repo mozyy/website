@@ -46,7 +46,7 @@ CREATE TABLE `house_base_info` (
 -- ----------------------------
 DROP TABLE IF EXISTS `house_info`;
 CREATE TABLE `house_info` (
-  `id` int(11) NOT NULL COMMENT 'id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `house_no` int(11) NOT NULL COMMENT '编号',
   `url` varchar(100) NOT NULL COMMENT '连接地址',
   `title` varchar(100) DEFAULT NULL COMMENT '标题',
@@ -82,7 +82,7 @@ CREATE TABLE `house_pic` (
 -- ----------------------------
 DROP TABLE IF EXISTS `house_transaction_info`;
 CREATE TABLE `house_transaction_info` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `house_no` int(11) NOT NULL COMMENT '编号',
   `listing_time` varchar(50) DEFAULT NULL COMMENT '挂牌时间',
   `trading_authority` varchar(50) DEFAULT NULL COMMENT '交易权属',

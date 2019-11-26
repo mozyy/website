@@ -1,6 +1,11 @@
 package engine
 
-import "go.yyue.dev/crawler/fetcher"
+import (
+	"fmt"
+	"log"
+
+	"go.yyue.dev/crawler/fetcher"
+)
 
 type Scheduler interface {
 	Submit(Request)
@@ -36,15 +41,21 @@ func createWorker(in chan Request, out chan Result, scheduler Scheduler) {
 		for {
 			scheduler.WorkerReady(in)
 			request := <-in
-			result := worker(request)
+			result, err := worker(request)
+			if err != nil {
+				log.Printf("worker error: %s, request: %s\n", err, request)
+			}
 			out <- result
+
 		}
 	}()
 }
-func worker(request Request) Result {
-	b := fetcher.Fetch(request.URL)
-	result := request.Parser(b)
-	return result
+func worker(request Request) (Result, error) {
+	b, err := fetcher.Fetch(request.URL)
+	if err != nil {
+		return Result{}, fmt.Errorf("fetch error: %s", err)
+	}
+	return request.Parser(b)
 }
 
 var visitsMaps = make(map[string]bool)

@@ -60,5 +60,9 @@ networks:
     # driver: custom-driver-1
 
 volumes:
-  db-data: 
-    driver: /demo/volumes/mysql
+  db-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /demo/volumes/mysql
+      o: bind

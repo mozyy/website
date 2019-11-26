@@ -2,13 +2,12 @@ package lianjia
 
 import (
 	"encoding/json"
-	"log"
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"go.yyue.dev/common/utils"
 	"go.yyue.dev/crawler/engine"
 	"go.yyue.dev/crawler/proto"
 )
@@ -52,11 +51,17 @@ import (
 
 var domain = "https://cd.lianjia.com"
 
-func City(q *goquery.Document) engine.Result {
+func City(q *goquery.Document) (engine.Result, error) {
 	result := engine.Result{}
 
 	total, err := strconv.Atoi(strings.TrimSpace(q.Find(".resultDes span").Text()))
-	utils.PanicErr(err)
+	if err != nil {
+		return result, err
+	}
+	if total == 0 {
+		return result, nil
+	}
+	err = nil
 	// 其他区域 (链家二手房列表最多100页, 所以需要按区域爬取数据)
 	if total > 3000 {
 		areas := q.Find("div[data-role=ershoufang] a[href]")
@@ -68,6 +73,7 @@ func City(q *goquery.Document) engine.Result {
 				href, _ := s.Attr("href")
 				result.Requests = append(result.Requests, engine.Request{URL: domain + href, Parser: City})
 			})
+			return result, nil
 		case 1:
 			// 爬小区域页面
 			links := q.Find("div[data-role=ershoufang]>div").Last().Find("a[href]")
@@ -75,17 +81,22 @@ func City(q *goquery.Document) engine.Result {
 				href, _ := s.Attr("href")
 				result.Requests = append(result.Requests, engine.Request{URL: domain + href, Parser: City})
 			})
+			return result, nil
 		default:
 			// TODO: 如果还有多余数据, 再细化搜索条件
-			log.Println("total: ", total, selectedLen, q.Find("div[data-role=ershoufang] .selected").Text())
+			// log.Println("total: ", total, selectedLen, q.Find("div[data-role=ershoufang] .selected").Text())
 			// result.Items = append(result.Items, engine.Item{Payload: total})
+			err = fmt.Errorf("parse city error: total is too large: %d", total)
 		}
-		return result
 	}
 
 	result.Requests = append(result.Requests, cityItem(q)...)
-	result.Requests = append(result.Requests, morePage(q)...)
-	return result
+	morePageRequests, errp := morePage(q)
+	if errp != nil {
+		err = fmt.Errorf("%s-%s", err, errp)
+	}
+	result.Requests = append(result.Requests, morePageRequests...)
+	return result, err
 }
 
 func cityItem(q *goquery.Document) []engine.Request {
@@ -96,7 +107,7 @@ func cityItem(q *goquery.Document) []engine.Request {
 
 		request := engine.Request{
 			URL: URL,
-			Parser: func(qq *goquery.Document) engine.Result {
+			Parser: func(qq *goquery.Document) (engine.Result, error) {
 				return House(qq, URL)
 			},
 		}
@@ -105,7 +116,7 @@ func cityItem(q *goquery.Document) []engine.Request {
 	return requests
 }
 
-func morePage(q *goquery.Document) []engine.Request {
+func morePage(q *goquery.Document) ([]engine.Request, error) {
 	var requests []engine.Request
 	listNode := q.Find(".house-lst-page-box[page-url][page-data]")
 	pageURL, _ := listNode.Attr("page-url")
@@ -115,9 +126,11 @@ func morePage(q *goquery.Document) []engine.Request {
 		CurPage   int
 	}
 	err := json.Unmarshal([]byte(pageDataStr), &pageData)
-	utils.PanicErr(err)
+	if err != nil {
+		return requests, err
+	}
 	if pageData.CurPage == 0 {
-		return requests
+		return requests, nil
 	}
 	for curPage, totalPage := pageData.CurPage, pageData.TotalPage; curPage < totalPage; curPage++ {
 		nextURL := domain + strings.ReplaceAll(pageURL, "{page}", strconv.Itoa(curPage+1))
@@ -126,12 +139,12 @@ func morePage(q *goquery.Document) []engine.Request {
 			Parser: City,
 		})
 	}
-	return requests
+	return requests, nil
 }
 
 var idRegexp = regexp.MustCompile(`^https://cd.lianjia.com/ershoufang/(\d+).html`)
 
-func House(q *goquery.Document, URL string) engine.Result {
+func House(q *goquery.Document, URL string) (engine.Result, error) {
 	HouseNo := idRegexp.FindStringSubmatch(URL)[1]
 
 	houseInfo := proto.HouseInfo{
@@ -237,5 +250,5 @@ func House(q *goquery.Document, URL string) engine.Result {
 		Items: []engine.Item{
 			house,
 		},
-	}
+	}, nil
 }

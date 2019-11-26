@@ -11,7 +11,7 @@ type Engine struct {
 // Request is engin request
 type Request struct {
 	URL    string
-	Parser func(*goquery.Document) Result
+	Parser func(*goquery.Document) (Result, error)
 }
 
 // Result is engin result
