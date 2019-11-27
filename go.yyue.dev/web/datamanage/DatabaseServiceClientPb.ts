@@ -14,7 +14,8 @@ import * as crawler_lianjia_pb from '../crawler/lianjia_pb';
 
 import {
   ConnectRequest,
-  InsertHouseRequest} from './database_pb';
+  InsertHouseRequest,
+  InsertHouseSummaryRequest} from './database_pb';
 
 export class DatabaseServiceClient {
   client_: grpcWeb.AbstractClientBase;
@@ -54,6 +55,28 @@ export class DatabaseServiceClient {
       request,
       metadata || {},
       this.methodInfoConnect,
+      callback);
+  }
+
+  methodInfoInsertHouseSummary = new grpcWeb.AbstractClientBase.MethodInfo(
+    common_message_pb.Message,
+    (request: InsertHouseSummaryRequest) => {
+      return request.serializeBinary();
+    },
+    common_message_pb.Message.deserializeBinary
+  );
+
+  insertHouseSummary(
+    request: InsertHouseSummaryRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: common_message_pb.Message) => void) {
+    return this.client_.rpcCall(
+      this.hostname_ +
+        '/database.DatabaseService/InsertHouseSummary',
+      request,
+      metadata || {},
+      this.methodInfoInsertHouseSummary,
       callback);
   }
 

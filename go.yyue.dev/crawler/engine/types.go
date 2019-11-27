@@ -1,6 +1,10 @@
 package engine
 
-import "github.com/PuerkitoBio/goquery"
+import (
+	"errors"
+
+	"github.com/PuerkitoBio/goquery"
+)
 
 type Engine struct {
 	Scheduler   Scheduler
@@ -33,3 +37,6 @@ type Item interface{}
 func NilParser(q *goquery.Document) Result {
 	return Result{}
 }
+
+// ErrListLarge is house page have large then 3000 item
+var ErrListLarge = errors.New("house is large then 3000")

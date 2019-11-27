@@ -20,12 +20,39 @@ CREATE DATABASE `development` CHARACTER SET 'utf8';
 use development;
 
 -- ----------------------------
+-- Table structure for house_summary
+-- ----------------------------
+DROP TABLE IF EXISTS `house_summary`;
+CREATE TABLE `house_summary` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `house_no` bigint(20) NOT NULL COMMENT '编号',
+  `url` varchar(50) NOT NULL COMMENT 'url',
+  `title` varchar(100) DEFAULT NULL COMMENT '标题',
+  `total_price` varchar(50) DEFAULT NULL COMMENT '总价',
+  `unit_price` varchar(50) DEFAULT NULL COMMENT '单价',
+  `plot` varchar(50) DEFAULT NULL COMMENT '小区',
+  `region` varchar(50) DEFAULT NULL COMMENT '区域',
+  `layout` varchar(50) DEFAULT NULL COMMENT '房屋户型',
+  `area` varchar(50) DEFAULT NULL COMMENT '建筑面积',
+  `face` varchar(50) DEFAULT NULL COMMENT '房屋朝向',
+  `decoration` varchar(50) DEFAULT NULL COMMENT '装修情况',
+  `floor` varchar(50) DEFAULT NULL COMMENT '所在楼层',
+  `house_year` varchar(50) DEFAULT NULL COMMENT '房屋年限',
+  `struct_build` varchar(50) DEFAULT NULL COMMENT '建筑结构',
+  `image` varchar(50) DEFAULT NULL COMMENT '图片',
+  `follow` int(11) DEFAULT NULL COMMENT '关注人数',
+  `release_time` varchar(50) DEFAULT NULL COMMENT '时间',
+  `tags` int(11) DEFAULT NULL COMMENT '标签',
+  PRIMARY KEY (`id`,`house_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='房间简要信息';
+
+-- ----------------------------
 -- Table structure for house_base_info
 -- ----------------------------
 DROP TABLE IF EXISTS `house_base_info`;
 CREATE TABLE `house_base_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `house_no` int(11) NOT NULL COMMENT '编号',
+  `house_no` bigint(20) NOT NULL COMMENT '编号',
   `layout` varchar(50) DEFAULT NULL COMMENT '房屋户型',
   `floor` varchar(50) DEFAULT NULL COMMENT '所在楼层',
   `area_build` varchar(50) DEFAULT NULL COMMENT '建筑面积',
@@ -47,7 +74,7 @@ CREATE TABLE `house_base_info` (
 DROP TABLE IF EXISTS `house_info`;
 CREATE TABLE `house_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `house_no` int(11) NOT NULL COMMENT '编号',
+  `house_no` bigint(20) NOT NULL COMMENT '编号',
   `url` varchar(100) NOT NULL COMMENT '连接地址',
   `title` varchar(100) DEFAULT NULL COMMENT '标题',
   `sub_title` varchar(255) DEFAULT NULL COMMENT '副标题',
@@ -69,7 +96,7 @@ CREATE TABLE `house_info` (
 DROP TABLE IF EXISTS `house_pic`;
 CREATE TABLE `house_pic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `house_no` int(11) NOT NULL COMMENT '编号',
+  `house_no` bigint(20) NOT NULL COMMENT '编号',
   `description` varchar(50) DEFAULT NULL COMMENT '描述',
   `pic_small_url` varchar(50) DEFAULT NULL COMMENT '小图',
   `pic_normal_url` varchar(50) DEFAULT NULL COMMENT '中图',
@@ -83,7 +110,7 @@ CREATE TABLE `house_pic` (
 DROP TABLE IF EXISTS `house_transaction_info`;
 CREATE TABLE `house_transaction_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `house_no` int(11) NOT NULL COMMENT '编号',
+  `house_no` bigint(20) NOT NULL COMMENT '编号',
   `listing_time` varchar(50) DEFAULT NULL COMMENT '挂牌时间',
   `trading_authority` varchar(50) DEFAULT NULL COMMENT '交易权属',
   `last_transaction` varchar(50) DEFAULT NULL COMMENT '上次交易',

@@ -9,11 +9,18 @@ option go_package="go.yyue.dev/datamanage/proto";
 
 service DatabaseService {
   rpc Connect(ConnectRequest) returns (message.Message) {};
+  rpc InsertHouseSummary(InsertHouseSummaryRequest) returns (message.Message) {};
   rpc InsertHouse(InsertHouseRequest) returns (message.Message) {};
 }
 
 message ConnectRequest {
   string database = 1;
+}
+
+message InsertHouseSummaryRequest {
+  string database = 1;
+	string table= 2;
+  lianjia.HouseSummary house = 3;
 }
 
 message InsertHouseRequest {

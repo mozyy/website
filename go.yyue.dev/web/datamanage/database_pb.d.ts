@@ -21,6 +21,34 @@ export namespace ConnectRequest {
   }
 }
 
+export class InsertHouseSummaryRequest extends jspb.Message {
+  getDatabase(): string;
+  setDatabase(value: string): void;
+
+  getTable(): string;
+  setTable(value: string): void;
+
+  getHouse(): crawler_lianjia_pb.HouseSummary | undefined;
+  setHouse(value?: crawler_lianjia_pb.HouseSummary): void;
+  hasHouse(): boolean;
+  clearHouse(): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): InsertHouseSummaryRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: InsertHouseSummaryRequest): InsertHouseSummaryRequest.AsObject;
+  static serializeBinaryToWriter(message: InsertHouseSummaryRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): InsertHouseSummaryRequest;
+  static deserializeBinaryFromReader(message: InsertHouseSummaryRequest, reader: jspb.BinaryReader): InsertHouseSummaryRequest;
+}
+
+export namespace InsertHouseSummaryRequest {
+  export type AsObject = {
+    database: string,
+    table: string,
+    house?: crawler_lianjia_pb.HouseSummary.AsObject,
+  }
+}
+
 export class InsertHouseRequest extends jspb.Message {
   getDatabase(): string;
   setDatabase(value: string): void;

@@ -82,6 +82,49 @@ func (q *Query) Connect(ctx context.Context, req *proto.ConnectRequest, reply *m
 	reply.Success(fmt.Sprintf("连接数据库[%s]成功", database))
 	return nil
 }
+
+func (q *Query) InsertHouseSummary(ctx context.Context, req *proto.InsertHouseSummaryRequest, reply *message.Message) error {
+	DB, ok := q.DBMap[req.Database]
+
+	if !ok {
+		return reply.Error(fmt.Sprintf("未连接数据库[%s]", req.Database))
+	}
+	if DB.Ping() != nil {
+		return reply.Error(fmt.Sprintf("数据库[%s]已断开", req.Database))
+	}
+	houseSummary := req.GetHouse()
+	sql := fmt.Sprintf(`INSERT INTO %s (
+		house_no, url, title, total_price, unit_price, plot, region, layout, area, face, decoration, floor, house_year, struct_build, image, follow, release_time tags
+	) VALUES (%s, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %d, %s, %d);`,
+		"house_summary",
+		houseSummary.GetHouseNo(),
+		houseSummary.GetUrl(),
+		houseSummary.GetTitle(),
+		houseSummary.GetTotalPrice(),
+		houseSummary.GetUnitPrice(),
+		houseSummary.GetPlot(),
+		houseSummary.GetRegion(),
+		houseSummary.GetLayout(),
+		houseSummary.GetArea(),
+		houseSummary.GetFace(),
+		houseSummary.GetDecoration(),
+		houseSummary.GetFloor(),
+		houseSummary.GetHouseYear(),
+		houseSummary.GetStructBuild(),
+		houseSummary.GetImage(),
+		houseSummary.GetFollow(),
+		houseSummary.GetReleaseTime(),
+		houseSummary.GetTags(),
+	)
+	_, err := DB.Exec(sql)
+	if err != nil {
+		return err
+	}
+
+	reply.Success("insert success")
+	return nil
+}
+
 func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, reply *message.Message) error {
 	DB, ok := q.DBMap[req.Database]
 

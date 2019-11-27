@@ -1,5 +1,95 @@
 import * as jspb from "google-protobuf"
 
+export class HouseSummary extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
+  getHouseNo(): string;
+  setHouseNo(value: string): void;
+
+  getUrl(): string;
+  setUrl(value: string): void;
+
+  getTitle(): string;
+  setTitle(value: string): void;
+
+  getTotalPrice(): string;
+  setTotalPrice(value: string): void;
+
+  getUnitPrice(): string;
+  setUnitPrice(value: string): void;
+
+  getPlot(): string;
+  setPlot(value: string): void;
+
+  getRegion(): string;
+  setRegion(value: string): void;
+
+  getLayout(): string;
+  setLayout(value: string): void;
+
+  getArea(): string;
+  setArea(value: string): void;
+
+  getFace(): string;
+  setFace(value: string): void;
+
+  getDecoration(): string;
+  setDecoration(value: string): void;
+
+  getFloor(): string;
+  setFloor(value: string): void;
+
+  getHouseYear(): string;
+  setHouseYear(value: string): void;
+
+  getStructBuild(): string;
+  setStructBuild(value: string): void;
+
+  getImage(): string;
+  setImage(value: string): void;
+
+  getFollow(): number;
+  setFollow(value: number): void;
+
+  getReleaseTime(): string;
+  setReleaseTime(value: string): void;
+
+  getTags(): number;
+  setTags(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): HouseSummary.AsObject;
+  static toObject(includeInstance: boolean, msg: HouseSummary): HouseSummary.AsObject;
+  static serializeBinaryToWriter(message: HouseSummary, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): HouseSummary;
+  static deserializeBinaryFromReader(message: HouseSummary, reader: jspb.BinaryReader): HouseSummary;
+}
+
+export namespace HouseSummary {
+  export type AsObject = {
+    id: number,
+    houseNo: string,
+    url: string,
+    title: string,
+    totalPrice: string,
+    unitPrice: string,
+    plot: string,
+    region: string,
+    layout: string,
+    area: string,
+    face: string,
+    decoration: string,
+    floor: string,
+    houseYear: string,
+    structBuild: string,
+    image: string,
+    follow: number,
+    releaseTime: string,
+    tags: number,
+  }
+}
+
 export class House extends jspb.Message {
   getId(): string;
   setId(value: string): void;

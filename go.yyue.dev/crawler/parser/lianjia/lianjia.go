@@ -12,51 +12,30 @@ import (
 	"go.yyue.dev/crawler/proto"
 )
 
-//<ul class="sellListContent" log-mod="list">
-//<li class="clear LOGVIEWDATA LOGCLICKDATA" data-lj_view_evtid="21625" data-lj_evtid="21624"
-//data-lj_view_event="ItemExpo" data-lj_click_event="SearchClick"  data-lj_action_source_type="链家_PC_二手列表页卡片"
-//data-lj_action_click_position="0" data-lj_action_fb_expo_id='' data-lj_action_fb_query_id=''
-//data-lj_action_resblock_id="3011055763863" data-lj_action_housedel_id="106103125055" >
-//<a class="noresultRecommend img LOGCLICKDATA" href="https://cd.lianjia.com/ershoufang/106103125055.html"
-//  target="_blank" data-log_index="1"data-el="ershoufang" data-housecode="106103125055" data-is_focus=""data-sl="">
-//  <!-- 热推标签、埋点 -->
-//  <img src="https://s1.ljcdn.com/feroot/pc/asset/img/vr/vrlogo.png?_v=20191009144231" class="vr_item">
-//  <img class="lj-lazy" src="https://s1.ljcdn.com/feroot/pc/asset/img/blank.gif?_v=20191009144231"
-//  data-original="https://image1.ljcdn.com/510100-inspection/prod-c171a6ef-1680-4609-afdc-df9ed5827d40.jpg.296x216.jpg"
-//  alt="成都温江温江大学城">
-//</a>
-//<div class="info clear">
-//<div class="title">
-//<a class="" href="https://cd.lianjia.com/ershoufang/106103125055.html" target="_blank" data-log_index="1"  data-el="ershoufang"
-//data-housecode="106103125055" data-is_focus="" data-sl="">中铁丽景书香清水套三，可根据自己喜好装修</a>
-//<!-- 拆分标签 -->
-//</div>
-//<div class="address">
-//<div class="houseInfo">
-//<span class="houseIcon"></span>
-//<a href="https://cd.lianjia.com/xiaoqu/3011055763863/" target="_blank" data-log_index="1" data-el="region">中铁丽景书香 </a>
-// | 3室2厅 | 89.23平米 | 东南 | 毛坯
-//</div></div>
-//<div class="flood"><div class="positionInfo"><span class="positionIcon"></span>
-//低楼层(共32层)2018年建板塔结合  -  <a href="https://cd.lianjia.com/ershoufang/wenjiangdaxuecheng/" target="_blank">温江大学城</a>
-//</div></div><div class="followInfo"><span class="starIcon"></span>117人关注 / 2个月以前发布</div>
-//<div class="tag"><span class="good"><img src="https://img.ljcdn.com/beike/bikanhaofang/1559536880827.png"></span>
-//  <span class="vr">VR房源</span>
-//  <span class="haskey">随时看房</span></div>
-//<div class="priceInfo"><div class="totalPrice"><span>90.4</span>万</div>
-// <div class="unitPrice" data-hid="106103125055" data-rid="3011055763863" data-price="10132">
-//<span>单价10132元/平米</span></div></div></div>
-//<div class="listButtonContainer"><div class="btn-follow followBtn" data-hid="106103125055"><span class="follow-text">关注</span></div>
-//<div class="compareBtn LOGCLICK" data-hid="106103125055" log-mod="106103125055" data-log_evtid="10230">加入对比</div></div></li>
-
 var domain = "https://cd.lianjia.com"
 
+// ParseError is parse error
+type ParseError struct {
+	Func   string
+	Detail string
+	Err    error
+}
+
+// Unwarp is impl errors Unwarp
+func (e *ParseError) Unwarp() error {
+	return e.Err
+}
+func (e *ParseError) Error() string {
+	return fmt.Sprintf("parse error, %s: %s : %s", e.Func, e.Detail, e.Err)
+}
+
+// City parse city
 func City(q *goquery.Document) (engine.Result, error) {
 	result := engine.Result{}
 
 	total, err := strconv.Atoi(strings.TrimSpace(q.Find(".resultDes span").Text()))
 	if err != nil {
-		return result, err
+		return result, &ParseError{"City", "get total", err}
 	}
 	if total == 0 {
 		return result, nil
@@ -86,19 +65,104 @@ func City(q *goquery.Document) (engine.Result, error) {
 			// TODO: 如果还有多余数据, 再细化搜索条件
 			// log.Println("total: ", total, selectedLen, q.Find("div[data-role=ershoufang] .selected").Text())
 			// result.Items = append(result.Items, engine.Item{Payload: total})
-			err = fmt.Errorf("parse city error: total is too large: %d", total)
+			err = &ParseError{"City", fmt.Sprintf("large total[%d]", total), engine.ErrListLarge}
 		}
 	}
 
-	result.Requests = append(result.Requests, cityItem(q)...)
+	// get house item request
+	// result.Requests = append(result.Requests, cityItem(q)...)
+
+	// get house summary item request
+	result.Items = append(result.Items, houseSummary(q)...)
+
+	// get house page house length
+	// result.Items = []engine.Item{q.Find(".sellListContent>.LOGVIEWDATA").Length()}
+
 	morePageRequests, errp := morePage(q)
 	if errp != nil {
-		err = fmt.Errorf("%s-%s", err, errp)
+		err = &ParseError{"City", "more page", fmt.Errorf("%v-%v", err, errp)}
 	}
 	result.Requests = append(result.Requests, morePageRequests...)
 	return result, err
 }
 
+var tagsClass = []string{".goodhouse_tag", ".taxfree", ".five", ".vr", ".subway", ".haskey"}
+
+// houseSummary get house summary
+func houseSummary(q *goquery.Document) []engine.Item {
+	items := []engine.Item{}
+	content := q.Find(".sellListContent>.LOGVIEWDATA")
+	content.Each(func(i int, s *goquery.Selection) {
+		URL, ok := s.Find(".title a").Attr("href")
+		if !ok {
+			return
+		}
+		image, _ := s.Find(".lj-lazy").Attr("src")
+
+		HouseNo := idRegexp.FindStringSubmatch(URL)[1]
+
+		followInfo := strings.Split(s.Find(".followInfo").Text(), " / ")
+		follow, err := strconv.Atoi(strings.Replace(followInfo[0], "人关注", "", 1))
+		if err != nil {
+			follow = -1
+		}
+
+		tags := 0
+		for i, v := range tagsClass {
+			if s.Find(v).Length() > 0 {
+				tags |= 1 << i
+			}
+		}
+
+		item := proto.HouseSummary{
+			HouseNo:    HouseNo,
+			Url:        URL,
+			Title:      s.Find(".title a").Text(),
+			TotalPrice: s.Find(".totalPrice span").Text(),
+			UnitPrice:  s.Find(".unitPrice span").Text(),
+			Plot:       s.Find(".positionInfo a").Eq(0).Text(),
+			Region:     s.Find(".positionInfo a").Eq(1).Text(),
+			// Layout:      infos[0],
+			// Area:        infos[1],
+			// Face:        infos[2],
+			// Decoration:  infos[3],
+			// Floor:       infos[4],
+			// HouseYear:   infos[5],
+			// StructBuild: infos[6],
+			Image:       image,
+			Follow:      int32(follow),
+			ReleaseTime: followInfo[1],
+			Tags:        int32(tags),
+		}
+		infos := strings.Split(s.Find(".houseInfo").Text(), "|")
+		for i, info := range infos {
+			info = strings.TrimSpace(info)
+			if info == "" || info == "暂无数据" {
+				continue
+			}
+			switch i {
+			case 0:
+				item.Layout = info
+			case 1:
+				item.Area = info
+			case 2:
+				item.Face = info
+			case 3:
+				item.Decoration = info
+			case 4:
+				item.Floor = info
+			case 5:
+				item.HouseYear = info
+			case 6:
+				item.StructBuild = info
+			}
+		}
+		items = append(items, item)
+	})
+	return items
+}
+
+// cityItem get house item request
 func cityItem(q *goquery.Document) []engine.Request {
 	requests := []engine.Request{}
 	content := q.Find(".sellListContent>.LOGVIEWDATA")
@@ -108,7 +172,12 @@ func cityItem(q *goquery.Document) []engine.Request {
 		request := engine.Request{
 			URL: URL,
 			Parser: func(qq *goquery.Document) (engine.Result, error) {
-				return House(qq, URL)
+				result := engine.Result{}
+				house, err := House(qq, URL)
+				if err == nil {
+					result.Items = []engine.Item{house}
+				}
+				return result, err
 			},
 		}
 		requests = append(requests, request)
@@ -116,6 +185,7 @@ func cityItem(q *goquery.Document) []engine.Request {
 	return requests
 }
 
+// morePage get other page
 func morePage(q *goquery.Document) ([]engine.Request, error) {
 	var requests []engine.Request
 	listNode := q.Find(".house-lst-page-box[page-url][page-data]")
@@ -132,8 +202,8 @@ func morePage(q *goquery.Document) ([]engine.Request, error) {
 	if pageData.CurPage == 0 {
 		return requests, nil
 	}
-	for curPage, totalPage := pageData.CurPage, pageData.TotalPage; curPage < totalPage; curPage++ {
-		nextURL := domain + strings.ReplaceAll(pageURL, "{page}", strconv.Itoa(curPage+1))
+	for cur, total := pageData.CurPage, pageData.TotalPage; cur < total; cur++ {
+		nextURL := domain + strings.ReplaceAll(pageURL, "{page}", strconv.Itoa(cur+1))
 		requests = append(requests, engine.Request{
 			URL:    nextURL,
 			Parser: City,
@@ -144,7 +214,8 @@ func morePage(q *goquery.Document) ([]engine.Request, error) {
 
 var idRegexp = regexp.MustCompile(`^https://cd.lianjia.com/ershoufang/(\d+).html`)
 
-func House(q *goquery.Document, URL string) (engine.Result, error) {
+// House get house detail
+func House(q *goquery.Document, URL string) (proto.House, error) {
 	HouseNo := idRegexp.FindStringSubmatch(URL)[1]
 
 	houseInfo := proto.HouseInfo{
@@ -228,14 +299,14 @@ func House(q *goquery.Document, URL string) (engine.Result, error) {
 		} else {
 			housePic.Description = "vr"
 		}
-		if picSmallUrl, ok := s.Find("img").Attr("src"); ok {
-			housePic.PicSmallUrl = picSmallUrl
+		if picSmallURL, ok := s.Find("img").Attr("src"); ok {
+			housePic.PicSmallUrl = picSmallURL
 		}
-		if picNormalUrl, ok := s.Attr("data-src"); ok {
-			housePic.PicNormalUrl = picNormalUrl
+		if picNormalURL, ok := s.Attr("data-src"); ok {
+			housePic.PicNormalUrl = picNormalURL
 		}
-		if picLargeUrl, ok := s.Attr("data-pic"); ok {
-			housePic.PicLargeUrl = picLargeUrl
+		if picLargeURL, ok := s.Attr("data-pic"); ok {
+			housePic.PicLargeUrl = picLargeURL
 		}
 		housePics = append(housePics, &housePic)
 	})
@@ -246,9 +317,5 @@ func House(q *goquery.Document, URL string) (engine.Result, error) {
 		HouseTransactionInfo: &transactionInfo,
 		HousePics:            housePics,
 	}
-	return engine.Result{
-		Items: []engine.Item{
-			house,
-		},
-	}, nil
+	return house, nil
 }

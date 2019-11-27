@@ -4,10 +4,11 @@ import (
 	"context"
 	"encoding/gob"
 	"log"
+	"time"
 
 	"github.com/micro/go-micro"
+	"go.yyue.dev/common/message"
 	"go.yyue.dev/common/types"
-	"go.yyue.dev/common/utils"
 	"go.yyue.dev/crawler/engine"
 	"go.yyue.dev/crawler/proto"
 	databaseproto "go.yyue.dev/datamanage/proto"
@@ -18,38 +19,58 @@ func New() chan engine.Item {
 	gob.Register(types.HouseInfo{})
 
 	go func() {
-		count := 0
+
 		srv := micro.NewService(
 			micro.Name("database.client"),
 		)
 		srv.Init()
-		// all := map[string]string{}
 		database := databaseproto.NewDatabaseServiceClient("database", srv.Client())
-		_, err := database.Connect(context.TODO(), &databaseproto.ConnectRequest{Database: "development"})
-		utils.PanicErr(err)
+		database.Connect(context.TODO(), &databaseproto.ConnectRequest{Database: "development"})
+		// utils.PanicErr(err)
 
 		for {
 			result := <-item
-			count++
-			go func() {
-				house := result.(proto.House)
-				// info := house.GetHouseInfo()
-				// url := info.GetUrl()
-				// no := info.GetHouseNo()
-				// title := info.GetTitle()
-				// log.Printf("count: %d, url: %s, house: %s\n", count, url, title)
-				// if _, ok := all[no]; ok {
-				// 	log.Printf("mutile no: %s", no)
-				// } else {
-				// 	all[no] = title
-				// }
-				message, err := database.InsertHouse(context.TODO(), &databaseproto.InsertHouseRequest{Database: "development", House: &house})
-
-				if err != nil {
-					log.Printf("error: %s, message: %s, url: %s\n", err, message, house.GetHouseInfo().GetUrl())
-				}
-			}()
+			go sarverHandler(result, &database)
 		}
 	}()
 	return item
+}
+
+var (
+	count    = 0
+	total    = 0
+	errCount = 0
+)
+
+func sarverHandler(result engine.Item, database *databaseproto.DatabaseServiceClient) {
+	switch value := result.(type) {
+	case proto.House:
+		message, err := (*database).InsertHouse(context.TODO(),
+			&databaseproto.InsertHouseRequest{Database: "development", House: &value})
+
+		if err != nil {
+			reSaver(result, database, err, message, value.GetHouseInfo().GetUrl())
+		}
+	case proto.HouseSummary:
+		message, err := (*database).InsertHouseSummary(context.TODO(),
+			&databaseproto.InsertHouseSummaryRequest{Database: "development", House: &value})
+
+		if err != nil {
+			reSaver(result, database, err, message, value.GetUrl())
+		}
+	case int:
+		total += value
+		log.Printf("page: %d, count: %d, total: %d\n", count, value, total)
+	}
+}
+
+func reSaver(result engine.Item, database *databaseproto.DatabaseServiceClient, err error, message *message.Message, detail string) {
+	if errCount > 200 {
+		log.Printf("errorHouse: %s, message: %s, url: %s\n", err, message, detail)
+		return
+	}
+	<-time.NewTimer(time.Second).C
+	errCount++
+	log.Printf("saver error: %s, request: %v, resave...\n", err, detail)
+	sarverHandler(result, database)
 }

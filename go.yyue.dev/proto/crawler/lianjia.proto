@@ -5,6 +5,30 @@ package lianjia;
 
 option go_package = "go.yyue.dev/crawler/proto";
 
+// HouseSummary is house list info summary
+message HouseSummary {
+	int32 id = 1;
+	string house_no = 2;
+	string url = 3;
+	string title = 4;
+	string total_price = 5;
+	string unit_price = 6;
+	string plot = 7;     // 小区
+	string region = 8;
+	string layout = 9;
+	string area = 10;
+	string face = 11;                     // 房屋朝向
+	string decoration = 12;         // 装修情况
+	string floor = 13;                   // 所在楼层
+	string house_year = 14;                // 房屋年限
+	string struct_build = 15;      // 建筑结构
+	string image = 16;
+	int32 follow = 17;
+	string release_time = 18;
+	// tags 1: 必看好房 2: 房本满五年 4: 房本满两年 8: VR房源 16: 近地铁 32: 随时看房 
+	int32 tags = 19;
+}
+
 message House {
 	string id = 1;          //
 	string house_no = 2;

@@ -1,8 +1,10 @@
 package engine
 
 import (
+	"errors"
 	"fmt"
 	"log"
+	"time"
 
 	"go.yyue.dev/crawler/fetcher"
 )
@@ -30,26 +32,41 @@ func (engine *Engine) Run(seed ...Request) {
 		}
 		// next requests
 		for _, request := range result.Requests {
-			if checkDuplicate(request.URL) {
-				engine.Scheduler.Submit(request)
-			}
+			// if checkDuplicate(request.URL) {
+			engine.Scheduler.Submit(request)
+			// }
 		}
 	}
 }
+
 func createWorker(in chan Request, out chan Result, scheduler Scheduler) {
+	var fetchErrorCount = 0
 	go func() {
 		for {
 			scheduler.WorkerReady(in)
 			request := <-in
+		worker:
 			result, err := worker(request)
 			if err != nil {
-				log.Printf("worker error: %s, request: %s\n", err, request)
+				if errors.Is(err, ErrListLarge) {
+					log.Printf("worker error: %s, request: %v\n", err, request)
+				} else {
+					if fetchErrorCount > 50 {
+						panic("fetch error too mach, please check")
+					}
+					<-time.NewTimer(time.Second).C
+					fetchErrorCount++
+					log.Printf("worker error: %s, request: %v, rework...\n", err, request)
+					goto worker
+				}
+
 			}
 			out <- result
 
 		}
 	}()
 }
+
 func worker(request Request) (Result, error) {
 	b, err := fetcher.Fetch(request.URL)
 	if err != nil {
