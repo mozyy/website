@@ -1,6 +1,6 @@
 FROM golang:1.13.0
 
-ENV GOPROXY https://goproxy.cn
+# ENV GOPROXY https://goproxy.cn
 
 WORKDIR /
 
