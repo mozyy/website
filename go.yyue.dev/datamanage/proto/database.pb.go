@@ -6,15 +6,9 @@ package proto
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	message "go.yyue.dev/common/message"
+	_ "go.yyue.dev/common/message"
 	proto1 "go.yyue.dev/crawler/proto"
 	math "math"
-)
-
-import (
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
-	context "golang.org/x/net/context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -206,93 +200,4 @@ var fileDescriptor_d4ad0b9d61c6647e = []byte{
 	0xdc, 0x9e, 0x3e, 0x8d, 0x22, 0xc5, 0xb3, 0x2c, 0x25, 0xbe, 0xa2, 0x75, 0xd0, 0x58, 0xaa, 0x7c,
 	0x29, 0x96, 0xfb, 0x79, 0xb8, 0xfa, 0x0a, 0x00, 0x00, 0xff, 0xff, 0xe2, 0x70, 0x12, 0x6f, 0x6f,
 	0x02, 0x00, 0x00,
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ client.Option
-var _ server.Option
-
-// Client API for DatabaseService service
-
-type DatabaseServiceClient interface {
-	Connect(ctx context.Context, in *ConnectRequest, opts ...client.CallOption) (*message.Message, error)
-	InsertHouseSummary(ctx context.Context, in *InsertHouseSummaryRequest, opts ...client.CallOption) (*message.Message, error)
-	InsertHouse(ctx context.Context, in *InsertHouseRequest, opts ...client.CallOption) (*message.Message, error)
-}
-
-type databaseServiceClient struct {
-	c           client.Client
-	serviceName string
-}
-
-func NewDatabaseServiceClient(serviceName string, c client.Client) DatabaseServiceClient {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(serviceName) == 0 {
-		serviceName = "database"
-	}
-	return &databaseServiceClient{
-		c:           c,
-		serviceName: serviceName,
-	}
-}
-
-func (c *databaseServiceClient) Connect(ctx context.Context, in *ConnectRequest, opts ...client.CallOption) (*message.Message, error) {
-	req := c.c.NewRequest(c.serviceName, "DatabaseService.Connect", in)
-	out := new(message.Message)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *databaseServiceClient) InsertHouseSummary(ctx context.Context, in *InsertHouseSummaryRequest, opts ...client.CallOption) (*message.Message, error) {
-	req := c.c.NewRequest(c.serviceName, "DatabaseService.InsertHouseSummary", in)
-	out := new(message.Message)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *databaseServiceClient) InsertHouse(ctx context.Context, in *InsertHouseRequest, opts ...client.CallOption) (*message.Message, error) {
-	req := c.c.NewRequest(c.serviceName, "DatabaseService.InsertHouse", in)
-	out := new(message.Message)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for DatabaseService service
-
-type DatabaseServiceHandler interface {
-	Connect(context.Context, *ConnectRequest, *message.Message) error
-	InsertHouseSummary(context.Context, *InsertHouseSummaryRequest, *message.Message) error
-	InsertHouse(context.Context, *InsertHouseRequest, *message.Message) error
-}
-
-func RegisterDatabaseServiceHandler(s server.Server, hdlr DatabaseServiceHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&DatabaseService{hdlr}, opts...))
-}
-
-type DatabaseService struct {
-	DatabaseServiceHandler
-}
-
-func (h *DatabaseService) Connect(ctx context.Context, in *ConnectRequest, out *message.Message) error {
-	return h.DatabaseServiceHandler.Connect(ctx, in, out)
-}
-
-func (h *DatabaseService) InsertHouseSummary(ctx context.Context, in *InsertHouseSummaryRequest, out *message.Message) error {
-	return h.DatabaseServiceHandler.InsertHouseSummary(ctx, in, out)
-}
-
-func (h *DatabaseService) InsertHouse(ctx context.Context, in *InsertHouseRequest, out *message.Message) error {
-	return h.DatabaseServiceHandler.InsertHouse(ctx, in, out)
 }

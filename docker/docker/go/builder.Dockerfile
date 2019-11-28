@@ -4,7 +4,7 @@ ENV GOPROXY https://goproxy.cn
 
 WORKDIR /
 
-COPY ./docker/docker/go/go.mod ./go.yyue.dev/go.mod
+COPY ./docker/docker/go/mod ./go.yyue.dev
 
 RUN cd ./go.yyue.dev && \
     go mod download

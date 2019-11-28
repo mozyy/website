@@ -21,8 +21,8 @@ type ParseError struct {
 	Err    error
 }
 
-// Unwarp is impl errors Unwarp
-func (e *ParseError) Unwarp() error {
+// Unwrap is impl errors Unwrap
+func (e *ParseError) Unwrap() error {
 	return e.Err
 }
 func (e *ParseError) Error() string {

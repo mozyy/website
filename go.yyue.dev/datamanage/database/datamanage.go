@@ -94,8 +94,8 @@ func (q *Query) InsertHouseSummary(ctx context.Context, req *proto.InsertHouseSu
 	}
 	houseSummary := req.GetHouse()
 	sql := fmt.Sprintf(`INSERT INTO %s (
-		house_no, url, title, total_price, unit_price, plot, region, layout, area, face, decoration, floor, house_year, struct_build, image, follow, release_time tags
-	) VALUES (%s, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %d, %s, %d);`,
+		house_no, url, title, total_price, unit_price, plot, region, layout, area, face, decoration, floor, house_year, struct_build, image, follow, release_time, tags
+	) VALUES (%s, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %q, %d, %q, %d);`,
 		"house_summary",
 		houseSummary.GetHouseNo(),
 		houseSummary.GetUrl(),
