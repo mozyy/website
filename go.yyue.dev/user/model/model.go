@@ -10,6 +10,7 @@ package model
 // 	PRIMARY KEY (`uid`)
 // );
 
+// User is user struct
 type User struct {
 	UID      int
 	Name     string

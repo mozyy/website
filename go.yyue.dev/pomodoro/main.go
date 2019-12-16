@@ -8,6 +8,7 @@ import (
 	"go.yyue.dev/common/utils"
 )
 
+// User is test
 type User struct {
 	Name string `db:"name"`
 }

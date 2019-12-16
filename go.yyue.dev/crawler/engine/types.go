@@ -6,6 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+// Engine is engine struct
 type Engine struct {
 	Scheduler   Scheduler
 	ItemSaver   chan Item
@@ -24,7 +25,7 @@ type Result struct {
 	Items    []Item
 }
 
-// Items is engin result
+// Item is engin result
 type Item interface{}
 
 // ParserResult is engin result

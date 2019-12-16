@@ -48,6 +48,9 @@ func UploadDeploy(filePath, dest string) error {
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 	fw, err := writer.CreateFormFile("file", filepath.Base(filePath))
+	if err != nil {
+		return err
+	}
 	_, err = io.Copy(fw, file)
 	if err != nil {
 		return err
@@ -71,6 +74,9 @@ func UploadDeploy(filePath, dest string) error {
 		return err
 	}
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
+	if err != nil {
+		return err
+	}
 	alert := doc.Find("script").Eq(0).Text() //alert("上传成功")
 	reg := regexp.MustCompile(`alert\(\"(\S+)\"\)`)
 

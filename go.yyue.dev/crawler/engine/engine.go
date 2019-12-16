@@ -9,6 +9,7 @@ import (
 	"go.yyue.dev/crawler/fetcher"
 )
 
+// Scheduler is crawler engine scheduler
 type Scheduler interface {
 	Submit(Request)
 	GetWorkerChan() chan Request

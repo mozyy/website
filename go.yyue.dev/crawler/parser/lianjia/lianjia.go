@@ -234,8 +234,44 @@ func House(q *goquery.Document, URL string) (proto.House, error) {
 		AreaSub:    q.Find(".area .subInfo").Text(),
 	}
 
+	baseInfo := getHouseBaseInfo(q)
+	baseInfo.HouseNo = HouseNo
+
+	transactionInfo := getHouseTransactionInfo(q)
+	transactionInfo.HouseNo = HouseNo
+
+	housePics := []*proto.HousePic{}
+	q.Find(".smallpic li").Each(func(i int, s *goquery.Selection) {
+		housePic := proto.HousePic{HouseNo: HouseNo}
+		if desc, ok := s.Attr("data-desc"); ok {
+			housePic.Description = desc
+		} else {
+			housePic.Description = "vr"
+		}
+		if picSmallURL, ok := s.Find("img").Attr("src"); ok {
+			housePic.PicSmallUrl = picSmallURL
+		}
+		if picNormalURL, ok := s.Attr("data-src"); ok {
+			housePic.PicNormalUrl = picNormalURL
+		}
+		if picLargeURL, ok := s.Attr("data-pic"); ok {
+			housePic.PicLargeUrl = picLargeURL
+		}
+		housePics = append(housePics, &housePic)
+	})
+	house := proto.House{
+		HouseNo:              HouseNo,
+		HouseInfo:            &houseInfo,
+		HouseBaseInfo:        &baseInfo,
+		HouseTransactionInfo: &transactionInfo,
+		HousePics:            housePics,
+	}
+	return house, nil
+}
+
+func getHouseBaseInfo(q *goquery.Document) proto.HouseBaseInfo {
 	introduction := q.Find("#introduction")
-	baseInfo := proto.HouseBaseInfo{HouseNo: HouseNo}
+	baseInfo := proto.HouseBaseInfo{}
 	introduction.Find(".base .content ul li").Each(func(i int, s *goquery.Selection) {
 		s.Contents().Each(func(_ int, s *goquery.Selection) {
 			if goquery.NodeName(s) == "#text" {
@@ -269,7 +305,13 @@ func House(q *goquery.Document, URL string) (proto.House, error) {
 			}
 		})
 	})
-	transactionInfo := proto.HouseTransactionInfo{HouseNo: HouseNo}
+	return baseInfo
+}
+
+func getHouseTransactionInfo(q *goquery.Document) proto.HouseTransactionInfo {
+	introduction := q.Find("#introduction")
+
+	transactionInfo := proto.HouseTransactionInfo{}
 	introduction.Find(".transaction .content ul li span:nth-child(2)").Each(func(i int, s *goquery.Selection) {
 		value := strings.TrimSpace(s.Text())
 		switch i {
@@ -291,31 +333,5 @@ func House(q *goquery.Document, URL string) (proto.House, error) {
 			transactionInfo.DocumentPhoto = value // 房本备件
 		}
 	})
-	housePics := []*proto.HousePic{}
-	q.Find(".smallpic li").Each(func(i int, s *goquery.Selection) {
-		housePic := proto.HousePic{HouseNo: HouseNo}
-		if desc, ok := s.Attr("data-desc"); ok {
-			housePic.Description = desc
-		} else {
-			housePic.Description = "vr"
-		}
-		if picSmallURL, ok := s.Find("img").Attr("src"); ok {
-			housePic.PicSmallUrl = picSmallURL
-		}
-		if picNormalURL, ok := s.Attr("data-src"); ok {
-			housePic.PicNormalUrl = picNormalURL
-		}
-		if picLargeURL, ok := s.Attr("data-pic"); ok {
-			housePic.PicLargeUrl = picLargeURL
-		}
-		housePics = append(housePics, &housePic)
-	})
-	house := proto.House{
-		HouseNo:              HouseNo,
-		HouseInfo:            &houseInfo,
-		HouseBaseInfo:        &baseInfo,
-		HouseTransactionInfo: &transactionInfo,
-		HousePics:            housePics,
-	}
-	return house, nil
+	return transactionInfo
 }

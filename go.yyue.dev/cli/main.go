@@ -46,7 +46,7 @@ var (
 )
 
 var objects = []ObjectConfig{
-	ObjectConfig{
+	{
 		Object: Object{
 			Name:         "video-session",
 			Description:  "国君视频会议",
@@ -60,7 +60,7 @@ var objects = []ObjectConfig{
 			prod,
 		},
 	},
-	ObjectConfig{
+	{
 		Object: Object{
 			Name:        "video-session2",
 			Description: "国君视频会议",
@@ -72,7 +72,7 @@ var objects = []ObjectConfig{
 			prod,
 		},
 	},
-	ObjectConfig{
+	{
 		Object: Object{
 			Name:        "video-session3",
 			Description: "国君视频会议",
@@ -89,7 +89,7 @@ func main2() {
 
 	var object, env string
 	commands := []*cli.Command{
-		&cli.Command{
+		{
 			Name:    "deploy",
 			Aliases: []string{"d"},
 			Usage:   "发布项目",
@@ -123,7 +123,7 @@ func main2() {
 		Name:  "ttd",
 		Usage: "ttd command line interface",
 		Authors: []*cli.Author{
-			&cli.Author{
+			{
 				Name: "yang yue",
 			},
 		},
@@ -142,7 +142,8 @@ func main2() {
 }
 
 func main() {
-	err := util.UploadDeploy("d:/work/evidence-security/dist/evidence-security-one/evidence-security-one.zip", "http://192.168.88.122:9990/upfile.php?pk_id=202")
+	err := util.UploadDeploy("d:/work/evidence-security/dist/evidence-security-one/evidence-security-one.zip",
+		"http://192.168.88.122:9990/upfile.php?pk_id=202")
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -6,18 +6,23 @@ import (
 	"go.yyue.dev/zq/components"
 )
 
+// Server is server struct
 type Server struct {
 	Name string `json:"服务组启用服务器"`
-	Ip   string `json:"服务器IP地址"`
+	IP   string `json:"服务器IP地址"`
 	Port string `json:"服务器对内端口"`
 }
+
+// Group is server group
 type Group struct {
 	Name    string `json:"虚拟服务器启用服务组"`
 	Port    string `json:"服务组启用端口"`
 	Servers []Server
 }
+
+// Result is result
 type Result struct {
-	Ip     string `json:"虚拟服务器IP地址"`
+	IP     string `json:"虚拟服务器IP地址"`
 	Groups []Group
 }
 
@@ -29,7 +34,7 @@ func main() {
 	result := []Result{}
 	for _, ip := range ips {
 		item := Result{}
-		item.Ip = ip.Ip
+		item.IP = ip.IP
 		for _, ipPorts := range ip.Ports {
 			group := Group{}
 			group.Name = ipPorts.Group
@@ -42,7 +47,7 @@ func main() {
 						server.Port = groupMember.Port
 						for _, serverItem := range servers {
 							if serverItem.Member == groupMember.Member {
-								server.Ip = serverItem.Server
+								server.IP = serverItem.Server
 								break
 							}
 						}
@@ -76,11 +81,11 @@ func main() {
 			c1Len += len(group.Servers)
 			for j, server := range group.Servers {
 				contents := []string{
-					item.Ip,
+					item.IP,
 					group.Name,
 					group.Port,
 					server.Name,
-					server.Ip,
+					server.IP,
 					server.Port,
 				}
 				row := sheet.AddRow()

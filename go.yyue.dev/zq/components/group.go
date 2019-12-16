@@ -9,15 +9,19 @@ import (
 	"go.yyue.dev/common/utils"
 )
 
+// Member is server group member
 type Member struct {
 	Member string
 	Port   string
 }
+
+// Group is server group
 type Group struct {
 	Group   string
 	Members []Member
 }
 
+// GetGroups return server groups
 func GetGroups() []Group {
 	path := res + "贝森虚拟服务组.txt"
 	f, err := os.Open(path)

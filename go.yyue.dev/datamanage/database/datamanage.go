@@ -41,6 +41,7 @@ func GetDb(table string) *sql.DB {
 	return db
 }
 
+// Connect will connect database
 func Connect(database string) (*sql.DB, error) {
 	dbc := utils.GetConfig().Database
 	dsn := fmt.Sprintf(`%s:%s@tcp(%s:%s)/%s?%s`, dbc.User, dbc.Password,
@@ -57,15 +58,18 @@ func Connect(database string) (*sql.DB, error) {
 	return conn, conn.Ping()
 }
 
+// Query is mysql select struct
 type Query struct {
 	DBMap map[string]*sql.DB
 }
 
+// New reutrn new Query
 func New() *Query {
 
 	return &Query{make(map[string]*sql.DB)}
 }
 
+// Connect is query func connect database
 func (q *Query) Connect(ctx context.Context, req *proto.ConnectRequest, reply *message.Message) error {
 	database := req.Database
 	if DB, ok := q.DBMap[database]; ok && DB.Ping() == nil {
@@ -83,6 +87,7 @@ func (q *Query) Connect(ctx context.Context, req *proto.ConnectRequest, reply *m
 	return nil
 }
 
+// InsertHouseSummary impl Query insert
 func (q *Query) InsertHouseSummary(ctx context.Context, req *proto.InsertHouseSummaryRequest, reply *message.Message) error {
 	DB, ok := q.DBMap[req.Database]
 
@@ -125,6 +130,7 @@ func (q *Query) InsertHouseSummary(ctx context.Context, req *proto.InsertHouseSu
 	return nil
 }
 
+// InsertHouse insert house
 func (q *Query) InsertHouse(ctx context.Context, req *proto.InsertHouseRequest, reply *message.Message) error {
 	DB, ok := q.DBMap[req.Database]
 

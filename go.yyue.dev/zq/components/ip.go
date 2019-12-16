@@ -11,30 +11,33 @@ import (
 
 const res = "./resources/"
 
+// Port is port
 type Port struct {
 	Port  string
 	Group string
 }
 
-type Ip struct {
-	Ip    string
+// IP is ip
+type IP struct {
+	IP    string
 	Ports []Port
 }
 
-func GetIps() []Ip {
+// GetIps return ips
+func GetIps() []IP {
 	path := res + "贝森虚拟服务器IP地址.log"
 	f, err := os.Open(path)
 	utils.PanicErr(err)
 	defer f.Close()
 	scan := bufio.NewScanner(f)
-	ips := []Ip{}
+	ips := []IP{}
 	for scan.Scan() {
 		text := scan.Text()
 		// fmt.Println(text)
 		if strings.HasPrefix(text, "slb") {
 			ip := strings.Split(text, " ")[3]
-			item := Ip{
-				Ip: ip,
+			item := IP{
+				IP: ip,
 			}
 			for scan.Scan() {
 				content := strings.TrimSpace(scan.Text())
