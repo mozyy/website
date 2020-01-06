@@ -1,17 +1,16 @@
 package itemsaver
 
 import (
-	"context"
+	"database/sql"
 	"encoding/gob"
 	"log"
 
-	"github.com/micro/go-micro"
 	"go.yyue.dev/common/message"
 	"go.yyue.dev/common/types"
-	"go.yyue.dev/common/utils"
 	"go.yyue.dev/crawler/engine"
 	"go.yyue.dev/crawler/proto"
-	databaseproto "go.yyue.dev/datamanage/proto"
+	"go.yyue.dev/database"
+	databaseproto "go.yyue.dev/database/proto"
 )
 
 func New() chan engine.Item {
@@ -19,18 +18,13 @@ func New() chan engine.Item {
 	gob.Register(types.HouseInfo{})
 
 	go func() {
-
-		srv := micro.NewService(
-			micro.Name("database.client"),
-		)
-		srv.Init()
-		database := databaseproto.NewDatabaseService("database", srv.Client())
-		_, err := database.Connect(context.TODO(), &databaseproto.ConnectRequest{Database: "development"})
-		utils.PanicErr(err)
-
+		db, err := database.GetDB("development")
+		if err != nil {
+			return
+		}
 		for {
 			result := <-item
-			go sarverHandler(result, &database)
+			go sarverHandler(db, result)
 		}
 	}()
 	return item
@@ -42,22 +36,20 @@ var (
 	errCount = 0
 )
 
-func sarverHandler(result engine.Item, database *databaseproto.DatabaseService) {
+func sarverHandler(db *sql.DB, result engine.Item) {
 	switch value := result.(type) {
 	case proto.House:
-		message, err := (*database).InsertHouse(context.TODO(),
-			&databaseproto.InsertHouseRequest{Database: "development", House: &value})
+		err := InsertHouse(db, value)
 
 		if err != nil {
-			log.Printf("saver error: %s, request: %v, message: %v\n", err, value.GetHouseInfo().GetUrl(), message)
+			log.Printf("saver error: %s, request: %v\n", err, value.GetHouseInfo().GetUrl())
 			// reSaver(result, database, err, message, value.GetHouseInfo().GetUrl())
 		}
 	case proto.HouseSummary:
-		message, err := (*database).InsertHouseSummary(context.TODO(),
-			&databaseproto.InsertHouseSummaryRequest{Database: "development", House: &value})
+		err := InsertHouseSummary(db, value)
 
 		if err != nil {
-			log.Printf("saver error: %s, request: %v, message: %v\n", err, value.GetUrl(), message)
+			log.Printf("saver error: %s, request: %v\n", err, value.GetUrl())
 			// reSaver(result, database, err, message, value.GetUrl())
 		}
 	case int:
