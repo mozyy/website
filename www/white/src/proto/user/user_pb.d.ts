@@ -42,25 +42,53 @@ export namespace ValidateRequest {
   }
 }
 
-export class RegisterRequest extends jspb.Message {
+export class UserInfo extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
+  getName(): string;
+  setName(value: string): void;
+
   getMobile(): string;
   setMobile(value: string): void;
 
   getPassword(): string;
   setPassword(value: string): void;
 
+  getUuid(): string;
+  setUuid(value: string): void;
+
+  getState(): number;
+  setState(value: number): void;
+
+  getCreateTime(): string;
+  setCreateTime(value: string): void;
+
+  getUpdateTime(): string;
+  setUpdateTime(value: string): void;
+
+  getLoginTime(): string;
+  setLoginTime(value: string): void;
+
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): RegisterRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: RegisterRequest): RegisterRequest.AsObject;
-  static serializeBinaryToWriter(message: RegisterRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): RegisterRequest;
-  static deserializeBinaryFromReader(message: RegisterRequest, reader: jspb.BinaryReader): RegisterRequest;
+  toObject(includeInstance?: boolean): UserInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: UserInfo): UserInfo.AsObject;
+  static serializeBinaryToWriter(message: UserInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UserInfo;
+  static deserializeBinaryFromReader(message: UserInfo, reader: jspb.BinaryReader): UserInfo;
 }
 
-export namespace RegisterRequest {
+export namespace UserInfo {
   export type AsObject = {
+    id: number,
+    name: string,
     mobile: string,
     password: string,
+    uuid: string,
+    state: number,
+    createTime: string,
+    updateTime: string,
+    loginTime: string,
   }
 }
 
@@ -83,24 +111,6 @@ export namespace LoginRequest {
   export type AsObject = {
     mobile: string,
     password: string,
-  }
-}
-
-export class UserInfo extends jspb.Message {
-  getToken(): string;
-  setToken(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): UserInfo.AsObject;
-  static toObject(includeInstance: boolean, msg: UserInfo): UserInfo.AsObject;
-  static serializeBinaryToWriter(message: UserInfo, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): UserInfo;
-  static deserializeBinaryFromReader(message: UserInfo, reader: jspb.BinaryReader): UserInfo;
-}
-
-export namespace UserInfo {
-  export type AsObject = {
-    token: string,
   }
 }
 

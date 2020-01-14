@@ -14,7 +14,7 @@ import (
 
 const (
 	goOutPath  = "../../"
-	webOutPath = "../web/"
+	webOutPath = "../../www/white/src/proto"
 )
 
 func main() {

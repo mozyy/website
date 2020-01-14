@@ -14,7 +14,6 @@ import * as common_message_pb from '../common/message_pb';
 import {
   GetInfoRequest,
   LoginRequest,
-  RegisterRequest,
   SendRequest,
   UserInfo,
   ValidateRequest} from './user_pb';
@@ -105,14 +104,14 @@ export class UserServiceClient {
 
   methodInfoRegister = new grpcWeb.AbstractClientBase.MethodInfo(
     common_message_pb.Message,
-    (request: RegisterRequest) => {
+    (request: UserInfo) => {
       return request.serializeBinary();
     },
     common_message_pb.Message.deserializeBinary
   );
 
   register(
-    request: RegisterRequest,
+    request: UserInfo,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
                response: common_message_pb.Message) => void) {

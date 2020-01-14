@@ -1,3 +1,5 @@
+import 'webrtc-adapter';
+
 import { URLWs } from '../env'
 import { Message, sendMessage } from './message'
 import { encode, decode, decodeMessage } from './textEncoder'

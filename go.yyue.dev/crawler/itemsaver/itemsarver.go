@@ -10,7 +10,6 @@ import (
 	"go.yyue.dev/crawler/engine"
 	"go.yyue.dev/crawler/proto"
 	"go.yyue.dev/database"
-	databaseproto "go.yyue.dev/database/proto"
 )
 
 func New() chan engine.Item {
@@ -18,7 +17,7 @@ func New() chan engine.Item {
 	gob.Register(types.HouseInfo{})
 
 	go func() {
-		db, err := database.GetDB("development")
+		db, err := database.GetDB("crawler")
 		if err != nil {
 			return
 		}
@@ -58,7 +57,7 @@ func sarverHandler(db *sql.DB, result engine.Item) {
 	}
 }
 
-func reSaver(result engine.Item, database *databaseproto.DatabaseService, err error, message *message.Message, detail string) {
+func reSaver(result engine.Item, err error, message *message.Message, detail string) {
 	// if errCount > 200 {
 	// 	panic(fmt.Sprintf("errorHouse: %s, message: %s, url: %s\n", err, message, detail))
 	// }

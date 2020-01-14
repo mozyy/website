@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const configPath = "../../docker"
+const configPath = "../../local/docker"
 
 type Config struct {
 	WebsocketPort string

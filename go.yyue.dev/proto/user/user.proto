@@ -22,23 +22,26 @@ message ValidateRequest {
 
 
 service UserService {
-  rpc Register(RegisterRequest) returns (message.Message) {}
+  rpc Register(UserInfo) returns (message.Message) {}
   rpc Login(LoginRequest) returns (UserInfo) {}
   rpc GetInfo(GetInfoRequest) returns (UserInfo) {}
 }
 
-message RegisterRequest {
-  string mobile = 1;
-  string password = 2;
+message UserInfo {
+  uint32 id = 1;
+  string name = 4;
+  string mobile = 2;
+  string password = 3;
+  string uuid = 5;
+  int32 state = 6;
+  string create_time = 7;
+  string update_time = 8;
+  string login_time = 9;
 }
 
 message LoginRequest {
   string mobile = 1;
   string password = 3;
-}
-
-message UserInfo {
-  string token = 2;
 }
 
 message GetInfoRequest {

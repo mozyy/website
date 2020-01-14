@@ -111,7 +111,7 @@ func (h *sMSServiceHandler) Validate(ctx context.Context, in *ValidateRequest, o
 // Client API for UserService service
 
 type UserService interface {
-	Register(ctx context.Context, in *RegisterRequest, opts ...client.CallOption) (*message.Message, error)
+	Register(ctx context.Context, in *UserInfo, opts ...client.CallOption) (*message.Message, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...client.CallOption) (*UserInfo, error)
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...client.CallOption) (*UserInfo, error)
 }
@@ -134,7 +134,7 @@ func NewUserService(name string, c client.Client) UserService {
 	}
 }
 
-func (c *userService) Register(ctx context.Context, in *RegisterRequest, opts ...client.CallOption) (*message.Message, error) {
+func (c *userService) Register(ctx context.Context, in *UserInfo, opts ...client.CallOption) (*message.Message, error) {
 	req := c.c.NewRequest(c.name, "UserService.Register", in)
 	out := new(message.Message)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -167,14 +167,14 @@ func (c *userService) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...c
 // Server API for UserService service
 
 type UserServiceHandler interface {
-	Register(context.Context, *RegisterRequest, *message.Message) error
+	Register(context.Context, *UserInfo, *message.Message) error
 	Login(context.Context, *LoginRequest, *UserInfo) error
 	GetInfo(context.Context, *GetInfoRequest, *UserInfo) error
 }
 
 func RegisterUserServiceHandler(s server.Server, hdlr UserServiceHandler, opts ...server.HandlerOption) error {
 	type userService interface {
-		Register(ctx context.Context, in *RegisterRequest, out *message.Message) error
+		Register(ctx context.Context, in *UserInfo, out *message.Message) error
 		Login(ctx context.Context, in *LoginRequest, out *UserInfo) error
 		GetInfo(ctx context.Context, in *GetInfoRequest, out *UserInfo) error
 	}
@@ -189,7 +189,7 @@ type userServiceHandler struct {
 	UserServiceHandler
 }
 
-func (h *userServiceHandler) Register(ctx context.Context, in *RegisterRequest, out *message.Message) error {
+func (h *userServiceHandler) Register(ctx context.Context, in *UserInfo, out *message.Message) error {
 	return h.UserServiceHandler.Register(ctx, in, out)
 }
 
