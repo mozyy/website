@@ -4,15 +4,29 @@ import { Link } from 'umi';
 import React from 'react';
 import { connect } from 'dva';
 import { formatMessage } from 'umi-plugin-react/locale';
+import Icon from "antd/lib/icon"
 
 import SelectLang from '@/components/SelectLang';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import logo from '../assets/logo.svg';
+// import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
 
 export interface UserLayoutProps extends ConnectProps {
   breadcrumbNameMap: { [path: string]: MenuDataItem };
 }
+
+const links = [{
+  key: 'yyue',
+  title: 'yyue',
+  href: 'https://yyue.dev',
+  blankTarget: true
+}, {
+  key: 'github',
+  title: <Icon type="github" />,
+  href: 'https://github.com/mozyy/website',
+  blankTarget: true
+}];
+const copyright = 'yyue.dev出品';
 
 const UserLayout: React.FC<UserLayoutProps> = props => {
   const {
@@ -49,15 +63,15 @@ const UserLayout: React.FC<UserLayoutProps> = props => {
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
-                <img alt="logo" className={styles.logo} src={logo} />
-                <span className={styles.title}>Ant Design</span>
+                {/* <img alt="logo" className={styles.logo} src={logo} /> */}
+                <span className={styles.title}>视频会议</span>
               </Link>
             </div>
-            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+            <div className={styles.desc}>yyue.dev</div>
           </div>
           {children}
         </div>
-        <DefaultFooter />
+        <DefaultFooter links={links} copyright={copyright}/>
       </div>
     </>
   );
