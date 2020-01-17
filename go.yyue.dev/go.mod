@@ -11,23 +11,18 @@ require (
 	github.com/golang/protobuf v1.3.2
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/websocket v1.4.1
-	github.com/grpc-ecosystem/grpc-gateway v1.9.2 // indirect
-	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/micro/cli v0.2.0
 	github.com/micro/go-micro v1.18.0
-	github.com/micro/micro v1.18.0 // indirect
+	github.com/micro/go-plugins v1.5.1
+	github.com/micro/micro v1.18.0
 	github.com/mitchellh/go-homedir v1.1.0
-	github.com/onsi/ginkgo v1.8.0 // indirect
-	github.com/onsi/gomega v1.5.0 // indirect
 	github.com/ory/fosite v0.30.2
 	github.com/ory/fosite-example v0.0.0-20191125094722-21823512273f
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/pkg/term v0.0.0-20190109203006-aa71e9d9e942 // indirect
-	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.6.1
 	github.com/tealeg/xlsx v1.0.5
 	github.com/urfave/cli/v2 v2.0.0-alpha.2

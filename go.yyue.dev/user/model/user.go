@@ -72,6 +72,7 @@ func (user *User) GetInfo(context.Context, *proto.GetInfoRequest, *proto.UserInf
 }
 
 func RegisterService() {
+
 	srv := micro.NewService(
 		micro.Name("user"),
 		micro.Flags(cli.StringFlag{

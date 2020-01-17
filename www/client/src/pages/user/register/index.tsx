@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, Popover, Progress, Row, Select, message } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
-import React, { Component } from 'react';
+import React, { Component, useState, useRef, useEffect } from 'react';
 import { Dispatch } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
 import Link from 'umi/link';
@@ -47,39 +47,26 @@ interface UserRegisterProps extends FormComponentProps {
   userAndUserRegister: StateType;
   submitting: boolean;
 }
-interface UserRegisterState {
-  count: number;
-  confirmDirty: boolean;
-  visible: boolean;
-  help: string;
-  prefix: string;
-}
 
 export interface UserRegisterParams {
-  mail: string;
+  mobile: string;
   password: string;
   confirm: string;
-  mobile: string;
   captcha: string;
   prefix: string;
 }
 
-class UserRegister extends Component<
-  UserRegisterProps,
-  UserRegisterState
-> {
-  state: UserRegisterState = {
-    count: 0,
-    confirmDirty: false,
-    visible: false,
-    help: '',
-    prefix: '86',
-  };
+const UserRegister:React.FC<UserRegisterProps> = props => {
+  const { userAndUserRegister, form ,dispatch, submitting} = props;
+  const [time, setTime] = useState(0)
+  const [confirmDirty, setConfirmDirty] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [help, setHelp] = useState('')
+  const [prefix, setPrefix] = useState('86')
 
-  interval: number | undefined = undefined;
+  const interval = useRef<number>();
 
-  componentDidUpdate() {
-    const { userAndUserRegister, form } = this.props;
+  useEffect(()=> {
     const account = form.getFieldValue('mail');
     if (userAndUserRegister.status === 'ok') {
       message.success('注册成功！');
@@ -90,26 +77,24 @@ class UserRegister extends Component<
         },
       });
     }
-  }
+  }, [userAndUserRegister.status])
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  useEffect(()=> () =>clearInterval(interval.current),[])
 
-  onGetCaptcha = () => {
-    let count = 59;
-    this.setState({ count });
-    this.interval = window.setInterval(() => {
-      count -= 1;
-      this.setState({ count });
-      if (count === 0) {
-        clearInterval(this.interval);
+
+  const onGetCaptcha = () => {
+    let currentTime = 59;
+    setTime(currentTime)
+    interval.current = window.setInterval(() => {
+      currentTime -= 1;
+      setTime(currentTime)
+      if (currentTime === 0) {
+        clearInterval(interval.current);
       }
     }, 1000);
   };
 
-  getPasswordStatus = () => {
-    const { form } = this.props;
+  const getPasswordStatus = () => {
     const value = form.getFieldValue('password');
     if (value && value.length > 9) {
       return 'ok';
@@ -120,12 +105,10 @@ class UserRegister extends Component<
     return 'poor';
   };
 
-  handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
       if (!err) {
-        const { prefix } = this.state;
         dispatch({
           type: 'userAndUserRegister/submit',
           payload: {
@@ -137,8 +120,7 @@ class UserRegister extends Component<
     });
   };
 
-  checkConfirm = (rule: any, value: string, callback: (messgae?: string) => void) => {
-    const { form } = this.props;
+  const checkConfirm = (rule: any, value: string, callback: (messgae?: string) => void) => {
     if (value && value !== form.getFieldValue('password')) {
       callback(formatMessage({ id: 'useranduserregister.password.twice' }));
     } else {
@@ -146,27 +128,19 @@ class UserRegister extends Component<
     }
   };
 
-  checkPassword = (rule: any, value: string, callback: (messgae?: string) => void) => {
-    const { visible, confirmDirty } = this.state;
+  const checkPassword = (rule: any, value: string, callback: (messgae?: string) => void) => {
     if (!value) {
-      this.setState({
-        help: formatMessage({ id: 'useranduserregister.password.required' }),
-        visible: !!value,
-      });
+      setHelp(formatMessage({ id: 'useranduserregister.password.required' }))
+      setVisible(!!value)
       callback('error');
     } else {
-      this.setState({
-        help: '',
-      });
+      setHelp('')
       if (!visible) {
-        this.setState({
-          visible: !!value,
-        });
+      setVisible(!!value)
       }
       if (value.length < 6) {
         callback('error');
       } else {
-        const { form } = this.props;
         if (value && confirmDirty) {
           form.validateFields(['confirm'], { force: true });
         }
@@ -175,16 +149,13 @@ class UserRegister extends Component<
     }
   };
 
-  changePrefix = (value: string) => {
-    this.setState({
-      prefix: value,
-    });
+  const changePrefix = (value: string) => {
+    setPrefix(value)
   };
 
-  renderPasswordProgress = () => {
-    const { form } = this.props;
+  const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
-    const passwordStatus = this.getPasswordStatus();
+    const passwordStatus =getPasswordStatus();
     return value && value.length ? (
       <div className={styles[`progress-${passwordStatus}`]}>
         <Progress
@@ -198,17 +169,15 @@ class UserRegister extends Component<
     ) : null;
   };
 
-  render() {
-    const { form, submitting } = this.props;
     const { getFieldDecorator } = form;
-    const { count, prefix, help, visible } = this.state;
+
     return (
       <div className={styles.main}>
         <h3>
           <FormattedMessage id="useranduserregister.register.register" />
         </h3>
-        <Form onSubmit={this.handleSubmit}>
-          <FormItem>
+        <Form onSubmit={handleSubmit}>
+          {/* <FormItem>
             {getFieldDecorator('mail', {
               rules: [
                 {
@@ -226,68 +195,13 @@ class UserRegister extends Component<
                 placeholder={formatMessage({ id: 'useranduserregister.email.placeholder' })}
               />,
             )}
-          </FormItem>
-          <FormItem help={help}>
-            <Popover
-              getPopupContainer={node => {
-                if (node && node.parentNode) {
-                  return node.parentNode as HTMLElement;
-                }
-                return node;
-              }}
-              content={
-                <div style={{ padding: '4px 0' }}>
-                  {passwordStatusMap[this.getPasswordStatus()]}
-                  {this.renderPasswordProgress()}
-                  <div style={{ marginTop: 10 }}>
-                    <FormattedMessage id="useranduserregister.strength.msg" />
-                  </div>
-                </div>
-              }
-              overlayStyle={{ width: 240 }}
-              placement="right"
-              visible={visible}
-            >
-              {getFieldDecorator('password', {
-                rules: [
-                  {
-                    validator: this.checkPassword,
-                  },
-                ],
-              })(
-                <Input
-                  size="large"
-                  type="password"
-                  placeholder={formatMessage({ id: 'useranduserregister.password.placeholder' })}
-                />,
-              )}
-            </Popover>
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('confirm', {
-              rules: [
-                {
-                  required: true,
-                  message: formatMessage({ id: 'useranduserregister.confirm-password.required' }),
-                },
-                {
-                  validator: this.checkConfirm,
-                },
-              ],
-            })(
-              <Input
-                size="large"
-                type="password"
-                placeholder={formatMessage({ id: 'useranduserregister.confirm-password.placeholder' })}
-              />,
-            )}
-          </FormItem>
+          </FormItem> */}
           <FormItem>
             <InputGroup compact>
               <Select
                 size="large"
                 value={prefix}
-                onChange={this.changePrefix}
+                onChange={changePrefix}
                 style={{ width: '20%' }}
               >
                 <Option value="86">+86</Option>
@@ -333,16 +247,71 @@ class UserRegister extends Component<
               <Col span={8}>
                 <Button
                   size="large"
-                  disabled={!!count}
+                  disabled={!!time}
                   className={styles.getCaptcha}
-                  onClick={this.onGetCaptcha}
+                  onClick={onGetCaptcha}
                 >
-                  {count
-                    ? `${count} s`
+                  {time
+                    ? `${time} s`
                     : formatMessage({ id: 'useranduserregister.register.get-verification-code' })}
                 </Button>
               </Col>
             </Row>
+          </FormItem>
+          <FormItem help={help}>
+            <Popover
+              getPopupContainer={node => {
+                if (node && node.parentNode) {
+                  return node.parentNode as HTMLElement;
+                }
+                return node;
+              }}
+              content={
+                <div style={{ padding: '4px 0' }}>
+                  {passwordStatusMap[getPasswordStatus()]}
+                  {renderPasswordProgress()}
+                  <div style={{ marginTop: 10 }}>
+                    <FormattedMessage id="useranduserregister.strength.msg" />
+                  </div>
+                </div>
+              }
+              overlayStyle={{ width: 240 }}
+              placement="right"
+              visible={visible}
+            >
+              {getFieldDecorator('password', {
+                rules: [
+                  {
+                    validator: checkPassword,
+                  },
+                ],
+              })(
+                <Input
+                  size="large"
+                  type="password"
+                  placeholder={formatMessage({ id: 'useranduserregister.password.placeholder' })}
+                />,
+              )}
+            </Popover>
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('confirm', {
+              rules: [
+                {
+                  required: true,
+                  message: formatMessage({ id: 'useranduserregister.confirm-password.required' }),
+                },
+                {
+                  validator: checkConfirm,
+                },
+              ],
+            })(
+              <Input
+                size="large"
+                type="password"
+                placeholder={formatMessage({ id: 'useranduserregister.confirm-password.placeholder' })}
+              />,
+            )}
           </FormItem>
           <FormItem>
             <Button
@@ -361,7 +330,6 @@ class UserRegister extends Component<
         </Form>
       </div>
     );
-  }
 }
 
 export default connect(
