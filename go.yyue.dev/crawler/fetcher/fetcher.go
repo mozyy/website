@@ -8,7 +8,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-var ticker = time.NewTicker(10 * time.Millisecond)
+var ticker = time.NewTicker(20 * time.Millisecond)
 
 // Fetch url
 func Fetch(url string) (*goquery.Document, error) {

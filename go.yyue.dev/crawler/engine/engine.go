@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"sync"
 	"time"
 
 	"go.yyue.dev/crawler/fetcher"
@@ -46,18 +47,22 @@ func createWorker(in chan Request, out chan Result, scheduler Scheduler) {
 		for {
 			scheduler.WorkerReady(in)
 			request := <-in
+			if !checkDuplicate(request.URL) {
+				return
+			}
 		worker:
 			result, err := worker(request)
 			if err != nil {
 				if errors.Is(err, ErrListLarge) {
-					log.Printf("worker error: %s, request: %v\n", err, request)
+					log.Printf("large error: %s, request: %v\n", err, request)
 				} else {
 					if fetchErrorCount > 50 {
 						panic("fetch error too mach, please check")
 					}
-					<-time.NewTimer(time.Second).C
 					fetchErrorCount++
-					log.Printf("worker error: %s, request: %v, rework...\n", err, request)
+					log.Printf("worker error: %s, request: %s, rework...\n", err.Error(), request.URL)
+					<-time.NewTimer(1 * time.Minute).C
+					log.Printf("start work: %s...\n", request.URL)
 					goto worker
 				}
 
@@ -76,14 +81,21 @@ func worker(request Request) (Result, error) {
 	return request.Parser(b)
 }
 
-var visitsMaps = make(map[string]bool)
+type urlCache struct {
+	sync.RWMutex
+	data map[string]bool
+}
+
+var visitsMaps = new(urlCache)
 
 // 验证url是否重复
 func checkDuplicate(url string) bool {
-	// 不存在会返回 false
-	if visitsMaps[url] {
+	visitsMaps.Lock()
+	defer visitsMaps.Unlock()
+	// 存在会返回 false
+	if visitsMaps.data[url] {
 		return false
 	}
-	visitsMaps[url] = true
+	visitsMaps.data[url] = true
 	return true
 }

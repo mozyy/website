@@ -20,7 +20,7 @@ func main() {
 		ItemSaver:   itemsaver.New(),
 	}
 	request := engine.Request{
-		URL:    "https://cd.lianjia.com/ershoufang/",
+		URL:    "https://cd.lianjia.com/ershoufang/l1l2l3/",
 		Parser: lianjia.City,
 		// URL: "https://d.lianjia.com/ershoufang/106102678685.html",
 		// Parser: func(q *goquery.Document) engine.Result {

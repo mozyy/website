@@ -48,7 +48,7 @@ func sarverHandler(db *sql.DB, result engine.Item) {
 		err := InsertHouseSummary(db, value)
 
 		if err != nil {
-			log.Printf("saver error: %s, request: %v\n", err, value.GetUrl())
+			log.Printf("[[[saver error]]]: %s, request: %v\n", err, value.GetUrl())
 			// reSaver(result, database, err, message, value.GetUrl())
 		}
 	case int:
