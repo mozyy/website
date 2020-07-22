@@ -12,8 +12,9 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	api "github.com/micro/go-micro/v2/api"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -28,9 +29,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Reference imports to suppress errors if they are not otherwise used.
+var _ api.Endpoint
 var _ context.Context
 var _ client.Option
 var _ server.Option
+
+// Api Endpoints for SMSService service
+
+func NewSMSServiceEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
 
 // Client API for SMSService service
 
@@ -45,12 +53,6 @@ type sMSService struct {
 }
 
 func NewSMSService(name string, c client.Client) SMSService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "user"
-	}
 	return &sMSService{
 		c:    c,
 		name: name,
@@ -108,6 +110,12 @@ func (h *sMSServiceHandler) Validate(ctx context.Context, in *ValidateRequest, o
 	return h.SMSServiceHandler.Validate(ctx, in, out)
 }
 
+// Api Endpoints for UserService service
+
+func NewUserServiceEndpoints() []*api.Endpoint {
+	return []*api.Endpoint{}
+}
+
 // Client API for UserService service
 
 type UserService interface {
@@ -122,12 +130,6 @@ type userService struct {
 }
 
 func NewUserService(name string, c client.Client) UserService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "user"
-	}
 	return &userService{
 		c:    c,
 		name: name,

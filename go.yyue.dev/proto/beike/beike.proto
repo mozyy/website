@@ -1,0 +1,185 @@
+syntax="proto3";
+
+package message;
+// https://m.ke.com/liverpool/api/ershoufang/getList?cityId=510100&condition=%252Fchuanshi%252Fpg12&curPage=13;
+option go_package = "go.yyue.dev/common/beike";
+
+message BEIKE {
+  double code = 1;
+
+  message DATA {
+    double errno = 1;
+    string msg = 2;
+
+    message DATA {
+
+      message GETERSHOUFANGLIST {
+        double totalCount = 1;
+        double returnCount = 2;
+        string fbQueryId = 3;
+        double curPage = 4;
+        double hasMoreData = 5;
+
+        message SPELLCHECK {
+        }
+
+        SPELLCHECK spellCheck = 6;
+
+        message ALADINCARD {
+        }
+
+        ALADINCARD aladinCard = 7;
+
+        message ADXPARAMS {
+        }
+
+        ADXPARAMS adxParams = 8;
+
+        message NORESULTLIUZI {
+        }
+
+        NORESULTLIUZI noResultLiuzi = 9;
+        double noResultReason = 10;
+        double lessResultReason = 11;
+
+        message LIST {
+          string cardType = 1;
+          string cityId = 2;
+          string houseCode = 3;
+          string resblockId = 4;
+          string delegateId = 5;
+          string title = 6;
+          string desc = 7;
+          string bangdanTitle = 8;
+          string recoDesc = 9;
+          string totalPrice = 10;
+          string totalPriceCount = 11;
+          string unitPrice = 12;
+          string jumpUrl = 13;
+
+          message LISTPICTUREURL {
+          }
+
+          LISTPICTUREURL listPictureUrl = 14;
+
+          message RECOMMENDREASON {
+          }
+
+          RECOMMENDREASON recommendReason = 15;
+
+          message COLORTAGS {
+            string key = 1;
+            string title = 2;
+            string color = 3;
+            string textColor = 4;
+            string bgColor = 5;
+          }
+
+          repeated COLORTAGS colorTags = 16;
+          string houseStatus = 17;
+          bool isCtypeHouse = 18;
+          string fbExpoId = 19;
+
+          message STATUSSWITCH {
+            bool isYeZhuTuijian = 1;
+            bool isHaofang = 2;
+            bool isYezhuPay = 3;
+            bool isVr = 4;
+            bool isKey = 5;
+            bool isNew = 6;
+          }
+
+          STATUSSWITCH statusSwitch = 20;
+
+          message BRANDTAGS {
+          }
+
+          BRANDTAGS brandTags = 21;
+          repeated string recomTag = 22; // TODO
+
+          message HOTTOP {
+            string dspAgentUcId = 1;
+            string hotTopDigV = 2;
+            double hotTop = 3;
+          }
+
+          HOTTOP hotTop = 23;
+          repeated string framePicture = 24; // TODO
+          repeated string housePicture = 25; // TODO
+          repeated string marketBooth = 26; // TODO
+          string poiDistance = 27;
+          string poiIcon = 28;
+        }
+
+        repeated LIST list = 12;
+
+        message SELECTED {
+
+          message REGION {
+            repeated string id = 1;
+            string name = 2;
+            string lev3 = 3;
+            string lev1 = 4;
+            string lev2 = 5;
+          }
+
+          REGION region = 1;
+
+          message PRICE {
+          }
+
+          PRICE price = 2;
+
+          message ROOM {
+          }
+
+          ROOM room = 3;
+
+          message MORE {
+          }
+
+          MORE more = 4;
+
+          message ORDER {
+          }
+
+          ORDER order = 5;
+        }
+
+        SELECTED selected = 13;
+        string keyword = 14;
+
+        message RECOMMENDEXTINFO {
+          repeated string bizcircleId = 1;
+        }
+
+        RECOMMENDEXTINFO recommendExtInfo = 15;
+        string nearWenan = 16;
+        repeated string bsRecommendList = 17; // TODO
+
+        message TDK {
+          string title = 1;
+          string keywords = 2;
+          string description = 3;
+        }
+
+        TDK tdk = 18;
+
+        message BREADCRUMBS {
+          string title = 1;
+          string url = 2;
+        }
+
+        repeated BREADCRUMBS breadcrumbs = 19;
+      }
+
+      GETERSHOUFANGLIST getErShouFangList = 1;
+    }
+
+    DATA data = 3;
+    repeated string errkeys = 4; // TODO
+  }
+
+  DATA data = 2;
+  string msg = 3;
+}

@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
-	"strings"
+	"path/filepath"
 
 	"go.yyue.dev/common/utils"
 )
@@ -18,12 +17,15 @@ const (
 )
 
 func main() {
-	files, err := readDir("./")
+	dir, err := os.Getwd()
 	utils.PanicErr(err)
-	for _, file := range files {
-		if strings.HasSuffix(file, ".proto") {
-			dir, err := os.Getwd()
-			utils.PanicErr(err)
+	err = filepath.Walk("./", func (p string, info os.FileInfo, err error) error {
+    if err != nil {
+        return err
+		}
+		fmt.Println(p, info.IsDir(), filepath.Ext(p))
+		if (!info.IsDir() && filepath.Ext(p) == ".proto") {
+
 			args := []string{
 				"-I=.",
 				// 分开写会生成两个文件, 下面的写一起只生成一个文件 ,
@@ -34,37 +36,18 @@ func main() {
 				// fmt.Sprintf("--go_out=plugins=micro:%s", goOutPath),
 				fmt.Sprintf("--js_out=import_style=commonjs,binary:%s", webOutPath),
 				fmt.Sprintf("--grpc-web_out=import_style=typescript,mode=grpcwebtext:%s", webOutPath),
-				file,
+				p,
 			}
 			cmd := exec.Command("protoc", args...)
 			cmd.Dir = dir
 			out, err := cmd.CombinedOutput()
 			if err != nil {
-				fmt.Printf("protoc error: %s, out: %s\n", err, out)
+				fmt.Printf("protoc [%s] error: %s, out: \n%s\n", p, err, out)
 			} else {
-				fmt.Printf("protoc success: %s\n", file)
+				fmt.Printf("protoc success: %s\n", p)
 			}
 		}
-	}
-}
-
-func readDir(dirname string) ([]string, error) {
-	readFiles, err := ioutil.ReadDir(dirname)
-	if err != nil {
-		return nil, err
-	}
-	files := []string{}
-	for _, readFile := range readFiles {
-		// fmt.Println(readFile.Name())
-		if readFile.IsDir() {
-			subFiles, err := readDir(dirname + readFile.Name() + "/")
-			if err != nil {
-				return nil, err
-			}
-			files = append(files, subFiles...)
-		} else {
-			files = append(files, dirname+readFile.Name())
-		}
-	}
-	return files, nil
+    return nil
+	})
+	utils.PanicErr(err)
 }
