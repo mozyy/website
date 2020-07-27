@@ -1,0 +1,1751 @@
+ [
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105057417",
+                  "resblockId": "1611060836544",
+                  "delegateId": "106105057417",
+                  "title": "华润幸福里二期 负一楼 一栋下 标准车位 方便停车",
+                  "desc": "1室0厅/32.08m²/东/华润幸福里二期",
+                  "bangdanTitle": "1室0厅/32.08m²/华润幸福里二期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东",
+                  "totalPrice": "15万",
+                  "totalPriceCount": "15",
+                  "unitPrice": "4676元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105057417.html?fb_expo_id=338007639756279808",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "isKey",
+                        "title": "随时可看",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279808",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": true,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104898777",
+                  "resblockId": "1611062710807",
+                  "delegateId": "106104898777",
+                  "title": "锦江国际花园 1室0厅 东",
+                  "desc": "1室0厅/30m²/东/锦江国际花园",
+                  "bangdanTitle": "1室0厅/30m²/锦江国际花园",
+                  "recoDesc": "锦江 川师/地下室 共1层/东",
+                  "totalPrice": "11万",
+                  "totalPriceCount": "11",
+                  "unitPrice": "3667元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104898777.html?fb_expo_id=338007639756279809",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279809",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104878151",
+                  "resblockId": "1611060836544",
+                  "delegateId": "106104878151",
+                  "title": "华润幸福里二期 1室0厅 东",
+                  "desc": "1室0厅/12m²/东/华润幸福里二期",
+                  "bangdanTitle": "1室0厅/12m²/华润幸福里二期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东",
+                  "totalPrice": "16万",
+                  "totalPriceCount": "16",
+                  "unitPrice": "13333元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104878151.html?fb_expo_id=338007639756279810",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279810",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104859266",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106104859266",
+                  "title": "万科城市花园套三户型 谷底花园旁",
+                  "desc": "3室2厅/123m²/东北/万科城市花园",
+                  "bangdanTitle": "3室2厅/123m²/万科城市花园",
+                  "recoDesc": "锦江 川师/中楼层 共6层/东北",
+                  "totalPrice": "350万",
+                  "totalPriceCount": "350",
+                  "unitPrice": "28455元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104859266.html?fb_expo_id=338007639756279811",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279811",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104857514",
+                  "resblockId": "1611060813454",
+                  "delegateId": "106104857514",
+                  "title": "桂苑 3室1厅 南",
+                  "desc": "3室1厅/69.42m²/南/桂苑",
+                  "bangdanTitle": "3室1厅/69.42m²/桂苑",
+                  "recoDesc": "锦江 川师/低楼层 共7层/南",
+                  "totalPrice": "85万",
+                  "totalPriceCount": "85",
+                  "unitPrice": "12244元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104857514.html?fb_expo_id=338007639756279812",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "taxfree",
+                        "title": "满五年",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279812",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104337396",
+                  "resblockId": "3011053478981",
+                  "delegateId": "106104337396",
+                  "title": "比华利国际城三期  人车分流  24小时安保 标准车位",
+                  "desc": "1室0厅/34.8m²/东/比华利国际城三期",
+                  "bangdanTitle": "1室0厅/34.8m²/比华利国际城三期",
+                  "recoDesc": "锦江 川师/地下室 共1层/东",
+                  "totalPrice": "16万",
+                  "totalPriceCount": "16",
+                  "unitPrice": "4598元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104337396.html?fb_expo_id=338007639756279813",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279813",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104110750",
+                  "resblockId": "1611060831905",
+                  "delegateId": "106104110750",
+                  "title": "华润幸福里，标准车位，诚心出售",
+                  "desc": "1室0厅/38.84m²/东南 西北/华润幸福里一期",
+                  "bangdanTitle": "1室0厅/38.84m²/华润幸福里一期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东南 西北",
+                  "totalPrice": "20万",
+                  "totalPriceCount": "20",
+                  "unitPrice": "5149元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104110750.html?fb_expo_id=338007639756279814",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "two",
+                        "title": "满两年",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279814",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104037993",
+                  "resblockId": "3011053484408",
+                  "delegateId": "106104037993",
+                  "title": "标准车位，位置不错。。。。。。。。。。。。。。",
+                  "desc": "1室0厅/29.82m²/东/比华利国际城一期",
+                  "bangdanTitle": "1室0厅/29.82m²/比华利国际城一期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东",
+                  "totalPrice": "16万",
+                  "totalPriceCount": "16",
+                  "unitPrice": "5366元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104037993.html?fb_expo_id=338007639756279815",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "taxfree",
+                        "title": "满五年",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279815",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106103986275",
+                  "resblockId": "3011053484408",
+                  "delegateId": "106103986275",
+                  "title": "标准车位，价格优惠，位置都还不错",
+                  "desc": "1室0厅/29.54m²/东南/比华利国际城一期",
+                  "bangdanTitle": "1室0厅/29.54m²/比华利国际城一期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东南",
+                  "totalPrice": "16万",
+                  "totalPriceCount": "16",
+                  "unitPrice": "5416元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106103986275.html?fb_expo_id=338007639756279816",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "taxfree",
+                        "title": "满五年",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279816",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106103703143",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106103703143",
+                  "title": "万科城市花园            车库",
+                  "desc": "1室0厅/26.6m²/东南/万科城市花园",
+                  "bangdanTitle": "1室0厅/26.6m²/万科城市花园",
+                  "recoDesc": "锦江 川师/地下室 共1层/东南",
+                  "totalPrice": "17万",
+                  "totalPriceCount": "17",
+                  "unitPrice": "6391元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106103703143.html?fb_expo_id=338007639756279817",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "taxfree",
+                        "title": "满五年",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279817",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106103626778",
+                  "resblockId": "1611060831905",
+                  "delegateId": "106103626778",
+                  "title": "华润幸福里一期标准车位靠电梯口",
+                  "desc": "1室0厅/37.01m²/东南/华润幸福里一期",
+                  "bangdanTitle": "1室0厅/37.01m²/华润幸福里一期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东南",
+                  "totalPrice": "14万",
+                  "totalPriceCount": "14",
+                  "unitPrice": "3783元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106103626778.html?fb_expo_id=338007639756279818",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279818",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106103340500",
+                  "resblockId": "3011053478981",
+                  "delegateId": "106103340500",
+                  "title": "比华利国际城三期 1室0厅 东",
+                  "desc": "1室0厅/24.5m²/东/比华利国际城三期",
+                  "bangdanTitle": "1室0厅/24.5m²/比华利国际城三期",
+                  "recoDesc": "锦江 川师/地下室 共1层/东",
+                  "totalPrice": "14万",
+                  "totalPriceCount": "14",
+                  "unitPrice": "5714元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106103340500.html?fb_expo_id=338007639756279819",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279819",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106102353610",
+                  "resblockId": "1611060831905",
+                  "delegateId": "106102353610",
+                  "title": "华润幸福里一期标准车位，停车方便",
+                  "desc": "1室0厅/37.01m²/东南/华润幸福里一期",
+                  "bangdanTitle": "1室0厅/37.01m²/华润幸福里一期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东南",
+                  "totalPrice": "15万",
+                  "totalPriceCount": "15",
+                  "unitPrice": "4053元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106102353610.html?fb_expo_id=338007639756279820",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279820",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106102323983",
+                  "resblockId": "1611060831905",
+                  "delegateId": "106102323983",
+                  "title": "华润幸福里一期标准车位梯停车方便",
+                  "desc": "1室0厅/37.01m²/东南/华润幸福里一期",
+                  "bangdanTitle": "1室0厅/37.01m²/华润幸福里一期",
+                  "recoDesc": "锦江 川师/地下室 共0层/东南",
+                  "totalPrice": "16万",
+                  "totalPriceCount": "16",
+                  "unitPrice": "4323元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106102323983.html?fb_expo_id=338007639756279821",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279821",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105179668",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106105179668",
+                  "title": "万科城市花园     74栋地下负一楼   标准车库",
+                  "desc": "1室0厅/22.31m²/北/万科城市花园",
+                  "bangdanTitle": "1室0厅/22.31m²/万科城市花园",
+                  "recoDesc": "锦江 川师/地下室 共0层/北",
+                  "totalPrice": "18万",
+                  "totalPriceCount": "18",
+                  "unitPrice": "8068元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105179668.html?fb_expo_id=338007639756279822",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/hdic-frame/8b7826b6-66b2-4b46-b734-b8cd4539f59c.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279822",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/8b7826b6-66b2-4b46-b734-b8cd4539f59c.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105175472",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106105175472",
+                  "title": "万科城市花园标准车位，停车方便，在负一楼",
+                  "desc": "1室0厅/20.45m²/东南/万科城市花园",
+                  "bangdanTitle": "1室0厅/20.45m²/万科城市花园",
+                  "recoDesc": "锦江 川师/地下室 共1层/东南",
+                  "totalPrice": "18万",
+                  "totalPriceCount": "18",
+                  "unitPrice": "8802元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105175472.html?fb_expo_id=338007639756279823",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/hdic-frame/f34975ac-ed87-47cb-98f4-168e9373320c.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "isKey",
+                        "title": "随时可看",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279823",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": true,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/f34975ac-ed87-47cb-98f4-168e9373320c.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106101745841",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106101745841",
+                  "title": "万科彩域标准车位 入口位置 停车方便",
+                  "desc": "1室0厅/11.66m²/东/万科城市花园",
+                  "bangdanTitle": "1室0厅/11.66m²/万科城市花园",
+                  "recoDesc": "锦江 川师/地下室 共1层/东",
+                  "totalPrice": "15万",
+                  "totalPriceCount": "15",
+                  "unitPrice": "12865元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106101745841.html?fb_expo_id=338007639756279824",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/510100-inspection/9b94fa13-3893-4339-85bc-4fe1f7d30eba.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "taxfree",
+                        "title": "满五年",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279824",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/9b94fa13-3893-4339-85bc-4fe1f7d30eba.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "多功能间"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106101337695",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106101337695",
+                  "title": "万科城市花园     子母车位",
+                  "desc": "1室0厅/14.83m²/东/万科城市花园",
+                  "bangdanTitle": "1室0厅/14.83m²/万科城市花园",
+                  "recoDesc": "锦江 川师/地下室 共1层/东",
+                  "totalPrice": "32万",
+                  "totalPriceCount": "32",
+                  "unitPrice": "21578元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106101337695.html?fb_expo_id=338007639756279825",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/510100-inspection/4acbc56c-f874-4146-8209-bb0dc0d2db7b.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279825",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-frame/8ef8b311-f9f4-4e0b-aa1f-944c4b51a56e.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/4acbc56c-f874-4146-8209-bb0dc0d2db7b.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104029138",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106104029138",
+                  "title": "万科城市花园          车库",
+                  "desc": "1室0厅/14.83m²/东南/万科城市花园",
+                  "bangdanTitle": "1室0厅/14.83m²/万科城市花园",
+                  "recoDesc": "锦江 川师/地下室 共0层/东南",
+                  "totalPrice": "33万",
+                  "totalPriceCount": "33",
+                  "unitPrice": "22252元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104029138.html?fb_expo_id=338007639756279826",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279826",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106103816129",
+                  "resblockId": "1611057879617",
+                  "delegateId": "106103816129",
+                  "title": "万科城市花园         大车位",
+                  "desc": "1室0厅/29.56m²/东南/万科城市花园",
+                  "bangdanTitle": "1室0厅/29.56m²/万科城市花园",
+                  "recoDesc": "锦江 川师/地下室 共1层/东南",
+                  "totalPrice": "23万",
+                  "totalPriceCount": "23",
+                  "unitPrice": "7781元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106103816129.html?fb_expo_id=338007639756279827",
+                  "listPictureUrl": null,
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279827",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": false,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [],
+                  "housePicture": [],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106103175665",
+                  "resblockId": "1611060836544",
+                  "delegateId": "106103175665",
+                  "title": "精装套二，带部分家具家电看房方便随时可看",
+                  "desc": "2室1厅/75m²/南/华润幸福里二期",
+                  "bangdanTitle": "2室1厅/75m²/华润幸福里二期",
+                  "recoDesc": "锦江 川师/高楼层 共32层/南",
+                  "totalPrice": "190万",
+                  "totalPriceCount": "190",
+                  "unitPrice": "25333元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106103175665.html?fb_expo_id=338007639756279828",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/510100-inspection/prod-ae28b41f-2a71-4054-b82c-5be5fc6c8cef.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279828",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/prod-b8e383c6-a42c-4313-a93d-142c8f5070b3.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/prod-72d6e1d5-55a6-44f9-9621-7ffa2c408c68.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/prod-6b8bb66e-7946-4765-b323-f068265f4f74.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/prod-b03b04db-f91c-4242-955e-edc8a8011ef7.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106102450211",
+                  "resblockId": "1611060831905",
+                  "delegateId": "106102450211",
+                  "title": "幸福里中层套二居家装修视野采光很好",
+                  "desc": "2室1厅/76.64m²/东南/华润幸福里一期",
+                  "bangdanTitle": "2室1厅/76.64m²/华润幸福里一期",
+                  "recoDesc": "锦江 川师/中楼层 共32层/东南",
+                  "totalPrice": "198万",
+                  "totalPriceCount": "198",
+                  "unitPrice": "25835元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106102450211.html?fb_expo_id=338007639756279829",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/510100-inspection/prod-e5e1d27f-b052-4ed2-95e0-201aede7e2fb.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279829",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/prod-72174611-29d3-4340-96eb-45a1b4f54531.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/prod-7c9fd9cb-0476-4acd-9a22-727e53018d2e.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/prod-3a237866-0d9c-4bbc-b16c-c3bb3d4524c9.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/prod-0c15a9e2-16ff-4756-85c0-48e011a8b8de.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105583937",
+                  "resblockId": "1611063461001",
+                  "delegateId": "106105583937",
+                  "title": "华润凯旋天地 2室1厅 东",
+                  "desc": "2室1厅/59.84m²/东/华润凯旋天地",
+                  "bangdanTitle": "2室1厅/59.84m²/华润凯旋天地",
+                  "recoDesc": "锦江 川师/低楼层 共26层/东",
+                  "totalPrice": "160万",
+                  "totalPriceCount": "160",
+                  "unitPrice": "26738元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105583937.html?fb_expo_id=338007639756279830",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/110000-inspection/pc1_AqIsp1MBr_2.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "new",
+                        "title": "新上",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "isKey",
+                        "title": "随时可看",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279830",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": true,
+                     "isNew": true
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_5c0de19a-efff-4398-9a1c-4cb2f4db9cdb.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/pc0_X3Z0bahKK_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_35PC4VWDS_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_BI5wTj5oH_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     }
+                  ],
+                  "marketBooth": {
+                     "type": "bangdan",
+                     "title": "川师热门新上榜第2名",
+                     "iconUrl": "https://img.ljcdn.com/beike/bangdan/1565234456984.png",
+                     "textColor": "#222222",
+                     "bgColor": "#FFFFFF"
+                  },
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105279643",
+                  "resblockId": "1611063461001",
+                  "delegateId": "106105279643",
+                  "title": "临地铁华润品质凯旋天地精装套二",
+                  "desc": "2室1厅/59.2m²/南/华润凯旋天地",
+                  "bangdanTitle": "2室1厅/59.2m²/华润凯旋天地",
+                  "recoDesc": "锦江 川师/低楼层 共33层/南",
+                  "totalPrice": "136万",
+                  "totalPriceCount": "136",
+                  "unitPrice": "22973元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105279643.html?fb_expo_id=338007639756279831",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/510100-inspection/pc1_fy0LfLZo7_2.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279831",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_b0535b14-0f05-401d-a882-7192b7c72db4.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/pc0_5r1mt8M2T_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/apc_nHGzqPVM7_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/apc_AKjiDRYVr_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105124236",
+                  "resblockId": "3011053557417",
+                  "delegateId": "106105124236",
+                  "title": "比华利国际城二期标准套三，居家装修",
+                  "desc": "3室2厅/86m²/东南/比华利国际城二期",
+                  "bangdanTitle": "3室2厅/86m²/比华利国际城二期",
+                  "recoDesc": "锦江 川师/高楼层 共26层/东南",
+                  "totalPrice": "188万",
+                  "totalPriceCount": "188",
+                  "unitPrice": "21861元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105124236.html?fb_expo_id=338007639756279832",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/110000-inspection/pc1_OhXvEnmrv_2.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279832",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_627924bc-cc97-4cbd-bd1d-42e10bf8b403.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_VckwHS9Bc_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_XaCkcYCZG_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/pc0_thtRKelrj_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_mgpyVD860_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室C"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105527435",
+                  "resblockId": "1611062710807",
+                  "delegateId": "106105527435",
+                  "title": "锦江国际精装套三，西南朝向，视野开阔，位置安静",
+                  "desc": "3室2厅/84.09m²/西南/锦江国际花园",
+                  "bangdanTitle": "3室2厅/84.09m²/锦江国际花园",
+                  "recoDesc": "锦江 川师/高楼层 共42层/西南",
+                  "totalPrice": "175万",
+                  "totalPriceCount": "175",
+                  "unitPrice": "20811元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105527435.html?fb_expo_id=338007639756279833",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/110000-inspection/pc1_IAt2sJqcf_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279833",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": true,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": {
+                     "title": "必看好房",
+                     "picUrl": "https://img.ljcdn.com/beike/haofanglogo/1571901104492.png"
+                  },
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_4f8f0bf0-981e-4ce0-945b-abc544e31ded.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/pc0_RMtzASAUP_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_0h8HqnNVx_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_QF3Ezp4lm_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_Dd7C5V055_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室C"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105210756",
+                  "resblockId": "1611062710807",
+                  "delegateId": "106105210756",
+                  "title": "中铁品质楼盘 对中庭 视野开阔 户型方正",
+                  "desc": "3室2厅/84.69m²/东南/锦江国际花园",
+                  "bangdanTitle": "3室2厅/84.69m²/锦江国际花园",
+                  "recoDesc": "锦江 川师/高楼层 共34层/东南",
+                  "totalPrice": "172万",
+                  "totalPriceCount": "172",
+                  "unitPrice": "20309元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105210756.html?fb_expo_id=338007639756279834",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/110000-inspection/pc1_AoDcsjWYx_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279834",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_fd454081-6ed0-4703-bd15-26bfafb2da88.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/pc0_4qZz6lbjm_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_9qEl5D0Ot_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_qxy6qnOwy_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_8yLWYapeT_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室C"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106105173244",
+                  "resblockId": "1611062710807",
+                  "delegateId": "106105173244",
+                  "title": "优质精装套三横空出世，客厅看湖。卧室朝南。",
+                  "desc": "3室1厅/83.67m²/西北/锦江国际花园",
+                  "bangdanTitle": "3室1厅/83.67m²/锦江国际花园",
+                  "recoDesc": "锦江 川师/高楼层 共34层/西北",
+                  "totalPrice": "170万",
+                  "totalPriceCount": "170",
+                  "unitPrice": "20318元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106105173244.html?fb_expo_id=338007639756279835",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/110000-inspection/pc1_qqvF4MDBq_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279835",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_c14296f4-8546-4116-a093-243da1898b61.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/pc0_OKJapvRk3_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_vaaOGqI68_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_JoQsdHeN1_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_8URM0T5UG_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室C"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106104395524",
+                  "resblockId": "1611062710807",
+                  "delegateId": "106104395524",
+                  "title": "锦江国际满二精装套三，中庭不吵。",
+                  "desc": "3室2厅/84m²/东/锦江国际花园",
+                  "bangdanTitle": "3室2厅/84m²/锦江国际花园",
+                  "recoDesc": "锦江 川师/低楼层 共42层/东",
+                  "totalPrice": "175万",
+                  "totalPriceCount": "175",
+                  "unitPrice": "20833元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106104395524.html?fb_expo_id=338007639756279836",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/110000-inspection/pc1_wLlLgYsk1_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279836",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_a7a5a084-5066-4317-9f30-a4499dcdfabe.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/pc0_1nEgCQHad_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_xxDxP0lQX_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_hv6jVWKvS_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/110000-inspection/apc_613OlJ6ln_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室C"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               },
+               {
+                  "cardType": "CARD_TYPE_ERSHOUFANG_LIST",
+                  "cityId": "510100",
+                  "houseCode": "106103061278",
+                  "resblockId": "1611062710807",
+                  "delegateId": "106103061278",
+                  "title": "锦江国际花园精装套三带家具家电",
+                  "desc": "3室2厅/84.69m²/南/锦江国际花园",
+                  "bangdanTitle": "3室2厅/84.69m²/锦江国际花园",
+                  "recoDesc": "锦江 川师/高楼层 共34层/南",
+                  "totalPrice": "165万",
+                  "totalPriceCount": "165",
+                  "unitPrice": "19483元/平",
+                  "jumpUrl": "https://m.ke.com/cd/ershoufang/106103061278.html?fb_expo_id=338007639756279837",
+                  "listPictureUrl": "https://ke-image.ljcdn.com/510100-inspection/pc1_psEoZgGWX_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                  "recommendReason": null,
+                  "colorTags": [
+                     {
+                        "key": "two",
+                        "title": "满两年",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     },
+                     {
+                        "key": "subway_house",
+                        "title": "地铁",
+                        "color": "849aae",
+                        "textColor": "rgb(132,154,174)",
+                        "bgColor": "rgba(244,247,249,1)"
+                     }
+                  ],
+                  "houseStatus": "1",
+                  "isCtypeHouse": false,
+                  "fbExpoId": "338007639756279837",
+                  "statusSwitch": {
+                     "isYeZhuTuijian": false,
+                     "isHaofang": false,
+                     "isYezhuPay": false,
+                     "isVr": true,
+                     "isKey": false,
+                     "isNew": false
+                  },
+                  "brandTags": null,
+                  "recomTag": [],
+                  "hotTop": {
+                     "dspAgentUcId": "",
+                     "hotTopDigV": "",
+                     "hotTop": 0
+                  },
+                  "framePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/hdic-frame/standard_4c30e592-cc65-4629-b656-a455b8f22fd9.png!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "户型图"
+                     }
+                  ],
+                  "housePicture": [
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/pc0_SYTPCOGlI_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "客厅"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/pc0_ctO7t7Pw0.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室A"
+                     },
+                     {
+                        "url": "https://ke-image.ljcdn.com/510100-inspection/apc_mIGice6gB_1.jpg!m_fill,w_210,h_164,f_jpg?from=ke.com",
+                        "type": "卧室B"
+                     }
+                  ],
+                  "marketBooth": [],
+                  "poiDistance": "",
+                  "poiIcon": ""
+               }
+            ]
